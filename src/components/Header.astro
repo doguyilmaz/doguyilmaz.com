@@ -1,12 +1,13 @@
 ---
 import removeTrailingSlash from '@/utils/removeTrailingSlash';
 import presentation from '@/data/presentation';
+import theme from '@/data/theme';
 
 const pathname = removeTrailingSlash(Astro.url.pathname);
 ---
 
 <header class='z-40 flex w-full flex-col gap-2 md:flex-row md:justify-between'>
-  <a href={`mailto:${presentation.mail}`} class='hover:text-neutral-100'>{presentation.mail}</a>
+  <a href={`mailto:${presentation.mail}`} class={`hover:text-${theme.colors.primary}-500`}>{presentation.mail}</a>
 
   <nav role='navigation'>
     <ul role='list' class='flex flex-row gap-2'>

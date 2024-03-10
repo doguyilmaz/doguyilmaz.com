@@ -1,4 +1,4 @@
-import type { TailwindColor } from "@/utils/types/tailwind";
+import type { TailwindColor } from '@/utils/types/tailwind';
 
 type Theme = {
   colors: {
@@ -12,10 +12,10 @@ type Theme = {
 
 const theme: Theme = {
   colors: {
-    primary: "orange",
+    primary: 'blue',
     blur: {
-      top: "orange",
-      bottom: "violet",
+      top: 'blue',
+      bottom: 'violet',
     },
   },
 };

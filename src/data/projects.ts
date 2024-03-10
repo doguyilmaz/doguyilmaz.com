@@ -30,7 +30,7 @@ const projects: Project[] = [
   {
     title: 'social-network-app',
     techs: ['A fully socail network app API.', 'MongoDB', 'Express', 'React', 'Node.js'],
-    link: '/',
+    link: 'https://github.com/doguyilmaz/social-network-app',
   },
 ];
 
