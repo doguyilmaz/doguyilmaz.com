@@ -27,9 +27,7 @@ import projects from '@/data/projects';
       }
 
       <div class='flex flex-col gap-8'>
-        <h1 class='text-3xl text-neutral-100'>
-          {presentation.title}
-        </h1>
+        <h1 class='text-3xl text-neutral-100' set:html={convertAsteriskToStrongTag(presentation.title)} />
 
         <h2 class='w-auto max-w-[60ch] leading-6' set:html={convertAsteriskToStrongTag(presentation.description)} />
 
