@@ -1,10 +1,10 @@
 ---
-import { getCollection } from 'astro:content';
+// import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 
 import Layout from '@/layouts/Layout.astro';
 import SocialLinks from '@/components/SocialLinks.astro';
-import PostCard from '@/components/PostCard.astro';
+// import PostCard from '@/components/PostCard.astro';
 import ProjectCard from '@/components/ProjectCard.astro';
 import Link from '@/components/shared/Link.astro';
 import convertAsteriskToStrongTag from '@/utils/convertAsteriskToStrongTag';
@@ -12,9 +12,9 @@ import convertAsteriskToStrongTag from '@/utils/convertAsteriskToStrongTag';
 import presentation from '@/data/presentation';
 import projects from '@/data/projects';
 
-const posts = (await getCollection('posts')).sort(function (first, second) {
-  return second.data.publishedAt.getTime() - first.data.publishedAt.getTime();
-});
+// const posts = (await getCollection('posts')).sort(function (first, second) {
+//   return second.data.publishedAt.getTime() - first.data.publishedAt.getTime();
+// });
 ---
 
 <Layout>
