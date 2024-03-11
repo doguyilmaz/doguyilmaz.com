@@ -41,7 +41,7 @@ const presentation: Presentation = {
       link: 'https://github.com/doguyilmaz',
     },
     {
-      label: 'Linkedin',
+      label: 'LinkedIn',
       link: 'https://www.linkedin.com/in/doguyilmaz',
     },
   ],
