@@ -1,10 +1,11 @@
 ---
-import SpeedInsights from '@vercel/speed-insights/astro';
+
 import Header from '../components/Header.astro';
 import BlurCircle from '@/components/shared/BlurCircle.astro';
 import theme from '@/data/theme';
 import SEOTags from '@/components/seo/SEOTags.astro';
 import type { HeadTags } from '@/utils/types/HeadTags';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import '@/styles/tailwind.css';
 import '@/styles/post.css';
