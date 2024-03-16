@@ -1,12 +1,11 @@
 ---
 import type { Project } from "@/data/projects";
+import { formatTechs } from '@/utils/formatTechs';
 
 type Props = Project;
 
 const { title, techs, link, isComingSoon } = Astro.props;
 
-const formatTechs = (values: string[]) =>
-  values.toString().replaceAll(",", " • ");
 ---
 
 <>
