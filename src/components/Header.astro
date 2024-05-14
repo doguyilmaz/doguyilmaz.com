@@ -20,6 +20,24 @@ const pathname = removeTrailingSlash(Astro.url.pathname);
           }}>Home</a
         >
       </li>
+      <li>
+        <a
+          href='/privacy'
+          class:list={{
+            ['hover:text-neutral-100']: true,
+            ['text-neutral-100']: pathname === '/privacy',
+          }}>Privacy</a
+        >
+      </li>
+      <li>
+        <a
+          href='/terms'
+          class:list={{
+            ['hover:text-neutral-100']: true,
+            ['text-neutral-100']: pathname === '/terms',
+          }}>Terms</a
+        >
+      </li>
       <!-- <li>/</li>
       <li>
         <a
