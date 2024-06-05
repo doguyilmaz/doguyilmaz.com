@@ -2,12 +2,12 @@ export const SITE_URL = 'https://doguyilmaz.com';
 
 const LANG_COLORS = {
   js: {
-    bg: '#f7df1e',
+    bg: '#FFE561',
     text: 'JavaScript',
     color: 'black',
   },
   ts: {
-    bg: '#007acc',
+    bg: '#008abb',
     text: 'TypeScript',
     color: 'white',
   },
@@ -34,6 +34,11 @@ const LANG_COLORS = {
   astro: {
     bg: '#fff',
     text: 'Astro',
+    color: 'white',
+  },
+  kotlin: {
+    bg: '#F125FF',
+    text: 'Kotlin',
     color: 'white',
   },
 };
