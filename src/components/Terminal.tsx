@@ -9,18 +9,22 @@ export default function Terminal() {
   const terminalRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const initialText = `> const developer = {
-  name: "John Doe",
-  role: "Full Stack Developer",
-  location: "San Francisco, CA",
-  skills: ["TypeScript", "React", "Node.js"],
-  passions: ["Clean Code", "UI/UX", "Innovation"]
+  name: "Dogu Yilmaz",
+  role: "Computer Engineer & Software Developer",
+  location: "Istanbul",
+  skills: ["TypeScript", "React", "React Native", "JavaScript"],
 };
 
 > developer.greeting();
-"Hello! I'm John, a developer who turns coffee into code."
+"I am a Software Developer at Togg | Trugo.
+Currently working with Vue, React and React Native.
+
+Describe myself as a highly motivated software developer and dedicated team player. Enthusiastic about exploring new technologies and optimizing systems. Enjoys developing web and mobile applications.
+Passionate about JavaScript & TypeScript."
 
 > developer.currentStatus();
-"Building elegant solutions to complex problems..."
+"Building elegant solutions to complex problems...
+Recently exploring Swift and Kotlin."
 
 Type 'help' for available commands.`;
 
@@ -41,10 +45,10 @@ Type 'help' for available commands.`;
   interests: ["AI/ML", "Cloud Architecture", "Open Source"]
 };`,
     skills: `> const skills = {
-  languages: ["TypeScript", "Python", "Go"],
-  frontend: ["React", "Next.js", "Tailwind CSS"],
-  backend: ["Node.js", "Django", "PostgreSQL"],
-  cloud: ["AWS", "Docker", "Kubernetes"]
+  languages: ["JavaScript", "TypeScript", "Go", "HTML", "CSS"],
+  frontend: ["React", "Next.js", "React Native", "Vue", "Astro"],
+  backend: ["Node.js", "Go", "Elixir", "Elysia"],
+  cloud: ["AWS", "Docker", "Kubernetes", "Cloudflare", "Oracle Cloud", "Digital Ocean", "Vercel", "Heroku", "Supabase"],
 };`,
     projects: `Featured Projects:
 1. Neural Canvas - AI Art Platform
@@ -52,10 +56,10 @@ Type 'help' for available commands.`;
 3. CloudScale - Infrastructure Manager
 4. CodeMentor - Learning Platform`,
     contact: `> const contact = {
-  email: "john.doe@example.com",
-  github: "github.com/johndoe",
-  linkedin: "linkedin.com/in/johndoe",
-  twitter: "@johndoe"
+  email: "info@doguyilmaz.com",
+  github: "github.com/doguyilmaz",
+  linkedin: "linkedin.com/in/doguyilmaz",
+  twitter: "@dogukyilmaz"
 };`,
     github: 'Opening GitHub profile...',
     clear: '',
