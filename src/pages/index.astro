@@ -18,7 +18,7 @@ import projects from '@/data/projects';
 ---
 
 <Layout>
-  <main class='flex flex-col gap-20'>
+  <main class='flex flex-col  0 h-[calc(80vh-theme(space.20))] overflow-auto'>
     <article class='flex flex-col gap-8 md:flex-row-reverse md:justify-end md:gap-12'>
       {
         presentation.profile && (
@@ -59,7 +59,7 @@ import projects from '@/data/projects';
       </section>
     </article> -->
 
-    <article class='flex flex-col gap-8'>
+    <!-- <article class='flex flex-col gap-8'>
       <header class='flex w-full flex-row justify-between gap-2'>
         <h3 class='text-lg text-neutral-100'>
           Selected projects ({projects.length})
@@ -71,8 +71,9 @@ import projects from '@/data/projects';
         {projects.length !== 0 && projects.map((project) => <ProjectCard {...project} />)}
       </section>
     </article>
+     -->
 
-    <article class='flex flex-col gap-8'>
+    <article class='flex flex-col gap-8 mt-auto'>
       <header class='flex w-full flex-row justify-between gap-2'>
         <h3 class='text-lg text-neutral-100'>Get in touch</h3>
       </header>
