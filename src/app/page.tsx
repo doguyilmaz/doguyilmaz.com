@@ -9,6 +9,9 @@ import About from '@/components/About';
 import Contact from '@/components/Contact';
 import Skills from '@/components/Skills';
 
+// https://images.unsplash.com/photo-1559762691-617a33825bc6?q=80&w=1740&auto=format&fit=crop
+// https://images.unsplash.com/photo-1566410824233-a8011929225c?q=80&w=1740&auto=format&fit=crop
+
 function App() {
   const [activeSection, setActiveSection] = React.useState('terminal');
 
@@ -22,7 +25,7 @@ function App() {
 
   const backgrounds = {
     terminal:
-      "bg-[url('https://images.unsplash.com/photo-1484950763426-56b5bf172dbb?auto=format&fit=crop&q=80&w=2070')] bg-cover",
+      "bg-[url('https://images.unsplash.com/photo-1557264322-b44d383a2906?q=80&w=1740&auto=format&fit=crop')] bg-cover",
     about:
       "bg-[url('https://images.unsplash.com/photo-1510906594845-bc082582c8cc?auto=format&fit=crop&q=80&w=2072')] bg-cover",
     projects:

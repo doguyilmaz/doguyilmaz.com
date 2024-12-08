@@ -165,7 +165,7 @@ Type 'help' for available commands.`;
 
           <div
             ref={terminalRef}
-            className='h-[60vh] overflow-y-auto space-y-2 mb-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900'
+            className='h-[75vh] overflow-y-auto space-y-2 mb-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900'
           >
             <AnimatePresence mode='popLayout'>
               {history.map((entry, i) => (
