@@ -10,10 +10,10 @@ interface NavigationProps {
 export default function Navigation({ activeSection, onNavigate }: NavigationProps) {
   const navItems = [
     { id: 'terminal', icon: Terminal, label: 'Terminal' },
-    { id: 'about', icon: User, label: 'About' },
-    { id: 'projects', icon: Code2, label: 'Projects' },
-    { id: 'contact', icon: Send, label: 'Contact' },
-    { id: 'skills', icon: Code2, label: 'Skills' },
+    // { id: 'about', icon: User, label: 'About' },
+    // { id: 'projects', icon: Code2, label: 'Projects' },
+    // { id: 'contact', icon: Send, label: 'Contact' },
+    // { id: 'skills', icon: Code2, label: 'Skills' },
   ];
 
   return (
