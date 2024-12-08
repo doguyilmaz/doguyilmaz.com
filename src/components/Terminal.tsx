@@ -30,31 +30,17 @@ Type 'help' for available commands.`;
 
   const commands = {
     help: `Available commands:
-  - help: Show this help message
-  - about: Display information about me
-  - skills: List my technical skills
-  - projects: Show my featured projects
+  - help: Show this help message 
+  - skills: List my technical skills 
   - contact: Display contact information
   - clear: Clear the terminal
   - github: Open my GitHub profile`,
-    about: `> const aboutMe = {
-  name: "John Doe",
-  role: "Full Stack Developer",
-  location: "San Francisco, CA",
-  experience: "5+ years",
-  interests: ["AI/ML", "Cloud Architecture", "Open Source"]
-};`,
     skills: `> const skills = {
   languages: ["JavaScript", "TypeScript", "Go", "HTML", "CSS"],
   frontend: ["React", "Next.js", "React Native", "Vue", "Astro"],
   backend: ["Node.js", "Go", "Elixir", "Elysia"],
   cloud: ["AWS", "Docker", "Kubernetes", "Cloudflare", "Oracle Cloud", "Digital Ocean", "Vercel", "Heroku", "Supabase"],
 };`,
-    projects: `Featured Projects:
-1. Neural Canvas - AI Art Platform
-2. DevFlow - Developer Toolkit
-3. CloudScale - Infrastructure Manager
-4. CodeMentor - Learning Platform`,
     contact: `> const contact = {
   email: "info@doguyilmaz.com",
   github: "github.com/doguyilmaz",
@@ -64,6 +50,42 @@ Type 'help' for available commands.`;
     github: 'Opening GitHub profile...',
     clear: '',
   };
+  //   const commands = {
+  //     help: `Available commands:
+  //   - help: Show this help message
+  //   - about: Display information about me
+  //   - skills: List my technical skills
+  //   - projects: Show my featured projects
+  //   - contact: Display contact information
+  //   - clear: Clear the terminal
+  //   - github: Open my GitHub profile`,
+  //     about: `> const aboutMe = {
+  //   name: "John Doe",
+  //   role: "Full Stack Developer",
+  //   location: "San Francisco, CA",
+  //   experience: "5+ years",
+  //   interests: ["AI/ML", "Cloud Architecture", "Open Source"]
+  // };`,
+  //     skills: `> const skills = {
+  //   languages: ["JavaScript", "TypeScript", "Go", "HTML", "CSS"],
+  //   frontend: ["React", "Next.js", "React Native", "Vue", "Astro"],
+  //   backend: ["Node.js", "Go", "Elixir", "Elysia"],
+  //   cloud: ["AWS", "Docker", "Kubernetes", "Cloudflare", "Oracle Cloud", "Digital Ocean", "Vercel", "Heroku", "Supabase"],
+  // };`,
+  //     projects: `Featured Projects:
+  // 1. Neural Canvas - AI Art Platform
+  // 2. DevFlow - Developer Toolkit
+  // 3. CloudScale - Infrastructure Manager
+  // 4. CodeMentor - Learning Platform`,
+  //     contact: `> const contact = {
+  //   email: "info@doguyilmaz.com",
+  //   github: "github.com/doguyilmaz",
+  //   linkedin: "linkedin.com/in/doguyilmaz",
+  //   twitter: "@dogukyilmaz"
+  // };`,
+  //     github: 'Opening GitHub profile...',
+  //     clear: '',
+  //   };
 
   const typeInitialText = async () => {
     let currentText = '';
@@ -78,7 +100,9 @@ Type 'help' for available commands.`;
       currentText += '\n';
     }
     setIsTyping(false);
-    await inputRef.current?.focus();
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
   };
 
   const handleCommand = (cmd: string) => {
@@ -135,11 +159,14 @@ Type 'help' for available commands.`;
             </div>
             <div className='flex items-center space-x-2 text-zinc-400'>
               <TerminalIcon size={14} />
-              <span className='text-xs'>bash</span>
+              <span className='text-xs'>zsh</span>
             </div>
           </div>
 
-          <div ref={terminalRef} className='h-[60vh] overflow-y-auto space-y-2 mb-4'>
+          <div
+            ref={terminalRef}
+            className='h-[60vh] overflow-y-auto space-y-2 mb-4 scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900'
+          >
             <AnimatePresence mode='popLayout'>
               {history.map((entry, i) => (
                 <motion.pre
