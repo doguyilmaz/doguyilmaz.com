@@ -1,0 +1,81 @@
+{
+  "person": {
+    "role": "Software Developer"
+  },
+  "newsletter": {
+    "title": "Subscribe to {firstName}'s Newsletter",
+    "description": "I occasionally write about software development, technology, and share thoughts on building scalable applications",
+    "button": "Sign up"
+  },
+  "home": {
+    "label": "Home",
+    "title": "{name}'s Portfolio",
+    "description": "Portfolio website showcasing my work as a {role}",
+    "headline": "Software Developer & Computer Engineer",
+    "subline": "I'm Dogu, a Software Developer at <> Togg, where I develop energy and EV-focused products for mobility ecosystem. I specialize in building scalable web and mobile applications."
+  },
+  "about": {
+    "label": "About",
+    "title": "About me",
+    "description": "Meet {name}, {role} from {location}",
+    "intro": {
+      "title": "Introduction",
+      "description": "I am a software developer specializing in building web and mobile applications with modern technologies. My focus is on creating scalable, high-performance applications with great user experiences."
+    },
+    "work": {
+      "title": "Work Experience",
+      "experiences": {
+        "Togg": {
+          "timeframe": "December 2023 - Present",
+          "role": "Software Developer",
+          "achievements": "Developing energy and EV-focused products, monitoring tools and CMS for mobility ecosystem.;Building web and mobile applications for charging, EV, fleet and management operations.;Contributing to scalable, high-performance applications, enhancing user experience and operational workflows."
+        },
+        "TGA": {
+          "timeframe": "July 2022 - December 2023",
+          "role": "Software Development Team Lead",
+          "achievements": "Led a development team, managing project planning, tracking and delivery of multiple applications.;Oversaw the creation of web and mobile applications, emphasizing data visualization and user experience.;Supervised team growth and fostered collaboration for efficient development."
+        }
+      }
+    },
+    "studies": {
+      "title": "Education",
+      "institutions": {
+        "Istanbul University": {
+          "description": "Bachelor's Degree in Computer Engineering"
+        }
+      }
+    },
+    "technical": {
+      "title": "Technical Skills",
+      "skills": {
+        "Frontend": {
+          "description": "React, Next.js, TypeScript, React Native, Redux, Zustand, Tailwind"
+        },
+        "Backend": {
+          "description": "Node.js, Go, Express, ElysiaJS, MongoDB, PostgreSQL"
+        },
+        "Data": {
+          "description": "Highcharts, Deck.gl, Kepler.gl, MapGL, Data Visualization"
+        }
+      }
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Writing about software development...",
+    "description": "Read what {name} has been up to recently"
+  },
+  "work": {
+    "label": "Work",
+    "title": "My Projects",
+    "description": "Software development projects by {name}"
+  },
+  "gallery": {
+    "label": "Gallery",
+    "title": "My Gallery",
+    "description": "A collection by {name}"
+  },
+  "projectCard": {
+    "label": "View Project"
+  }
+}

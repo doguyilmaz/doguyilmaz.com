@@ -1,72 +1,164 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Github, Linkedin, Mail, FileText } from 'lucide-react';
+'use client';
 
-export default function Header() {
+import { useParams } from 'next/navigation';
+import { useEffect, useState, useTransition } from 'react';
+import { Flex, ToggleButton } from '@/once-ui/components';
+import styles from '@/components/Header.module.scss';
+import { routing } from '@/i18n/routing';
+import { Locale, usePathname, useRouter } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
+import { siteConfig } from '@/config';
+
+type TimeDisplayProps = {
+  timeZone: string;
+  locale?: string;
+};
+
+const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = 'en-GB' }) => {
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone,
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      };
+      const timeString = new Intl.DateTimeFormat(locale, options).format(now);
+      setCurrentTime(timeString);
+    };
+
+    updateTime();
+    const intervalId = setInterval(updateTime, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [timeZone, locale]);
+
+  return <>{currentTime}</>;
+};
+
+export const Header = () => {
+  const router = useRouter();
+  const [isPending, startTransition] = useTransition();
+  const pathname = usePathname() ?? '';
+  const params = useParams();
+
+  function handleLanguageChange(locale: string) {
+    const nextLocale = locale as Locale;
+    startTransition(() => {
+      router.replace(pathname, { locale: nextLocale });
+    });
+  }
+
+  const t = useTranslations();
+
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      className='fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm'
-    >
-      <nav className='max-w-6xl mx-auto px-4 py-4 flex justify-between items-center'>
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          className='text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent'
-        >
-          John Doe
-        </motion.div>
-
-        <div className='flex items-center gap-6'>
-          <a href='#about' className='hover:text-purple-600 transition-colors'>
-            About
-          </a>
-          <a href='#projects' className='hover:text-purple-600 transition-colors'>
-            Projects
-          </a>
-          <a href='#skills' className='hover:text-purple-600 transition-colors'>
-            Skills
-          </a>
-          <a href='#contact' className='hover:text-purple-600 transition-colors'>
-            Contact
-          </a>
-        </div>
-
-        <div className='flex items-center gap-4'>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            href='https://github.com'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='text-gray-600 hover:text-purple-600 transition-colors'
+    <>
+      <Flex
+        className={styles.mask}
+        position='fixed'
+        zIndex={9}
+        fillWidth
+        minHeight='80'
+        justifyContent='center'
+      />
+      <Flex
+        style={{ height: 'fit-content' }}
+        className={styles.position}
+        as='header'
+        zIndex={9}
+        fillWidth
+        padding='8'
+        justifyContent='center'
+      >
+        <Flex paddingLeft='12' fillWidth alignItems='center' textVariant='body-default-s'>
+          {/* <Flex hide='s'>{t('location')}</Flex> */}
+        </Flex>
+        <Flex fillWidth justifyContent='center'>
+          <Flex
+            background='surface'
+            border='neutral-medium'
+            borderStyle='solid-1'
+            radius='m-4'
+            shadow='l'
+            padding='4'
+            justifyContent='center'
           >
-            <Github size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            href='https://linkedin.com'
-            target='_blank'
-            rel='noopener noreferrer'
-            className='text-gray-600 hover:text-purple-600 transition-colors'
+            <Flex gap='4' textVariant='body-default-s'>
+              {siteConfig.navigation.map((item, index) => (
+                <ToggleButton
+                  key={index}
+                  prefixIcon={getIconForPath(item.path)}
+                  href={`/${params?.locale}${item.path}`}
+                  selected={item.path === '/' ? pathname === '/' : pathname.startsWith(item.path)}
+                >
+                  <Flex paddingX='2' hide='s'>
+                    {t(item.name.toLowerCase())}
+                  </Flex>
+                </ToggleButton>
+              ))}
+            </Flex>
+          </Flex>
+        </Flex>
+        <Flex fillWidth justifyContent='flex-end' alignItems='center'>
+          <Flex
+            paddingRight='12'
+            justifyContent='flex-end'
+            alignItems='center'
+            textVariant='body-default-s'
+            gap='20'
           >
-            <Linkedin size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            href='mailto:your.email@example.com'
-            className='text-gray-600 hover:text-purple-600 transition-colors'
-          >
-            <Mail size={20} />
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.1 }}
-            href='/resume.pdf'
-            className='text-gray-600 hover:text-purple-600 transition-colors'
-          >
-            <FileText size={20} />
-          </motion.a>
-        </div>
-      </nav>
-    </motion.header>
+            {routing.locales.length > 1 && (
+              <Flex
+                background='surface'
+                border='neutral-medium'
+                borderStyle='solid-1'
+                radius='m-4'
+                shadow='l'
+                padding='4'
+                gap='2'
+                justifyContent='center'
+              >
+                {routing.locales.map((locale, index) => (
+                  <ToggleButton
+                    key={index}
+                    selected={params?.locale === locale}
+                    onClick={() => handleLanguageChange(locale)}
+                    className={isPending ? 'pointer-events-none opacity-60' : ''}
+                  >
+                    {locale.toUpperCase()}
+                  </ToggleButton>
+                ))}
+              </Flex>
+            )}
+            <Flex hide='s'>
+              <TimeDisplay timeZone='Europe/Istanbul' />
+            </Flex>
+          </Flex>
+        </Flex>
+      </Flex>
+    </>
   );
+};
+
+function getIconForPath(path: string): string {
+  switch (path) {
+    case '/':
+      return 'home';
+    case '/about':
+      return 'person';
+    case '/work':
+      return 'grid';
+    case '/blog':
+      return 'book';
+    case '/gallery':
+      return 'gallery';
+    case '/contact':
+      return 'mail';
+    default:
+      return 'link';
+  }
 }

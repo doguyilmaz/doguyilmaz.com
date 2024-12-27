@@ -1,0 +1,81 @@
+{
+  "person": {
+    "role": "Yazılım Geliştirici"
+  },
+  "newsletter": {
+    "title": "{firstName}'in Bültenine Abone Ol",
+    "description": "Yazılım geliştirme, teknoloji ve ölçeklenebilir uygulamalar hakkında yazılar yazıyorum",
+    "button": "Abone Ol"
+  },
+  "home": {
+    "label": "Ana Sayfa",
+    "title": "{name}'in Portfolyosu",
+    "description": "{role} olarak çalışmalarımı sergileyen portfolyo",
+    "headline": "Yazılım Geliştirici & Bilgisayar Mühendisi",
+    "subline": "Ben Dogu, Togg'da enerji ve elektrikli araç odaklı ürünler geliştiren bir Yazılım Geliştiriciyim. Ölçeklenebilir web ve mobil uygulamalar geliştirme konusunda uzmanım."
+  },
+  "about": {
+    "label": "Hakkımda",
+    "title": "Hakkımda",
+    "description": "{location}'dan {role} {name} ile tanışın",
+    "intro": {
+      "title": "Giriş",
+      "description": "Modern teknolojilerle web ve mobil uygulamalar geliştiren bir yazılım geliştiriciyim. Ölçeklenebilir, yüksek performanslı uygulamalar ve harika kullanıcı deneyimleri oluşturmaya odaklanıyorum."
+    },
+    "work": {
+      "title": "İş Deneyimi",
+      "experiences": {
+        "Togg": {
+          "timeframe": "Aralık 2023 - Günümüz",
+          "role": "Yazılım Geliştirici",
+          "achievements": "Mobilite ekosistemi için enerji ve EV odaklı ürünler, izleme araçları ve CMS geliştirme.;Şarj, EV, filo ve yönetim operasyonları için web ve mobil uygulamalar geliştirme.;Kullanıcı deneyimini ve operasyonel iş akışlarını geliştiren ölçeklenebilir, yüksek performanslı uygulamalar geliştirme."
+        },
+        "TGA": {
+          "timeframe": "Temmuz 2022 - Aralık 2023",
+          "role": "Yazılım Geliştirme Takım Lideri",
+          "achievements": "Birden fazla uygulamanın proje planlaması, takibi ve teslimini yöneten bir geliştirme ekibine liderlik.;Veri görselleştirme ve kullanıcı deneyimine odaklanan web ve mobil uygulamaların geliştirilmesini denetleme.;Ekip büyümesini ve verimli işbirliğini teşvik etme."
+        }
+      }
+    },
+    "studies": {
+      "title": "Eğitim",
+      "institutions": {
+        "Istanbul University": {
+          "description": "Bilgisayar Mühendisliği Lisans Derecesi"
+        }
+      }
+    },
+    "technical": {
+      "title": "Teknik Beceriler",
+      "skills": {
+        "Frontend": {
+          "description": "React, Next.js, TypeScript, React Native, Redux, Zustand, Tailwind"
+        },
+        "Backend": {
+          "description": "Node.js, Go, Express, ElysiaJS, MongoDB, PostgreSQL"
+        },
+        "Data": {
+          "description": "Highcharts, Deck.gl, Kepler.gl, MapGL, Veri Görselleştirme"
+        }
+      }
+    }
+  },
+  "blog": {
+    "label": "Blog",
+    "title": "Yazılım geliştirme hakkında yazılar...",
+    "description": "{name}'in son yazılarını okuyun"
+  },
+  "work": {
+    "label": "Projeler",
+    "title": "Projelerim",
+    "description": "{name}'in yazılım geliştirme projeleri"
+  },
+  "gallery": {
+    "label": "Galeri",
+    "title": "Galerim",
+    "description": "{name}'in koleksiyonu"
+  },
+  "projectCard": {
+    "label": "Projeyi Görüntüle"
+  }
+}
