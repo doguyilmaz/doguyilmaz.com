@@ -27,3 +27,6 @@ export const siteConfig = {
     },
   },
 };
+
+export { routes, display } from '@/app/resources/config';
+export { renderContent } from '@/app/resources/renderContent';
