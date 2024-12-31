@@ -36,6 +36,7 @@ export const POST: APIRoute = async ({ request }) => {
   const allowedOrigins = [
     import.meta.env.DEV ? "http://localhost:4321" : null, // Default Astro dev port
     import.meta.env.SITE || "https://doguyilmaz.com",
+    "https://www.doguyilmaz.com",
   ].filter(Boolean); // Remove any undefined values
 
   if (!origin || !allowedOrigins.includes(origin)) {
