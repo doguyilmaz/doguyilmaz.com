@@ -19,6 +19,7 @@
     "@astrojs/rss": "4.0.10",
     "@astrojs/sitemap": "3.2.1",
     "@astrojs/tailwind": "5.1.4",
+    "@astrojs/vercel": "^8.0.1",
     "@fontsource/inter": "^4.5.14",
     "@fontsource/jetbrains-mono": "^4.5.11",
     "@types/nodemailer": "^6.4.16",
