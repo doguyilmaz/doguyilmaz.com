@@ -16,6 +16,32 @@ const { pageTitle, description, type } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Mobile theme colors -->
+    <meta
+      name="theme-color"
+      content="#18181b"
+      media="(prefers-color-scheme: dark)"
+    />
+    <meta
+      name="theme-color"
+      content="#fafafa"
+      media="(prefers-color-scheme: light)"
+    />
+
+    <!-- iOS status bar -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#18181b" />
+
+    <!-- Android -->
+    <meta name="mobile-web-app-capable" content="yes" />
+
     <!--TODO: Ask for twitter username, and other socials as well -->
     <SEO
       title={pageTitle}
