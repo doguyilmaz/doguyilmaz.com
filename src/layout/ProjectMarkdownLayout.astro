@@ -1,0 +1,47 @@
+---
+import Layout from "./Layout.astro";
+const { frontmatter } = Astro.props;
+// import { Tweet } from "@astro-community/astro-embed-twitter";
+import { YouTube } from "@astro-community/astro-embed-youtube";
+---
+
+<Layout
+  pageTitle={frontmatter.title}
+  description={frontmatter.description}
+  type="article"
+>
+  <main class="px-8 pt-16 mx-auto mb-4 max-w-6xl sm:pt-24 lg:px-16">
+    <a
+      href="/portfolio"
+      class="mx-auto text-lg underline transition duration-200 decoration-2 decoration-accent-300 text-primary-100 hover:decoration-accent-300"
+      >‹ Back to portfolio</a
+    >
+    <article
+      class={`mx-auto 
+      mt-8 prose 
+      text-primary-100 
+      prose-headings:text-primary-100 
+      prose-a:text-accent-300/80
+      prose-a:decoration-accent-400/80
+      hover:prose-a:decoration-accent-300
+      prose-strong:text-primary-100
+      prose-code:text-primary-100
+      prose-blockquote:text-primary-200
+        prose-img:rounded-2xl
+      marker:prose-li:text-primary-100
+      prose-li:text-primary-100
+      prose-ul:text-primary-100
+      prose-ol:text-primary-100
+      prose-pre:rounded-2xl
+      prose-pre:border-[1px]
+    prose-pre:border-primary-700/40
+      prose-img:mx-auto
+      prose-img:shadow-md
+      prose-video:mx-auto
+    prose-p:text-primary-300`}
+    >
+      {frontmatter.videoID && <YouTube id={frontmatter.videoID} />}
+      <slot />
+    </article>
+  </main>
+</Layout>

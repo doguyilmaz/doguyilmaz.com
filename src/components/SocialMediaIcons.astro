@@ -1,0 +1,41 @@
+---
+import { getSocialLinks, type SocialLink } from "@config/site";
+
+interface Props {
+  class?: string;
+  containerClass?: string;
+}
+
+const { class: className, containerClass } = Astro.props;
+const socialLinks = getSocialLinks();
+
+const ICONS = {
+  github: `<path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M14.333 19v-1.863c.025-.31-.018-.62-.126-.913a2.18 2.18 0 00-.5-.781c2.093-.227 4.293-1 4.293-4.544 0-.906-.358-1.778-1-2.434a3.211 3.211 0 00-.06-2.448s-.787-.227-2.607.961a9.152 9.152 0 00-4.666 0c-1.82-1.188-2.607-.96-2.607-.96A3.211 3.211 0 007 8.464a3.482 3.482 0 00-1 2.453c0 3.519 2.2 4.291 4.293 4.544a2.18 2.18 0 00-.496.773 2.134 2.134 0 00-.13.902V19M9.667 17.702c-2 .631-3.667 0-4.667-1.948" stroke-linecap="round" stroke-linejoin="round"></path>`,
+  linkedin: `<path d="M21 8v8a5 5 0 01-5 5H8a5 5 0 01-5-5V8a5 5 0 015-5h8a5 5 0 015 5zM7 17v-7" stroke-linecap="round" stroke-linejoin="round"></path><path d="M11 17v-3.25M11 10v3.75m0 0c0-3.75 6-3.75 6 0V17M7 7.01l.01-.011" stroke-linecap="round" stroke-linejoin="round"></path>`,
+  twitter: `<path d="M23 3.01s-2.018 1.192-3.14 1.53a4.48 4.48 0 00-7.86 3v1a10.66 10.66 0 01-9-4.53s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5 0-.278-.028-.556-.08-.83C21.94 5.674 23 3.01 23 3.01z" stroke-linecap="round" stroke-linejoin="round"></path>`,
+  instagram: `<path d="M12 16a4 4 0 100-8 4 4 0 000 8z" stroke-linecap="round" stroke-linejoin="round"></path><path d="M3 16V8a5 5 0 015-5h8a5 5 0 015 5v8a5 5 0 01-5 5H8a5 5 0 01-5-5z"></path><path d="M17.5 6.51l.01-.011" stroke-linecap="round" stroke-linejoin="round"></path>`,
+} as const;
+
+const LABELS = {
+  github: "Go to my github page",
+  linkedin: "Go to my linkedin page",
+  twitter: "Go to my twitter page",
+  instagram: "Go to my instagram page",
+} as const;
+---
+
+<div class={`flex flex-row gap-1 ${containerClass}`}>
+  {
+    socialLinks.map((social) => (
+      <a href={social.url} target="_blank" aria-label={LABELS[social.platform]}>
+        <svg
+          class={className}
+          viewBox="0 0 24 24"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          set:html={ICONS[social.platform]}
+        />
+      </a>
+    ))
+  }
+</div>

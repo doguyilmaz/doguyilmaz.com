@@ -1,0 +1,38 @@
+---
+import HighlightedLink from "./HighlightedLink.astro";
+import Tag from "./Tag.astro";
+
+interface Props {
+  date: string;
+  readTime: string;
+  title: string;
+  description: string;
+  tags: string[];
+  url?: string;
+}
+
+const { date, readTime, title, description, tags, url } = Astro.props;
+---
+
+<div class="sm:pl-4 sm:border-l sm:border-primary-700" data-tags={tags}>
+  <article class="overflow-hidden divide-none">
+    <div class="flex flex-col gap-2 py-2 sm:px-6">
+      <h3 class="text-xl font-semibold tracking-tight">{title}</h3>
+      <div class="flex flex-row gap-2 justify-start text-sm text-primary-400">
+        <time>{date}&nbsp;•</time>
+        <span>{readTime}</span>
+      </div>
+    </div>
+
+    <div class="py-2 text-base sm:px-6 max-w-[65ch]">
+      {description}
+    </div>
+
+    <div class="flex flex-col gap-8 py-2 sm:px-6">
+      <ul class="flex flex-row flex-wrap gap-2">
+        {tags.map((tag) => <Tag>{tag}</Tag>)}
+      </ul>
+      <HighlightedLink href={url}>Read more ›</HighlightedLink>
+    </div>
+  </article>
+</div>

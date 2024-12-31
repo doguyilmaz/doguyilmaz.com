@@ -1,0 +1,19 @@
+---
+import AboutImage from "@components/AboutImage.astro";
+import Experience from "@components/Experience.astro";
+import Layout from "@layout/Layout.astro";
+import { siteConfig } from "@config/site";
+
+const { about } = siteConfig;
+---
+
+<Layout
+  pageTitle={about.pageTitle}
+  description={about.pageDescription}
+  type="content"
+>
+  <main class="px-8">
+    <AboutImage />
+    <Experience />
+  </main>
+</Layout>

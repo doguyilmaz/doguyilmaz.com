@@ -1,0 +1,24 @@
+---
+import ThemeSwitch from "@components/ThemeSwitch.astro";
+---
+
+<ThemeSwitch strategy="button">
+  <button
+    class="fixed right-5 bottom-5 z-[9999]"
+    id="theme-switcher"
+    title="Theme switcher"
+    aria-label="Theme switcher"
+    ><!--?xml version="1.0" encoding="UTF-8"?-->
+    <svg
+      stroke-width="2.21"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      class="p-2 w-12 h-12 rounded-2xl bg-lightercontentbackground text-primary-100 stroke-primary-200 border-x-[1px] border-primary-800"
+      ><path
+        d="M12 18a6 6 0 100-12 6 6 0 000 12zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1"
+        stroke-width="2.21"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </button>
+</ThemeSwitch>

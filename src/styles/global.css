@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root,
+  .dark {
+    /* basically the zinc palette */
+    --primary-50: 250 250 250;
+    --primary-100: 244 244 245;
+    --primary-200: 228 228 231;
+    --primary-300: 212 212 216;
+    --primary-400: 161 161 170;
+    --primary-500: 113 113 122;
+    --primary-600: 82 82 91;
+    --primary-700: 63 63 70;
+    --primary-800: 39 39 42;
+    --primary-900: 24 24 27;
+
+    --accent-verylight: 214 188 250;
+    --accent-light: 192 132 252;
+    --accent-regular: 168 85 247;
+    --accent-dark: 147 51 234;
+    --accent-darkest: 88 28 135;
+
+    --main-bg: #000;
+    --content-bg: #0a0a0a;
+    --lighter-content-bg: #121212;
+
+    --gradient-1: rgba(0, 0, 0, 0);
+    --gradient-2: rgba(0, 0, 0, 0.74);
+    --gradient-3-start: rgba(168, 85, 247, 0.91);
+    --gradient-3-end: hsl(265, 89%, 62%);
+  }
+
+  .light {
+    --gradient-1: rgba(255, 255, 255, 0);
+    --gradient-2: #fafafad5;
+    --gradient-3-start: rgba(192, 132, 252, 0.756);
+    --gradient-3-end: hsl(265, 96%, 70%);
+    --main-bg: #fafafad5;
+
+    --primary-50: 0 0 0;
+    --primary-900: 244 244 245;
+    --primary-800: 228 228 231;
+    --primary-700: 212 212 216;
+    --primary-600: 161 161 170;
+    --primary-500: 113 113 122;
+    --primary-400: 82 82 91;
+    --primary-300: 63 63 70;
+    --primary-200: 39 39 42;
+    --primary-100: 24 24 27;
+
+    --accent-darkest: 214 188 250;
+    --accent-dark: 192 132 252;
+    --accent-regular: 168 85 247;
+    --accent-light: 147 51 234;
+    --accent-verylight: 88 28 135;
+
+    --content-bg: #fafafa;
+    --lighter-content-bg: #f4f3f3;
+  }
+}
+
+html {
+  background: var(--main-bg);
+}
+body {
+  background: radial-gradient(
+      84% 84% at -20% -20%,
+      var(--main-bg) 0%,
+      var(--gradient-1) 100%
+    ),
+    radial-gradient(
+      40% 82% at 50% 50%,
+      var(--gradient-2) 0%,
+      var(--gradient-2) 100%
+    ),
+    radial-gradient(
+      82% 60% at 34% 10%,
+      var(--main-bg) 0%,
+      var(--gradient-3-start) 46%,
+      var(--gradient-3-end) 72%,
+      var(--main-bg) 90%
+    );
+  background-repeat: no-repeat;
+}

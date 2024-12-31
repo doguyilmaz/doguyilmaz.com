@@ -1,0 +1,106 @@
+---
+import BlogPost from "@components/BlogPost.astro";
+import SelectableTag from "@components/SelectableTag.astro";
+import Layout from "@layout/Layout.astro";
+import { siteConfig } from "@config/site";
+import { CollectionEntry, getCollection } from "astro:content";
+import readingTime from "reading-time";
+
+const { blog } = siteConfig.pages;
+let allPosts = (await getCollection("blog")) as CollectionEntry<"blog">[];
+// sort by date
+allPosts = allPosts.sort((a, b) => {
+  let dateA = new Date(a.data.pubDate),
+    dateB = new Date(b.data.pubDate);
+  if (dateA < dateB) return 1;
+  if (dateA > dateB) return -1;
+  return 0;
+});
+
+const tags = [
+  ...new Set(
+    allPosts
+      .map((post) => post.data.tags)
+      .flat()
+      .sort()
+  ),
+];
+---
+
+<Layout pageTitle={blog.title} description={blog.description} type={blog.type}>
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
+    <div class="flex flex-col mt-4 space-y-8">
+      <div class="flex flex-col space-y-4">
+        <h1
+          class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]"
+        >
+          Talking about startup building and software
+        </h1>
+        <p class="text-primary-300 max-w-[65ch]">
+          All of my blog posts on programming, startups, marketing, and more,
+          sorted by their date. You can also filter them by clicking on the tags
+          below.
+        </p>
+        <h2
+          class="text-3xl font-bold tracking-tighter sm:text-4xl max-w-[25ch]"
+        >
+          Filter by tags:
+        </h2>
+      </div>
+      <div class="mb-8">
+        <ul class="flex flex-row flex-wrap gap-2">
+          {tags.map((t) => <SelectableTag name={t} />)}
+        </ul>
+      </div>
+      <div class="flex flex-col gap-8">
+        {
+          allPosts.map((post) => (
+            <BlogPost
+              date={new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+              readTime={readingTime(post.body || "").text}
+              title={post.data.title}
+              description={post.data.description}
+              tags={post.data.tags}
+              url={`/blog/${post.slug}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<script define:vars={{ tags }}>
+  let blogPosts = document.querySelectorAll("div[data-tags]");
+  let filters = document.querySelectorAll("input");
+
+  let tagMap = Object.assign(...tags.map((t) => ({ [t]: false })));
+
+  for (const filter of filters) {
+    filter.addEventListener("change", (e) => {
+      let isChecked = e.target.checked;
+      let name = filter.name;
+      tagMap[name] = isChecked;
+
+      toggleVisibility();
+    });
+  }
+
+  function toggleVisibility() {
+    let checkedTags = Object.keys(tagMap).filter((t) => tagMap[t] === true);
+
+    for (const blogPost of blogPosts) {
+      let tags = blogPost.dataset.tags.split(",");
+
+      if (checkedTags.every((t) => tags.includes(t))) {
+        blogPost.style.display = "block";
+      } else {
+        blogPost.style.display = "none";
+      }
+    }
+  }
+</script>

@@ -1,0 +1,122 @@
+---
+import { Image } from "astro:assets";
+import { siteConfig } from "@config/site";
+import aboutImage from "@assets/images/personal/about.jpeg";
+
+const { about } = siteConfig;
+---
+
+<div class="pt-16 sm:pb-12 md:pb-4 lg:pb-16">
+  <div
+    class="mx-auto mt-8 max-w-7xl lg:px-8 lg:bg-transparent bg-contentbackground"
+  >
+    <div class="lg:grid lg:grid-cols-12">
+      <div
+        class="z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:py-16 lg:bg-transparent"
+      >
+        <div class="px-4 mx-auto max-w-xs sm:px-6 md:max-w-md lg:p-0">
+          <Image
+            width={720}
+            height={960}
+            quality={100}
+            decoding="async"
+            loading="lazy"
+            class="object-cover object-center w-full max-w-md rounded-3xl shadow-2xl -rotate-3 aspect-[1/1]"
+            src={aboutImage}
+            alt={`Image of ${siteConfig.siteName}`}
+          />
+        </div>
+      </div>
+
+      <div
+        class="relative rounded-3xl lg:grid lg:grid-cols-10 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:items-center lg:bg-contentbackground"
+      >
+        <div
+          class="hidden overflow-hidden absolute inset-0 rounded-3xl pointer-events-none lg:block"
+          aria-hidden="true"
+        >
+          <svg
+            class="absolute bottom-full left-full opacity-20 transform -translate-x-2/3 translate-y-1/3 xl:top-0 xl:bottom-auto xl:translate-y-0"
+            width="404"
+            height="384"
+            fill="none"
+            viewBox="0 0 404 384"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
+                x="0"
+                y="0"
+                width="20"
+                height="20"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="4"
+                  height="4"
+                  class="text-accent-500"
+                  fill="currentColor"></rect>
+              </pattern>
+            </defs>
+            <rect
+              width="404"
+              height="384"
+              fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)"></rect>
+          </svg>
+          <svg
+            class="absolute top-full opacity-40 transform -translate-x-1/3 -translate-y-1/3 xl:-translate-y-1/2"
+            width="404"
+            height="384"
+            fill="none"
+            viewBox="0 0 404 384"
+            aria-hidden="true"
+          >
+            <defs>
+              <pattern
+                id="64e643ad-2176-4f86-b3d7-f2c5da3b6a6d"
+                x="0"
+                y="0"
+                width="20"
+                height="20"
+                patternUnits="userSpaceOnUse"
+              >
+                <rect
+                  x="0"
+                  y="0"
+                  width="4"
+                  height="4"
+                  class="text-accent-500"
+                  fill="currentColor"></rect>
+              </pattern>
+            </defs>
+            <rect
+              width="404"
+              height="384"
+              fill="url(#64e643ad-2176-4f86-b3d7-f2c5da3b6a6d)"></rect>
+          </svg>
+        </div>
+
+        <div
+          class="py-12 mx-auto space-y-6 sm:py-16 sm:max-w-3xl lg:col-span-7 lg:col-start-4 lg:max-w-none"
+        >
+          <h2
+            class="text-4xl leading-[45px] font-bold tracking-tighter sm:text-5xl sm:leading-[60px]"
+            id="about-heading"
+          >
+            {about.content.heading}
+          </h2>
+          <div class="text-lg text-primary-300 md:text-primary-100">
+            {
+              about.content.paragraphs.map((paragraph) => (
+                <p class="mb-4">{paragraph}</p>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<input name={name} id={name} type="checkbox" />
+<label
+  for={name}
+  class="flex justify-center items-center px-2 h-8 font-mono text-xs font-extrabold leading-3 uppercase rounded-lg text-accent-200 bg-accent-800/90"
+>
+  {name}
+</label>
+
+<style>
+  label {
+    user-select: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+  }
+  input {
+    display: none;
+  }
+  :checked + label {
+    @apply border-accent-300;
+    @apply shadow-[0_0_5px_rgb(var(--accent-light))];
+  }
+</style>
