@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /api/og/*
-
-# Host
-Host: https://doguyilmaz.com
-
-# Sitemaps
-Sitemap: https://doguyilmaz.com/sitemap.xml

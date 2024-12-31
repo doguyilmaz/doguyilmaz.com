@@ -1,0 +1,83 @@
+---
+import { getNavigation } from "@config/site";
+const navigation = getNavigation();
+---
+
+<!-- set width and max-w, -4rem from body, probably should refactor -->
+<div
+  class="w-[calc(100%-4px)] sm:w-[calc(100%-4px-4rem)] fixed backdrop-blur-[8px] top-0 py-2 z-50"
+  id="navbar-container"
+>
+  <nav class="px-1 mx-auto max-w-sm rounded-3xl z-100">
+    <ul class="flex flex-row justify-center items-center">
+      {
+        navigation.map((item) => (
+          <li>
+            <a
+              rel="prefetch"
+              class:list={[
+                "block py-2 px-3 font-semibold tracking-tighter transition hover:text-accent-400 active:text-accent-400",
+                Astro.url.pathname === item.path ? "text-accent-400" : "",
+              ]}
+              href={item.path}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</div>
+
+<style>
+  #navbar-container {
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.3s linear;
+    max-width: calc(72rem - 2px);
+  }
+
+  a[aria-current="page"] {
+    color: var(--accent-400);
+  }
+</style>
+
+<script>
+  let prevScrollPos = window.pageYOffset;
+
+  let navbar = document.getElementById("navbar-container");
+
+  // hide on scroll down, show on scroll up
+  window.onscroll = () => {
+    let currentScrollPos = window.pageYOffset;
+
+    // console.table([{ previous: prevScrollPos, current: currentScrollPos }]);
+
+    if (!navbar) {
+      return;
+    }
+
+    if (currentScrollPos < 50) {
+      navbar.style.top = "0";
+      return;
+    }
+
+    if (prevScrollPos > currentScrollPos) {
+      navbar.style.top = "0";
+    } else {
+      navbar.style.top = "-5rem";
+    }
+
+    prevScrollPos = currentScrollPos;
+  };
+
+  // Updated active page logic
+  const currentPath = window.location.pathname;
+  const links = document.querySelectorAll("li>a");
+  for (const link of links) {
+    if (link.getAttribute("href") === currentPath) {
+      link.classList.add("active");
+    }
+  }
+</script>

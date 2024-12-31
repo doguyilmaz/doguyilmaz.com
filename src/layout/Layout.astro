@@ -1,0 +1,68 @@
+---
+import MainContainer from "@components/MainContainer.astro";
+import ThemeSwitcher from "@components/ThemeSwitcher.astro";
+import { ClientRouter, fade } from "astro:transitions";
+import "@fontsource/inter";
+import "@fontsource/jetbrains-mono";
+import { SEO } from "astro-seo";
+import "@styles/global.css";
+
+const { pageTitle, description, type } = Astro.props;
+---
+
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <!--TODO: Ask for twitter username, and other socials as well -->
+    <SEO
+      title={pageTitle}
+      description={description}
+      openGraph={{
+        basic: {
+          title: description,
+          type: type,
+          image: "/images/og_image.png",
+        },
+        image: {
+          alt: "An image of myself",
+        },
+      }}
+      twitter={{ creator: "@" }}
+    />
+    <script
+      is:inline
+      defer
+      data-domain="localhost:4321"
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
+    <style is:inline>
+      :root {
+        --tc-padding: 0;
+        --tc-border-color: transparent;
+      }
+      .twitter-tweet:not(iframe) {
+        visibility: hidden;
+      }
+      .twitter-tweet {
+        width: 100% !important;
+        margin: 0 !important;
+      }
+    </style>
+
+    <ClientRouter />
+  </head>
+  <body
+    class="h-full sm:px-8 text-primary-100 selection:bg-accent-400 selection:text-black"
+  >
+    <div transition:animate={fade({ duration: "0.5s" })}>
+      <MainContainer>
+        <slot />
+      </MainContainer>
+      <ThemeSwitcher />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+---
+import { siteConfig } from "@config/site";
+import { Image } from "astro:assets";
+
+const { experience } = siteConfig.about;
+
+// Function to get image path from assets
+function getImagePath(path: string) {
+  const imageName = path.split("/").pop()?.toLowerCase();
+  return import(`../assets/images/experience/${imageName}`);
+}
+---
+
+<section
+  aria-labelledby=":rr:"
+  class="mx-auto max-w-5xl sm:px-6 sm:border-l sm:border-primary-700/40"
+>
+  <div class="grid grid-cols-1 gap-y-8 items-baseline md:grid-cols-4">
+    <h2
+      id=":rr:"
+      class="text-lg font-semibold tracking-tight sm:text-xl text-primary-100"
+    >
+      {experience.sectionTitle}
+    </h2>
+    <div class="md:col-span-3">
+      <ul role="list" class="space-y-16">
+        {
+          experience.jobs.map(async (job) => {
+            const logoModule = await getImagePath(job.logoPath);
+            return (
+              <li class="flex flex-col items-start">
+                <>
+                  <div class="flex flex-row justify-between items-baseline pl-2 w-full border-l border-primary-700">
+                    <div class="flex flex-col">
+                      <div class="flex flex-row gap-4 items-center">
+                        <Image
+                          src={logoModule.default}
+                          alt={`${job.company} logo`}
+                          width={36}
+                          height={36}
+                          class={`object-contain ring-1 shadow-md shadow-primary-800/5 ring-primary-900 ${
+                            job.isLogoRounded ? "rounded-full" : ""
+                          }`}
+                        />
+                        <h3 class="text-base font-semibold tracking-tight sm:max-w-none sm:text-lg max-w-[20ch] text-primary-100">
+                          {job.title}
+                        </h3>
+                      </div>
+
+                      <h2 class="text-sm mt-2 tracking-tight sm:max-w-none sm:text-base max-w-[20ch] text-primary-300">
+                        {job.company}
+                      </h2>
+                    </div>
+                    <time class="text-sm text-primary-600">
+                      {job.timeRange}
+                    </time>
+                  </div>
+
+                  <p class="mt-4 text-sm text-primary-400 pl-2">
+                    {job.description}
+                  </p>
+
+                  {job.projects.length > 0 && (
+                    <ul class="mt-2 ml-6 text-sm list-disc text-primary-500">
+                      {job.projects.map((project) => (
+                        <li>{project}</li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              </li>
+            );
+          })
+        }
+      </ul>
+    </div>
+  </div>
+</section>

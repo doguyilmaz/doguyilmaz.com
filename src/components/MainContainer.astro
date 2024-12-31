@@ -1,0 +1,13 @@
+---
+import Footer from "./Footer.astro";
+import Navbar from "./Navbar.astro";
+---
+
+<div
+  class="mx-auto max-w-6xl min-h-full bg-contentbackground border-x-[1px] border-primary-800"
+  id="main-container"
+>
+  <Navbar />
+  <slot />
+  <Footer />
+</div>

@@ -1,0 +1,58 @@
+---
+import SocialMediaIcons from "./SocialMediaIcons.astro";
+import { getNavigation, siteConfig, type NavItem } from "@config/site";
+
+const navigation = getNavigation();
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="mt-20">
+  <div class="sm:px-8">
+    <div class="mx-auto max-w-7xl lg:px-8">
+      <div class="pt-10 pb-16 border-t border-primary-700/40">
+        <div class="relative px-4 sm:px-8 lg:px-12">
+          <div class="mx-auto max-w-2xl lg:max-w-5xl">
+            <div class="flex flex-col gap-2">
+              <div
+                class="flex flex-col gap-6 justify-between items-center sm:flex-row"
+              >
+                <div class="flex gap-6 text-sm font-medium text-primary-200">
+                  {
+                    navigation.map((item) => (
+                      <a
+                        rel="prefetch"
+                        class="transition hover:text-accent-400"
+                        href={item.path}
+                      >
+                        {item.label}
+                      </a>
+                    ))
+                  }
+                </div>
+
+                <p class="text-sm text-primary-500">
+                  © {currentYear}
+                  {siteConfig.footer.copyright}
+                </p>
+              </div>
+
+              <div
+                class="flex flex-col gap-2 items-end self-center sm:self-end"
+              >
+                <a
+                  class="mx-auto text-sm sm:mx-0 text-primary-500 my-[10px]"
+                  href={`mailto:${siteConfig.footer.email}`}
+                  ><!--?xml version="1.0" encoding="UTF-8"?-->
+                  {siteConfig.footer.email}</a
+                >
+                <SocialMediaIcons
+                  class="p-1 w-11 h-11 hover:cursor-pointer stroke-[0.5] stroke-primary-50 ceva hover:stroke-accent-400"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

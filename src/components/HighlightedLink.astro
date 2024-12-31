@@ -1,0 +1,12 @@
+---
+interface Props {
+  href?: string;
+}
+const { href } = Astro.props;
+---
+
+<a
+  href={href}
+  class="underline transition duration-200 decoration-2 decoration-accent-300/80 hover:decoration-accent-300"
+  ><slot />
+</a>

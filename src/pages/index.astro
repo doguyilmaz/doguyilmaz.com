@@ -1,0 +1,54 @@
+---
+import Layout from "@layout/Layout.astro";
+import { siteConfig } from "@config/site";
+import type { CollectionEntry } from "astro:content";
+
+import MainIntro from "@components/MainIntro.astro";
+import ContactForm from "@components/ContactForm.astro";
+import FeaturedBlogsContainer from "@components/FeaturedBlogsContainer.astro";
+import FeaturedBlogPost from "@components/FeaturedBlogPost.astro";
+import readingTime from "reading-time";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("blog");
+const lastThreePosts = posts
+  .sort((a: CollectionEntry<"blog">, b: CollectionEntry<"blog">) => {
+    let dateA = new Date(a.data.pubDate),
+      dateB = new Date(b.data.pubDate);
+    if (dateA < dateB) return 1;
+    if (dateA > dateB) return -1;
+    return 0;
+  })
+  .slice(0, 3);
+---
+
+<Layout
+  pageTitle={siteConfig.siteName}
+  description={siteConfig.siteDescription}
+  type="website"
+>
+  <main class="flex flex-col gap-8 items-center px-8 mx-auto max-w-[75ch]">
+    <MainIntro />
+    {
+      siteConfig.homepage.showLatestPosts && (
+        <FeaturedBlogsContainer>
+          {lastThreePosts.map((post: CollectionEntry<"blog">) => (
+            <FeaturedBlogPost
+              date={new Date(post.data.pubDate).toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric",
+              })}
+              readTime={readingTime(post.body || "").text}
+              title={post.data.title}
+              description={post.data.description}
+              tags={post.data.tags}
+              url={`/blog/${post.slug}`}
+            />
+          ))}
+        </FeaturedBlogsContainer>
+      )
+    }
+    {siteConfig.homepage.showContactForm && <ContactForm />}
+  </main>
+</Layout>
