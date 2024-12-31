@@ -1,7 +1,5 @@
 ---
-import { Image } from "astro:assets";
 import { siteConfig } from "@config/site";
-import aboutImage from "@assets/images/personal/about.jpeg";
 
 const { about } = siteConfig;
 ---
@@ -15,15 +13,14 @@ const { about } = siteConfig;
         class="z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:py-16 lg:bg-transparent"
       >
         <div class="px-4 mx-auto max-w-xs sm:px-6 md:max-w-md lg:p-0">
-          <Image
+          <img
             width={720}
             height={960}
-            quality={100}
-            decoding="async"
-            loading="lazy"
             class="object-cover object-center w-full max-w-md rounded-3xl shadow-2xl -rotate-3 aspect-[1/1]"
-            src={aboutImage}
+            src="/images/personal/about.jpeg"
             alt={`Image of ${siteConfig.siteName}`}
+            loading="lazy"
+            decoding="async"
           />
         </div>
       </div>

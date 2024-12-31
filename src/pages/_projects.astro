@@ -1,17 +1,15 @@
 ---
 import ProjectsGrid from "@components/ProjectsGrid.astro";
-import parkrunDashboardImage from "@assets/images/projects/parkrun_dashboard.png";
 import Layout from "@layout/Layout.astro";
 import { siteConfig } from "@config/site";
 
 const { projects } = siteConfig.pages;
 const projectsList = [
   {
-    name: "Parkrun Dashboard",
-    image: parkrunDashboardImage,
-    description:
-      "A personal Tableau project, for tracking my parkrun participation.",
-    link: "https://public.tableau.com/views/parkruntracker/Maindashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link",
+    name: "Test",
+    image: "/images/projects/test.png",
+    description: "A personal project",
+    link: "https://github.com",
   },
 ];
 ---
@@ -27,14 +25,9 @@ const projectsList = [
         <h1
           class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]"
         >
-          Things I’ve created to make the world around me a little different
+          Test
         </h1>
-        <p class="text-primary-300 max-w-[65ch]">
-          I’ve worked on tons of little projects over the years but these are
-          the ones that I’m most proud of. Many of them are open-source, so if
-          you see something that piques your interest, check out the code and
-          contribute if you have ideas for how it can be improved.
-        </p>
+        <p class="text-primary-300 max-w-[65ch]">Test</p>
       </div>
       <ProjectsGrid projects={projectsList} />
     </div>
