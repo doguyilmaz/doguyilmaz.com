@@ -23,6 +23,7 @@ export interface Job {
   timeRange: string;
   description: string;
   projects: string[];
+  technologies: string[];
 }
 
 export interface PageMeta {
@@ -139,6 +140,16 @@ export const siteConfig = {
           description:
             "Working as a Software Developer focusing on web and mobile application development.",
           projects: [],
+          technologies: [
+            "Vue.js",
+            "React Native",
+            "TypeScript",
+            "Expo",
+            "React",
+            "Primefaces",
+            "Tamagui",
+            "Bun",
+          ],
         },
         {
           title: "Software Development Team Lead",
@@ -151,6 +162,15 @@ export const siteConfig = {
           projects: [
             "Led multiple development projects and managed team progress",
             "Developed web and mobile applications",
+          ],
+          technologies: [
+            "Next.js",
+            "React Native",
+            "TypeScript",
+            "React",
+            "JavaScript",
+            "Teamwork",
+            "Team Leadership",
           ],
         },
         {
@@ -166,6 +186,14 @@ export const siteConfig = {
             "Developed mobile applications using React Native",
             "Created microservices using Node.js and Go",
           ],
+          technologies: [
+            "React",
+            "Next.js",
+            "React Native",
+            "JavaScript",
+            "Go",
+            "Node.js",
+          ],
         },
         {
           title: "Full-stack Developer",
@@ -179,6 +207,17 @@ export const siteConfig = {
             "Developed web, mobile and desktop applications",
             "Built REST APIs & backend services using NodeJs and Spring Boot",
           ],
+          technologies: [
+            "TypeScript",
+            "React Native",
+            "JavaScript",
+            "React",
+            "Vue.js",
+            "Spring Boot",
+            "PostgreSQL",
+            "MongoDB",
+            "Node.js",
+          ],
         },
         {
           title: "Software Intern",
@@ -191,6 +230,14 @@ export const siteConfig = {
             "Developed scripts for data parsing",
             "Participated in CRM application development",
           ],
+          technologies: [
+            "JavaScript",
+            "React",
+            "Node.js",
+            "Material UI",
+            "PostgreSQL",
+            "Bootstrap",
+          ],
         },
         {
           title: "Freelance Software Developer",
@@ -201,6 +248,15 @@ export const siteConfig = {
           description:
             "Worked on various freelance software development projects.",
           projects: [],
+          technologies: [
+            "Node.js",
+            "Knex.js",
+            "React",
+            "HTML",
+            "JavaScript",
+            "CSS",
+            "Material UI",
+          ],
         },
       ],
     },
