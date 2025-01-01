@@ -27,28 +27,49 @@ const lastThreePosts = posts
   description={siteConfig.siteDescription}
   type="website"
 >
-  <main class="flex flex-col gap-8 items-center px-8 mx-auto max-w-[75ch]">
+  <main class="flex flex-col w-full">
     <MainIntro />
-    {
-      siteConfig.homepage.showLatestPosts && (
-        <FeaturedBlogsContainer>
-          {lastThreePosts.map((post: CollectionEntry<"blog">) => (
-            <FeaturedBlogPost
-              date={new Date(post.data.pubDate).toLocaleDateString("en-US", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-              readTime={readingTime(post.body || "").text}
-              title={post.data.title}
-              description={post.data.description}
-              tags={post.data.tags}
-              url={`/blog/${post.slug}`}
-            />
-          ))}
-        </FeaturedBlogsContainer>
-      )
-    }
-    {siteConfig.homepage.showContactForm && <ContactForm />}
+
+    <div class="relative w-full overflow-hidden">
+      <div
+        class="absolute inset-0 w-full h-full bg-gradient-to-bl from-accent-400/10 via-primary-800/10 to-accent-300/10 animate-gradient-shift"
+      >
+      </div>
+      <div class="relative z-10 px-4 mx-auto max-w-6xl w-full">
+        {
+          siteConfig.homepage.showLatestPosts && (
+            <section class="py-20">
+              <FeaturedBlogsContainer>
+                {lastThreePosts.map((post: CollectionEntry<"blog">) => (
+                  <FeaturedBlogPost
+                    date={new Date(post.data.pubDate).toLocaleDateString(
+                      "en-US",
+                      {
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      }
+                    )}
+                    readTime={readingTime(post.body || "").text}
+                    title={post.data.title}
+                    description={post.data.description}
+                    tags={post.data.tags}
+                    url={`/blog/${post.slug}`}
+                  />
+                ))}
+              </FeaturedBlogsContainer>
+            </section>
+          )
+        }
+
+        {
+          siteConfig.homepage.showContactForm && (
+            <section class="py-20 border-t border-primary-800/30">
+              <ContactForm />
+            </section>
+          )
+        }
+      </div>
+    </div>
   </main>
 </Layout>

@@ -3,27 +3,90 @@ import SocialMediaIcons from "@components/SocialMediaIcons.astro";
 import { siteConfig } from "@config/site";
 ---
 
-<div class="flex flex-col gap-8 items-center mx-auto mt-24">
-  <div class="flex flex-col gap-2 items-center mx-auto">
-    <img
-      width={460}
-      height={460}
-      decoding="async"
-      loading="lazy"
-      class="w-20 h-20 rounded-full shadow-sm sm:w-28 sm:h-28 shadow-white aspect-[1/1]"
-      src="/images/personal/profile.jpeg"
-      alt={`Profile photo of ${siteConfig.siteName}`}
-    />
-    <SocialMediaIcons
-      class="w-8 h-8 stroke-1 hover:cursor-pointer stroke-primary-300 hover:stroke-accent-400"
-    />
+<div
+  class="relative flex flex-col items-center justify-center min-h-[80vh] w-full overflow-hidden"
+>
+  {/* Animated gradient background */}
+  <div
+    class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/10 via-primary-800/10 to-accent-300/10 animate-gradient-shift"
+  >
   </div>
-  <div class="flex flex-col gap-4 mb-2 max-w-[75ch]">
-    <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl">
-      {siteConfig.siteTitle}
-    </h1>
-    <p class="text-primary-300">
-      {siteConfig.siteDescription}
-    </p>
+
+  {/* Glass morphism effect */}
+  <div
+    class="relative z-10 flex flex-col items-center gap-12 px-6 py-16 mx-auto backdrop-blur-sm rounded-3xl border border-primary-800/20 bg-contentbackground/30 max-w-4xl"
+  >
+    {/* Profile section */}
+    <div class="flex flex-col items-center gap-6">
+      <div class="relative group">
+        <div
+          class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-300 opacity-50 blur transition duration-1000 group-hover:opacity-75 group-hover:duration-200"
+        >
+        </div>
+        <img
+          width={460}
+          height={460}
+          decoding="async"
+          loading="lazy"
+          class="relative w-32 h-32 rounded-full shadow-lg sm:w-40 sm:h-40 aspect-[1/1] object-cover"
+          src="/images/personal/profile.jpeg"
+          alt={`Profile photo of ${siteConfig.siteName}`}
+        />
+      </div>
+      <SocialMediaIcons
+        class="w-6 h-6 stroke-1 hover:cursor-pointer stroke-primary-300 hover:stroke-accent-400 transition-colors duration-200"
+      />
+    </div>
+
+    {/* Content section */}
+    <div class="flex flex-col items-center gap-6 text-center">
+      <h1
+        class="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-primary-100 to-primary-100/80 bg-clip-text text-transparent"
+      >
+        {siteConfig.siteTitle}
+      </h1>
+      <p
+        class="max-w-2xl text-lg sm:text-xl text-primary-300/90 leading-relaxed"
+      >
+        {siteConfig.siteDescription}
+      </p>
+      <div class="flex gap-4 mt-4">
+        <a
+          href="/about"
+          class="px-6 py-3 text-sm font-medium transition-all rounded-lg sm:text-base bg-accent-400/90 hover:bg-accent-400 text-black"
+        >
+          About Me
+        </a>
+        {
+          siteConfig.homepage.showLatestPosts && (
+            <a
+              href="/blog"
+              class="px-6 py-3 text-sm font-medium transition-all rounded-lg sm:text-base bg-primary-800/40 hover:bg-primary-800/60 text-primary-100"
+            >
+              Read Blog
+            </a>
+          )
+        }
+      </div>
+    </div>
   </div>
 </div>
+
+<style>
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+</style>
