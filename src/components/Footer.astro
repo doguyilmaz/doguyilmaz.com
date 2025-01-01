@@ -1,54 +1,47 @@
 ---
 import SocialMediaIcons from "./SocialMediaIcons.astro";
-import { getNavigation, siteConfig, type NavItem } from "@config/site";
+import { siteConfig } from "@config/site";
 
-const navigation = getNavigation();
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="mt-20">
-  <div class="sm:px-8">
-    <div class="mx-auto max-w-7xl lg:px-8">
-      <div class="pt-10 pb-16 border-t border-primary-700/40">
-        <div class="relative px-4 sm:px-8 lg:px-12">
-          <div class="mx-auto max-w-2xl lg:max-w-5xl">
-            <div class="flex flex-col gap-2">
-              <div
-                class="flex flex-col gap-6 justify-between items-center sm:flex-row"
-              >
-                <div class="flex gap-6 text-sm font-medium text-primary-200">
-                  {
-                    navigation.map((item) => (
-                      <a
-                        rel="prefetch"
-                        class="transition hover:text-accent-400"
-                        href={item.path}
-                      >
-                        {item.label}
-                      </a>
-                    ))
-                  }
-                </div>
+<footer>
+  <div class="relative overflow-hidden py-8">
+    {/* Animated gradient background */}
+    <div
+      class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/10 via-primary-800/10 to-accent-300/10 animate-gradient-shift"
+    >
+    </div>
 
-                <p class="text-sm text-primary-500">
-                  © {currentYear}
-                  {siteConfig.footer.copyright}
-                </p>
-              </div>
-
-              <div
-                class="flex flex-col gap-2 items-end self-center sm:self-end"
+    {/* Glass morphism content */}
+    <div class="relative z-10 w-full backdrop-blur-sm bg-contentbackground/30">
+      <div class="py-4 border-t border-primary-800/30">
+        <div class="max-w-[90rem] mx-auto px-4">
+          <div class="flex flex-col gap-6">
+            {/* Email and Social Links */}
+            <div
+              class="flex flex-col-reverse gap-6 sm:flex-row sm:gap-0 justify-between items-center"
+            >
+              <a
+                href={`mailto:${siteConfig.footer.email}`}
+                class="text-sm text-primary-200 hover:text-accent-400 transition-colors duration-300"
               >
-                <a
-                  class="mx-auto text-sm sm:mx-0 text-primary-500 my-[10px]"
-                  href={`mailto:${siteConfig.footer.email}`}
-                  ><!--?xml version="1.0" encoding="UTF-8"?-->
-                  {siteConfig.footer.email}</a
-                >
-                <SocialMediaIcons
-                  class="p-1 w-11 h-11 hover:cursor-pointer stroke-[0.5] stroke-primary-50 ceva hover:stroke-accent-400"
-                />
-              </div>
+                {siteConfig.footer.email}
+              </a>
+              <SocialMediaIcons
+                containerClass="flex gap-6"
+                class="w-6 h-6 hover:cursor-pointer stroke-[1.5] stroke-primary-300 hover:stroke-accent-400 transition-all duration-300 hover:scale-110"
+              />
+            </div>
+
+            {/* Copyright */}
+            <div
+              class="flex justify-center border-t border-primary-800/30 pt-4 sm:border-0 sm:pt-0"
+            >
+              <p class="text-sm text-primary-400">
+                © {currentYear}
+                {siteConfig.footer.copyright}
+              </p>
             </div>
           </div>
         </div>
@@ -56,3 +49,22 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
+
+<style>
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+</style>

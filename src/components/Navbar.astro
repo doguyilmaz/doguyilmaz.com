@@ -3,25 +3,31 @@ import { getNavigation } from "@config/site";
 const navigation = getNavigation();
 ---
 
-<!-- set width and max-w, -4rem from body, probably should refactor -->
 <div
-  class="w-[calc(100%-4px)] sm:w-[calc(100%-4px-4rem)] fixed backdrop-blur-[8px] top-0 py-2 z-50"
+  class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
   id="navbar-container"
 >
-  <nav class="px-1 mx-auto max-w-sm rounded-3xl z-100">
-    <ul class="flex flex-row justify-center items-center">
+  <nav
+    class="mx-auto max-w-6xl backdrop-blur-md bg-contentbackground/30 border-b border-primary-800/20"
+  >
+    <ul class="flex flex-row justify-center items-center gap-2 px-4 py-4">
       {
         navigation.map((item) => (
           <li>
             <a
               rel="prefetch"
               class:list={[
-                "block py-2 px-3 font-semibold tracking-tighter transition hover:text-accent-400 active:text-accent-400",
-                Astro.url.pathname === item.path ? "text-accent-400" : "",
+                "relative block px-4 py-2 font-medium tracking-tight transition-all duration-300 rounded-lg hover:bg-primary-800/40",
+                Astro.url.pathname === item.path
+                  ? "text-accent-400 bg-primary-800/20"
+                  : "text-primary-200 hover:text-accent-400",
               ]}
               href={item.path}
             >
-              {item.label}
+              <span class="relative z-10">{item.label}</span>
+              {Astro.url.pathname === item.path && (
+                <div class="absolute inset-0 rounded-lg bg-gradient-to-r from-accent-400/10 to-accent-300/10 animate-gradient-shift" />
+              )}
             </a>
           </li>
         ))
@@ -31,32 +37,32 @@ const navigation = getNavigation();
 </div>
 
 <style>
-  #navbar-container {
-    left: 50%;
-    transform: translateX(-50%);
-    transition: top 0.3s linear;
-    max-width: calc(72rem - 2px);
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
   }
 
-  a[aria-current="page"] {
-    color: var(--accent-400);
+  .animate-gradient-shift {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
   }
 </style>
 
 <script>
   let prevScrollPos = window.pageYOffset;
-
   let navbar = document.getElementById("navbar-container");
 
-  // hide on scroll down, show on scroll up
   window.onscroll = () => {
     let currentScrollPos = window.pageYOffset;
 
-    // console.table([{ previous: prevScrollPos, current: currentScrollPos }]);
-
-    if (!navbar) {
-      return;
-    }
+    if (!navbar) return;
 
     if (currentScrollPos < 50) {
       navbar.style.top = "0";
@@ -71,13 +77,4 @@ const navigation = getNavigation();
 
     prevScrollPos = currentScrollPos;
   };
-
-  // Updated active page logic
-  const currentPath = window.location.pathname;
-  const links = document.querySelectorAll("li>a");
-  for (const link of links) {
-    if (link.getAttribute("href") === currentPath) {
-      link.classList.add("active");
-    }
-  }
 </script>
