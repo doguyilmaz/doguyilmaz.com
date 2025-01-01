@@ -5,63 +5,96 @@ import { Image } from "astro:assets";
 const { experience } = siteConfig.about;
 ---
 
-<section
-  aria-labelledby=":rr:"
-  class="mx-auto max-w-5xl sm:px-6 sm:border-l sm:border-primary-700/40"
->
+<section class="mx-auto max-w-5xl">
   <div class="grid grid-cols-1 gap-y-8 items-baseline md:grid-cols-4">
     <h2
       id=":rr:"
-      class="text-lg font-semibold tracking-tight sm:text-xl text-primary-100"
+      class="text-lg font-semibold tracking-tight sm:text-xl text-primary-100 md:sticky md:top-0 md:pt-8 px-4 md:px-0"
     >
       {experience.sectionTitle}
     </h2>
     <div class="md:col-span-3">
-      <ul role="list" class="space-y-16">
-        {
-          experience.jobs.map((job) => (
-            <li class="flex flex-col items-start">
-              <>
-                <div class="flex flex-row justify-between items-baseline pl-2 w-full border-l border-primary-700">
-                  <div class="flex flex-col">
-                    <div class="flex flex-row gap-4 items-center">
-                      <img
-                        src={job.logoPath}
-                        alt={`${job.company} logo`}
-                        width={36}
-                        height={36}
-                        class={`object-contain ring-1 shadow-md shadow-primary-800/5 ring-primary-900 ${
-                          job.isLogoRounded ? "rounded-full" : ""
-                        }`}
-                      />
-                      <h3 class="text-base font-semibold tracking-tight sm:max-w-none sm:text-lg max-w-[20ch] text-primary-100">
-                        {job.title}
-                      </h3>
+      <div class="relative">
+        {/* Timeline line - desktop only */}
+        <div class="absolute left-[3px] top-6 bottom-6 hidden sm:block">
+          <div class="absolute w-[2px] h-full bg-accent-400 opacity-50"></div>
+        </div>
+
+        <ul role="list" class="space-y-8 sm:space-y-16 relative">
+          {
+            experience.jobs.map((job) => (
+              <li class="group">
+                <div class="relative pl-0 sm:pl-8">
+                  {/* Timeline dot - desktop only */}
+                  <div class="hidden sm:block absolute left-0 top-[24px] z-10">
+                    <div class="absolute w-2 h-2 rounded-full bg-contentbackground ring-2 ring-accent-400 group-hover:ring-accent-300 group-hover:scale-150 transition-all duration-300" />
+                    <div class="absolute w-4 h-4 -left-1 -top-1 rounded-full bg-accent-400/20 group-hover:bg-accent-300/20 animate-pulse" />
+                  </div>
+
+                  <div class="group relative flex flex-col p-4 sm:p-6 bg-contentbackground/30 backdrop-blur-sm rounded-xl border border-primary-800/40 transition-all duration-300 sm:hover:bg-contentbackground/50 sm:hover:border-accent-400/40 sm:hover:shadow-lg">
+                    <div class="flex flex-col sm:flex-row justify-between w-full mb-4 gap-3 sm:gap-4">
+                      <div class="flex flex-row sm:items-center gap-4 flex-1 min-w-0">
+                        <div class="relative flex-shrink-0">
+                          <div class="absolute inset-0 rounded-lg bg-gradient-to-br from-accent-400/50 to-accent-300/50 opacity-20 blur-lg sm:group-hover:opacity-40 transition-opacity hidden sm:block" />
+                          <img
+                            src={job.logoPath}
+                            alt={`${job.company} logo`}
+                            width={40}
+                            height={40}
+                            class={`relative object-contain bg-contentbackground p-1 ring-1 shadow-lg shadow-primary-800/5 ring-accent-400/20 sm:w-12 sm:h-12 w-10 h-10 ${
+                              job.isLogoRounded ? "rounded-full" : "rounded-lg"
+                            }`}
+                          />
+                        </div>
+                        <div class="min-w-0 flex-1">
+                          <h3 class="text-base font-semibold tracking-tight sm:text-lg text-primary-100 sm:group-hover:text-accent-400 transition-colors break-words">
+                            {job.title}
+                          </h3>
+                          <h2 class="text-sm tracking-tight sm:text-base text-primary-300 break-words mt-0.5">
+                            {job.company}
+                          </h2>
+                        </div>
+                      </div>
+                      <time class="text-sm text-primary-400 tracking-tight whitespace-nowrap self-start font-light sm:text-right sm:group-hover:text-accent-400 transition-colors">
+                        {job.timeRange}
+                      </time>
                     </div>
 
-                    <h2 class="text-sm mt-2 tracking-tight sm:max-w-none sm:text-base max-w-[20ch] text-primary-300">
-                      {job.company}
-                    </h2>
+                    <p class="text-sm text-primary-400 leading-relaxed">
+                      {job.description}
+                    </p>
+
+                    {job.projects.length > 0 && (
+                      <ul class="mt-4 grid grid-cols-1 gap-2">
+                        {job.projects.map((project) => (
+                          <li class="text-xs sm:text-sm text-primary-500 flex items-start sm:items-center gap-2 sm:group-hover:text-primary-400 transition-colors">
+                            <span class="h-1 w-1 rounded-full bg-accent-400 mt-1.5 sm:mt-0 flex-shrink-0" />
+                            <span class="leading-relaxed">{project}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <time class="text-sm text-primary-600">{job.timeRange}</time>
                 </div>
-
-                <p class="mt-4 text-sm text-primary-400 pl-2">
-                  {job.description}
-                </p>
-
-                {job.projects.length > 0 && (
-                  <ul class="mt-2 ml-6 text-sm list-disc text-primary-500">
-                    {job.projects.map((project) => (
-                      <li>{project}</li>
-                    ))}
-                  </ul>
-                )}
-              </>
-            </li>
-          ))
-        }
-      </ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+</style>
