@@ -1,3 +1,14 @@
+// Add type declaration for window.siteConfig
+declare global {
+  interface Window {
+    siteConfig?: {
+      patterns?: {
+        currentPattern?: string;
+      };
+    };
+  }
+}
+
 export interface SocialLink {
   platform: "github" | "twitter" | "linkedin" | "instagram";
   url: string;
@@ -31,6 +42,52 @@ export interface PageMeta {
   description: string;
   type: "website" | "content" | "notfound";
   image?: string;
+}
+
+export interface Pattern {
+  name: string;
+  class: string;
+  description: string;
+}
+
+export type PatternType =
+  | "original"
+  | "dots"
+  | "circuit"
+  | "matrix"
+  | "dna"
+  | "neural"
+  | "quantum"
+  | "algorithm"
+  | "code"
+  | "tech"
+  | "memphis"
+  | "flow"
+  | "pixels"
+  | "constellation"
+  | "blueprint"
+  | "devicons"
+  | "git"
+  | "stack"
+  | "ide"
+  | "terminal";
+
+export interface FloatingButton {
+  text: string;
+  show: boolean;
+}
+
+export interface FloatingButtons {
+  pattern?: FloatingButton;
+  random: FloatingButton;
+}
+
+export interface PatternSelector {
+  show: boolean;
+  floatingButtons: {
+    pattern?: FloatingButton;
+    random: FloatingButton;
+  };
 }
 
 export const siteConfig = {
@@ -109,7 +166,6 @@ export const siteConfig = {
     showLatestPosts: false,
     showContactForm: true,
     contactButtonText: "Want to reach out?",
-    showPatternSelector: false,
   },
 
   // About page settings
@@ -286,6 +342,13 @@ export const siteConfig = {
     twitter: "https://x.com/dogukyilmaz",
     // instagram: "https://www.instagram.com/dogukylmaz",
   } satisfies SocialLinks,
+
+  // Background patterns
+  patterns: {
+    defaultPattern: "flow" as PatternType,
+    isRandom: false,
+    showFloatingSelector: false,
+  },
 } as const;
 
 // Utility function to get navigation items
@@ -303,4 +366,51 @@ export const getSocialLinks = () => {
   });
 
   return links;
+};
+
+export const getRandomPattern = (): PatternType => {
+  const patterns: PatternType[] = [
+    "original",
+    "dots",
+    "circuit",
+    "matrix",
+    "dna",
+    "neural",
+    "quantum",
+    "algorithm",
+    "code",
+    "tech",
+    "memphis",
+    "flow",
+    "pixels",
+    "constellation",
+    "blueprint",
+    "devicons",
+    "git",
+    "stack",
+    "ide",
+    "terminal",
+  ];
+  return patterns[Math.floor(Math.random() * patterns.length)];
+};
+
+export const getPattern = (): PatternType => {
+  const { showFloatingSelector, isRandom, defaultPattern } =
+    siteConfig.patterns;
+
+  // If random is enabled, return a random pattern
+  if (isRandom) {
+    return getRandomPattern();
+  }
+
+  // If we're in the browser, check for dynamic pattern
+  if (
+    typeof window !== "undefined" &&
+    window.siteConfig?.patterns?.currentPattern
+  ) {
+    return window.siteConfig.patterns.currentPattern as PatternType;
+  }
+
+  // Otherwise use config pattern
+  return defaultPattern;
 };

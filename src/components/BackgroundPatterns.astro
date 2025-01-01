@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from "@config/site";
+import { siteConfig, getPattern } from "@config/site";
 
 interface Pattern {
   name: string;
@@ -265,23 +265,11 @@ const patterns: Record<string, Pattern> = {
   },
 };
 
-// Get a random pattern key excluding specific patterns
-const getRandomPattern = (excludePatterns: string[] = []) => {
-  const keys = Object.keys(patterns).filter(
-    (key) => !excludePatterns.includes(key)
-  );
-  const randomIndex = Math.floor(Math.random() * keys.length);
-  return keys[randomIndex];
-};
-
-// Use URL param if provided, otherwise use random pattern
-const urlPattern = Astro.url.searchParams.get("pattern");
-const defaultPatterns = ["original", "dots"]; // Patterns to avoid showing too often
-const randomPattern = getRandomPattern(defaultPatterns);
-const selectedPattern = urlPattern || randomPattern;
+// Get selected pattern from config
+const selectedPattern = getPattern();
 
 // Get config for selector visibility
-const { showPatternSelector = false } = siteConfig.homepage;
+const { showFloatingSelector, isRandom } = siteConfig.patterns;
 ---
 
 <div
@@ -318,35 +306,132 @@ const { showPatternSelector = false } = siteConfig.homepage;
   </svg>
 </div>
 
-{/* Pattern Selector - Only shown if enabled in config */}
+{/* Pattern Controls - Only shown if enabled in config */}
 {
-  showPatternSelector && (
-    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-50">
+  showFloatingSelector && (
+    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
       <div class="bg-contentbackground/80 backdrop-blur-sm p-2 rounded-lg shadow-lg">
         <select
           id="pattern-selector"
+          data-default-pattern={siteConfig.patterns.defaultPattern}
           class="bg-transparent text-primary-300 text-sm p-1 rounded cursor-pointer hover:text-accent-400 transition-colors"
         >
-          {Object.entries(patterns).map(([key, { name }]) => (
-            <option value={key} selected={key === selectedPattern}>
-              {name}
+          {Object.entries(patterns).map(([key, pattern]) => (
+            <option
+              value={key}
+              selected={key === selectedPattern}
+              data-pattern={pattern.pattern}
+              data-id={pattern.id}
+            >
+              {pattern.name}
             </option>
           ))}
         </select>
       </div>
+      <button
+        id="toggle-random"
+        data-is-random={isRandom}
+        class:list={[
+          "bg-contentbackground/80 backdrop-blur-sm p-2 rounded-lg shadow-lg text-sm transition-colors flex items-center gap-2",
+          isRandom
+            ? "text-accent-400"
+            : "text-primary-300 hover:text-accent-400",
+        ]}
+      >
+        <span>Random</span>
+        <span class="px-1.5 py-0.5 rounded bg-primary-800/50 text-xs">
+          {isRandom ? "ON" : "OFF"}
+        </span>
+      </button>
     </div>
   )
 }
 
 <script>
+  // Only for development - pattern changes will be handled here
   const selector = document.getElementById(
     "pattern-selector"
   ) as HTMLSelectElement;
+  const randomButton = document.getElementById("toggle-random");
+  const patternDefs = document.querySelectorAll("defs");
+  const patternRects = document.querySelectorAll("rect[fill^='url(#']");
 
+  // Function to get a random pattern
+  function getRandomPattern(): string {
+    if (!selector) return "";
+    const options = Array.from(selector.options);
+    const randomIndex = Math.floor(Math.random() * options.length);
+    return options[randomIndex].value;
+  }
+
+  // Function to update pattern in the DOM
+  function updatePattern(patternId: string): void {
+    if (!selector) return;
+    // Get the selected option's pattern HTML
+    const selectedOption = selector.querySelector(
+      `option[value="${patternId}"]`
+    );
+    if (!selectedOption) return;
+
+    const pattern = selectedOption.getAttribute("data-pattern");
+    const patternIdAttr = selectedOption.getAttribute("data-id");
+    if (!pattern || !patternIdAttr) return;
+
+    // Update pattern definitions
+    patternDefs.forEach((def) => {
+      def.innerHTML = pattern;
+    });
+
+    // Update pattern references in rects
+    patternRects.forEach((rect) => {
+      rect.setAttribute("fill", `url(#${patternIdAttr})`);
+    });
+  }
+
+  // Pattern selector change handler
   selector?.addEventListener("change", (e) => {
     const target = e.target as HTMLSelectElement;
-    const url = new URL(window.location.href);
-    url.searchParams.set("pattern", target.value);
-    window.location.href = url.toString();
+    updatePattern(target.value);
   });
+
+  // Toggle random button handler
+  randomButton?.addEventListener("click", () => {
+    const isRandom = randomButton.getAttribute("data-is-random") === "true";
+    const newState = !isRandom;
+    randomButton.setAttribute("data-is-random", String(newState));
+    randomButton.classList.toggle("text-accent-400");
+    const statusSpan = randomButton.querySelector("span:last-child");
+    if (statusSpan) {
+      statusSpan.textContent = newState ? "ON" : "OFF";
+    }
+
+    if (newState) {
+      startRandomMode();
+    } else {
+      stopRandomMode();
+    }
+  });
+
+  // Random mode functions
+  let randomInterval: number | undefined;
+  function startRandomMode(): void {
+    randomInterval = window.setInterval(() => {
+      const newPattern = getRandomPattern();
+      if (selector && newPattern) {
+        selector.value = newPattern;
+        updatePattern(newPattern);
+      }
+    }, 3000);
+  }
+
+  function stopRandomMode(): void {
+    if (randomInterval) {
+      window.clearInterval(randomInterval);
+    }
+  }
+
+  // Initialize random mode if enabled
+  if (randomButton?.getAttribute("data-is-random") === "true") {
+    startRandomMode();
+  }
 </script>
