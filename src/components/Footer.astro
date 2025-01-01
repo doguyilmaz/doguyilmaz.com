@@ -6,7 +6,7 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <div class="relative overflow-hidden py-8">
+  <div class="relative overflow-hidden">
     {/* Animated gradient background */}
     <div
       class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/10 via-primary-800/10 to-accent-300/10 animate-gradient-shift"
@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
     {/* Glass morphism content */}
     <div class="relative z-10 w-full backdrop-blur-sm bg-contentbackground/30">
       <div class="py-4 border-t border-primary-800/30">
-        <div class="max-w-[90rem] mx-auto px-4">
+        <div class="max-w-[90rem] mx-auto px-8">
           <div class="flex flex-col gap-6">
             {/* Email and Social Links */}
             <div
@@ -36,7 +36,7 @@ const currentYear = new Date().getFullYear();
 
             {/* Copyright */}
             <div
-              class="flex justify-center border-t border-primary-800/30 pt-4 sm:border-0 sm:pt-0"
+              class="flex justify-center border-t border-primary-800/30 pt-0 sm:border-0 sm:pt-0"
             >
               <p class="text-sm text-primary-400">
                 © {currentYear}
