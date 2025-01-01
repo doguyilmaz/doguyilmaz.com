@@ -109,6 +109,7 @@ export const siteConfig = {
     showLatestPosts: false,
     showContactForm: true,
     contactButtonText: "Want to reach out?",
+    showPatternSelector: false,
   },
 
   // About page settings

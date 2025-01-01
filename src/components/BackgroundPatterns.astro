@@ -1,0 +1,352 @@
+---
+import { siteConfig } from "@config/site";
+
+interface Pattern {
+  name: string;
+  id: string;
+  pattern: string;
+}
+
+const patterns: Record<string, Pattern> = {
+  original: {
+    name: "Original Dots",
+    id: "original-pattern",
+    pattern: `
+      <pattern id="original-pattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="4" height="4" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  dots: {
+    name: "Large Dots",
+    id: "dots-pattern",
+    pattern: `
+      <pattern id="dots-pattern" x="0" y="0" width="30" height="30" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="3" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  circuit: {
+    name: "Circuit Board",
+    id: "circuit-pattern",
+    pattern: `
+      <pattern id="circuit-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M20 0v10m0 20v10M0 20h10m20 0h10M20 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" stroke="currentColor" stroke-width="1" class="text-accent-500"/>
+        <circle cx="20" cy="20" r="6" stroke="currentColor" fill="none" stroke-width="1" class="text-accent-500"/>
+      </pattern>
+    `,
+  },
+  matrix: {
+    name: "Matrix Rain",
+    id: "matrix-pattern",
+    pattern: `
+      <pattern id="matrix-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+        <text x="10" y="10" class="text-accent-500" fill="currentColor" font-family="monospace" font-size="8">01</text>
+        <text x="30" y="20" class="text-accent-500" fill="currentColor" font-family="monospace" font-size="8">10</text>
+        <text x="15" y="35" class="text-accent-500" fill="currentColor" font-family="monospace" font-size="8">{}</text>
+        <text x="35" y="45" class="text-accent-500" fill="currentColor" font-family="monospace" font-size="8">[]</text>
+      </pattern>
+    `,
+  },
+  dna: {
+    name: "DNA Helix",
+    id: "dna-pattern",
+    pattern: `
+      <pattern id="dna-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M10 10c20 10 20 30 40 40M10 50c20-10 20-30 40-40" stroke="currentColor" stroke-width="1" class="text-accent-500" fill="none"/>
+        <circle cx="10" cy="10" r="2" class="text-accent-500" fill="currentColor"/>
+        <circle cx="50" cy="50" r="2" class="text-accent-500" fill="currentColor"/>
+        <circle cx="10" cy="50" r="2" class="text-accent-500" fill="currentColor"/>
+        <circle cx="50" cy="10" r="2" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  neural: {
+    name: "Neural Network",
+    id: "neural-pattern",
+    pattern: `
+      <pattern id="neural-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="20" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="80" cy="20" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="50" cy="50" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="20" cy="80" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="80" cy="80" r="3" class="text-accent-500" fill="currentColor"/>
+        <path d="M20 20L50 50L80 20M20 80L50 50L80 80" stroke="currentColor" stroke-width="0.5" class="text-accent-500" fill="none"/>
+      </pattern>
+    `,
+  },
+  quantum: {
+    name: "Quantum Waves",
+    id: "quantum-pattern",
+    pattern: `
+      <pattern id="quantum-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M0 40c10-20 20-20 30 0c10 20 20 20 30 0c10-20 20-20 30 0" stroke="currentColor" stroke-width="0.5" class="text-accent-500" fill="none"/>
+        <circle cx="15" cy="40" r="2" class="text-accent-500" fill="currentColor"/>
+        <circle cx="45" cy="40" r="2" class="text-accent-500" fill="currentColor"/>
+        <circle cx="75" cy="40" r="2" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  algorithm: {
+    name: "Algorithm Flow",
+    id: "algorithm-pattern",
+    pattern: `
+      <pattern id="algorithm-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <rect x="20" y="10" width="20" height="10" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <path d="M30 20v10M20 30h20M30 30v10" stroke="currentColor" class="text-accent-500"/>
+        <circle cx="30" cy="45" r="5" class="text-accent-500" fill="none" stroke="currentColor"/>
+      </pattern>
+    `,
+  },
+  code: {
+    name: "Code Brackets",
+    id: "code-pattern",
+    pattern: `
+      <pattern id="code-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <path d="M10 15l-5 5l5 5M30 15l5 5l-5 5" stroke="currentColor" stroke-width="1" class="text-accent-500" fill="none"/>
+        <path d="M15 10l10 20" stroke="currentColor" stroke-width="0.5" class="text-accent-500"/>
+      </pattern>
+    `,
+  },
+  tech: {
+    name: "Tech Symbols",
+    id: "tech-pattern",
+    pattern: `
+      <pattern id="tech-pattern" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse">
+        <path d="M15 15l-5 5l5 5M25 15l5 5l-5 5" stroke="currentColor" stroke-width="1" class="text-accent-500" fill="none"/>
+        <circle cx="35" cy="15" r="1" class="text-accent-500" fill="currentColor"/>
+        <circle cx="35" cy="25" r="1" class="text-accent-500" fill="currentColor"/>
+        <path d="M15 35h5v5h-5M35 35h-5v5h5" stroke="currentColor" stroke-width="1" class="text-accent-500" fill="none"/>
+      </pattern>
+    `,
+  },
+  memphis: {
+    name: "Memphis Style",
+    id: "memphis-pattern",
+    pattern: `
+      <pattern id="memphis-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <circle cx="10" cy="10" r="5" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <rect x="40" y="40" width="8" height="8" class="text-accent-500" fill="none" stroke="currentColor" transform="rotate(45 44 44)"/>
+        <path d="M30 5l5 5l-5 5" stroke="currentColor" class="text-accent-500" fill="none"/>
+        <path d="M5 40q5-5 10 0t10 0" stroke="currentColor" class="text-accent-500" fill="none"/>
+      </pattern>
+    `,
+  },
+  flow: {
+    name: "Flow Lines",
+    id: "flow-pattern",
+    pattern: `
+      <pattern id="flow-pattern" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <path d="M0 20q15-20 30 0t30 0" stroke="currentColor" class="text-accent-500" fill="none"/>
+        <path d="M0 40q15-20 30 0t30 0" stroke="currentColor" class="text-accent-500" fill="none"/>
+      </pattern>
+    `,
+  },
+  pixels: {
+    name: "Pixel Rain",
+    id: "pixels-pattern",
+    pattern: `
+      <pattern id="pixels-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <rect x="5" y="5" width="2" height="2" class="text-accent-500" fill="currentColor"/>
+        <rect x="15" y="10" width="2" height="2" class="text-accent-500" fill="currentColor"/>
+        <rect x="25" y="15" width="2" height="2" class="text-accent-500" fill="currentColor"/>
+        <rect x="10" y="25" width="2" height="2" class="text-accent-500" fill="currentColor"/>
+        <rect x="20" y="30" width="2" height="2" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  constellation: {
+    name: "Constellation",
+    id: "constellation-pattern",
+    pattern: `
+      <pattern id="constellation-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <circle cx="15" cy="15" r="1" class="text-accent-500" fill="currentColor"/>
+        <circle cx="40" cy="25" r="1" class="text-accent-500" fill="currentColor"/>
+        <circle cx="65" cy="40" r="1" class="text-accent-500" fill="currentColor"/>
+        <path d="M15 15L40 25L65 40" stroke="currentColor" class="text-accent-500" stroke-width="0.5" fill="none"/>
+      </pattern>
+    `,
+  },
+  blueprint: {
+    name: "Blueprint",
+    id: "blueprint-pattern",
+    pattern: `
+      <pattern id="blueprint-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <circle cx="50" cy="50" r="40" class="text-accent-500" fill="none" stroke="currentColor" stroke-width="0.5"/>
+        <path d="M10 50h80M50 10v80" stroke="currentColor" stroke-width="0.5" class="text-accent-500"/>
+        <circle cx="50" cy="50" r="2" class="text-accent-500" fill="currentColor"/>
+      </pattern>
+    `,
+  },
+  devicons: {
+    name: "Dev Icons",
+    id: "devicons-pattern",
+    pattern: `
+      <pattern id="devicons-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <!-- JS logo -->
+        <path d="M20 20h15v15h-15z" class="text-accent-500" fill="currentColor"/>
+        <text x="24" y="31" font-family="monospace" font-size="10" fill="black">JS</text>
+        <!-- Python logo -->
+        <path d="M45 20c0-2 4-3 7-3s7 1 7 3v6c0 2-1 3-7 3s-7-1-7-3z" class="text-accent-500" fill="currentColor" stroke="currentColor"/>
+        <path d="M45 26v6c0 2 4 3 7 3s7-1 7-3v-6" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <!-- React logo -->
+        <circle cx="25" cy="60" r="2" class="text-accent-500" fill="currentColor"/>
+        <ellipse cx="25" cy="60" rx="8" ry="3" class="text-accent-500" fill="none" stroke="currentColor" transform="rotate(30 25 60)"/>
+        <ellipse cx="25" cy="60" rx="8" ry="3" class="text-accent-500" fill="none" stroke="currentColor" transform="rotate(90 25 60)"/>
+        <!-- TypeScript logo -->
+        <path d="M65 55h15v15h-15z" class="text-accent-500" fill="currentColor"/>
+        <text x="69" y="66" font-family="monospace" font-size="10" fill="black">TS</text>
+      </pattern>
+    `,
+  },
+  git: {
+    name: "Git Flow",
+    id: "git-pattern",
+    pattern: `
+      <pattern id="git-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="20" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="50" cy="20" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="35" cy="50" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="20" cy="80" r="3" class="text-accent-500" fill="currentColor"/>
+        <circle cx="50" cy="80" r="3" class="text-accent-500" fill="currentColor"/>
+        <path d="M20 20L35 50L50 20M20 80L35 50L50 80" stroke="currentColor" class="text-accent-500"/>
+        <text x="60" y="35" font-family="monospace" font-size="8" class="text-accent-500" fill="currentColor">main</text>
+        <text x="60" y="65" font-family="monospace" font-size="8" class="text-accent-500" fill="currentColor">dev</text>
+      </pattern>
+    `,
+  },
+  stack: {
+    name: "Tech Stack",
+    id: "stack-pattern",
+    pattern: `
+      <pattern id="stack-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <!-- Database -->
+        <path d="M20 40c10 0 20 1 20-4s-10-4-20-4-20-1-20 4 10 4 20 4z" class="text-accent-500" fill="currentColor"/>
+        <!-- Cloud -->
+        <path d="M50 20a8 8 0 00-8 8a6 6 0 106 10h8a8 8 0 000-16" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <!-- Code -->
+        <path d="M15 60l-5 5l5 5M35 60l5 5l-5 5" class="text-accent-500" stroke="currentColor" fill="none"/>
+        <!-- Server -->
+        <rect x="50" y="50" width="16" height="20" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <path d="M54 55h8M54 60h8M54 65h8" stroke="currentColor" class="text-accent-500"/>
+      </pattern>
+    `,
+  },
+  ide: {
+    name: "IDE View",
+    id: "ide-pattern",
+    pattern: `
+      <pattern id="ide-pattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+        <!-- Editor window -->
+        <rect x="10" y="10" width="80" height="80" class="text-accent-500" fill="none" stroke="currentColor"/>
+        <!-- Title bar -->
+        <rect x="10" y="10" width="80" height="8" class="text-accent-500" fill="currentColor"/>
+        <!-- Line numbers -->
+        <text x="15" y="30" font-family="monospace" font-size="6" class="text-accent-500" fill="currentColor">1</text>
+        <text x="15" y="40" font-family="monospace" font-size="6" class="text-accent-500" fill="currentColor">2</text>
+        <text x="15" y="50" font-family="monospace" font-size="6" class="text-accent-500" fill="currentColor">3</text>
+        <!-- Code lines -->
+        <path d="M25 28h30M25 38h40M25 48h20" stroke="currentColor" class="text-accent-500" stroke-width="0.5"/>
+      </pattern>
+    `,
+  },
+  terminal: {
+    name: "Terminal",
+    id: "terminal-pattern",
+    pattern: `
+      <pattern id="terminal-pattern" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <rect x="10" y="10" width="60" height="40" class="text-accent-500" fill="none" stroke="currentColor" rx="2"/>
+        <text x="15" y="25" font-family="monospace" font-size="8" class="text-accent-500" fill="currentColor">$</text>
+        <path d="M25 25h20" stroke="currentColor" class="text-accent-500"/>
+        <text x="15" y="35" font-family="monospace" font-size="8" class="text-accent-500" fill="currentColor">></text>
+        <path d="M25 35h30" stroke="currentColor" class="text-accent-500"/>
+      </pattern>
+    `,
+  },
+};
+
+// Get a random pattern key excluding specific patterns
+const getRandomPattern = (excludePatterns: string[] = []) => {
+  const keys = Object.keys(patterns).filter(
+    (key) => !excludePatterns.includes(key)
+  );
+  const randomIndex = Math.floor(Math.random() * keys.length);
+  return keys[randomIndex];
+};
+
+// Use URL param if provided, otherwise use random pattern
+const urlPattern = Astro.url.searchParams.get("pattern");
+const defaultPatterns = ["original", "dots"]; // Patterns to avoid showing too often
+const randomPattern = getRandomPattern(defaultPatterns);
+const selectedPattern = urlPattern || randomPattern;
+
+// Get config for selector visibility
+const { showPatternSelector = false } = siteConfig.homepage;
+---
+
+<div
+  class="hidden overflow-hidden absolute inset-0 rounded-3xl pointer-events-none lg:block"
+  aria-hidden="true"
+>
+  <svg
+    class="absolute -right-20 -top-24 opacity-20 transform rotate-6"
+    width="404"
+    height="384"
+    fill="none"
+    viewBox="0 0 404 384"
+    aria-hidden="true"
+  >
+    <defs set:html={patterns[selectedPattern].pattern} />
+    <rect
+      width="404"
+      height="384"
+      fill={`url(#${patterns[selectedPattern].id})`}></rect>
+  </svg>
+  <svg
+    class="absolute -left-20 bottom-0 opacity-30 transform -rotate-6"
+    width="404"
+    height="384"
+    fill="none"
+    viewBox="0 0 404 384"
+    aria-hidden="true"
+  >
+    <defs set:html={patterns[selectedPattern].pattern} />
+    <rect
+      width="404"
+      height="384"
+      fill={`url(#${patterns[selectedPattern].id})`}></rect>
+  </svg>
+</div>
+
+{/* Pattern Selector - Only shown if enabled in config */}
+{
+  showPatternSelector && (
+    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-50">
+      <div class="bg-contentbackground/80 backdrop-blur-sm p-2 rounded-lg shadow-lg">
+        <select
+          id="pattern-selector"
+          class="bg-transparent text-primary-300 text-sm p-1 rounded cursor-pointer hover:text-accent-400 transition-colors"
+        >
+          {Object.entries(patterns).map(([key, { name }]) => (
+            <option value={key} selected={key === selectedPattern}>
+              {name}
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  )
+}
+
+<script>
+  const selector = document.getElementById(
+    "pattern-selector"
+  ) as HTMLSelectElement;
+
+  selector?.addEventListener("change", (e) => {
+    const target = e.target as HTMLSelectElement;
+    const url = new URL(window.location.href);
+    url.searchParams.set("pattern", target.value);
+    window.location.href = url.toString();
+  });
+</script>
