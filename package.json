@@ -7,6 +7,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "postbuild": "mkdir -p public && cp dist/client/sitemap*.xml public/ && mkdir dist/client/public && cp dist/client/sitemap*.xml dist/client/public/",
     "preview": "astro preview",
     "astro": "astro",
     "format": "rustywind --write . && pnpm prettier --plugin-search-dir=. --write ."
@@ -17,7 +18,7 @@
     "@astrojs/mdx": "^4.0.3",
     "@astrojs/prefetch": "^0.4.1",
     "@astrojs/rss": "4.0.10",
-    "@astrojs/sitemap": "3.2.1",
+    "@astrojs/sitemap": "^3.2.1",
     "@astrojs/tailwind": "5.1.4",
     "@astrojs/vercel": "^8.0.1",
     "@fontsource-variable/onest": "^5.1.1",

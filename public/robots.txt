@@ -1,0 +1,15 @@
+# https://doguyilmaz.com/robots.txt
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow certain paths
+Disallow: /api/
+Disallow: /404
+Disallow: /draft/
+
+# Sitemap location
+Sitemap: https://doguyilmaz.com/sitemap-index.xml
+
+# Crawl-delay
+Crawl-delay: 10 

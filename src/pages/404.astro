@@ -10,15 +10,62 @@ const { notFound } = siteConfig.pages;
   description={notFound.description}
   type={notFound.type}
 >
-  <main
-    class="flex flex-col justify-center items-center px-16 pt-40 mx-auto max-w-6xl text-center sm:pt-24 lg:px-24"
-  >
-    <div class="text-5xl font-extrabold">
-      <span
-        class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500"
-      >
-        404 Not Found
-      </span>
+  <main class="min-h-screen flex flex-col">
+    <div
+      class="grow flex flex-col justify-center items-center px-6 mx-auto max-w-6xl text-center sm:px-16 py-20"
+    >
+      <div class="space-y-8">
+        <div class="space-y-4">
+          <h1 class="text-8xl font-extrabold">
+            <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500"
+            >
+              404
+            </span>
+          </h1>
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200">
+            Page Not Found
+          </h2>
+        </div>
+
+        <div class="max-w-md mx-auto">
+          <p class="text-lg text-gray-600 dark:text-gray-400">
+            Oops! The page you're looking for seems to have wandered off into
+            the digital void.
+          </p>
+        </div>
+
+        <div class="pt-8">
+          <a
+            href="/"
+            class="inline-flex items-center px-6 py-3 text-base font-medium text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-5 h-5 mr-2"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+            Back to Home
+          </a>
+        </div>
+
+        <div class="mt-12 text-sm text-gray-500 dark:text-gray-400">
+          Lost? Check out our <a
+            href="/sitemap"
+            class="text-violet-500 hover:text-violet-600 underline">sitemap</a
+          > or <a
+            href="/?contact=true#contact-form"
+            class="text-violet-500 hover:text-violet-600 underline"
+            >contact us</a
+          >.
+        </div>
+      </div>
     </div>
   </main>
 </Layout>
