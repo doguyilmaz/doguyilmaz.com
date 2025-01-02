@@ -156,7 +156,7 @@ To modify any of these settings, edit the corresponding values in `src/config/si
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 
