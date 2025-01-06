@@ -7,9 +7,7 @@ const pattern = Astro.url.searchParams.get("pattern") || "dots";
 ---
 
 <div class="pt-16 sm:pb-12 md:pb-4 lg:pb-16 min-h-[80vh]">
-  <div
-    class="mx-auto mt-8 max-w-7xl lg:px-8 lg:bg-transparent bg-contentbackground"
-  >
+  <div class="mx-auto mt-8 max-w-7xl lg:px-8">
     <div class="lg:grid lg:grid-cols-12">
       <div
         class="z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:py-16 lg:bg-transparent"
@@ -28,7 +26,7 @@ const pattern = Astro.url.searchParams.get("pattern") || "dots";
       </div>
 
       <div
-        class="relative rounded-3xl lg:grid lg:grid-cols-10 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:items-center lg:bg-contentbackground"
+        class="relative rounded-3xl lg:grid lg:grid-cols-10 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:items-center backdrop-blur-sm bg-contentbackground/30"
       >
         <BackgroundPatterns selectedPattern={pattern} />
 
