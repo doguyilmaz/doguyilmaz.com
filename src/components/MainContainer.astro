@@ -3,11 +3,14 @@ import Footer from "./Footer.astro";
 import Navbar from "./Navbar.astro";
 ---
 
-<div
-  class="mx-auto max-w-6xl min-h-full bg-contentbackground"
-  id="main-container"
->
-  <Navbar />
-  <slot />
-  <Footer />
+<div class="relative min-h-full">
+  <div class="gradient-background"></div>
+  <div
+    class="relative z-10 mx-auto max-w-6xl min-h-full bg-contentbackground/30 backdrop-blur-sm"
+    id="main-container"
+  >
+    <Navbar />
+    <slot />
+    <Footer />
+  </div>
 </div>

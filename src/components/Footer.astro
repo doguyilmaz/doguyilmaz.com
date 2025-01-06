@@ -7,12 +7,6 @@ const currentYear = new Date().getFullYear();
 
 <footer>
   <div class="relative overflow-hidden">
-    {/* Animated gradient background */}
-    <div
-      class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/10 via-primary-800/10 to-accent-300/10 animate-gradient-shift"
-    >
-    </div>
-
     {/* Glass morphism content */}
     <div class="relative z-10 w-full backdrop-blur-sm bg-contentbackground/30">
       <div class="py-4 border-t border-primary-800/30">
@@ -49,22 +43,3 @@ const currentYear = new Date().getFullYear();
     </div>
   </div>
 </footer>
-
-<style>
-  @keyframes gradient-shift {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
-  }
-
-  .animate-gradient-shift {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-  }
-</style>

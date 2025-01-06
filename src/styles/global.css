@@ -96,19 +96,7 @@ body {
   background-repeat: no-repeat;
 }
 
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 8s ease infinite;
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+/* Add the new gradient utility class */
+.gradient-background {
+  @apply absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/5 via-primary-800/5 to-accent-300/5;
 }
