@@ -4,9 +4,12 @@ import Navbar from "./Navbar.astro";
 ---
 
 <div class="relative min-h-full">
-  <div class="gradient-background"></div>
   <div
-    class="relative z-10 mx-auto max-w-6xl min-h-full bg-contentbackground/30 backdrop-blur-sm sm:px-8"
+    class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/20 via-primary-800/20 to-accent-300/20 animate-gradient-shift"
+  >
+  </div>
+  <div
+    class="relative z-10 mx-auto max-w-6xl min-h-full backdrop-blur-sm bg-contentbackground/30 sm:px-8"
     id="main-container"
   >
     <Navbar />
