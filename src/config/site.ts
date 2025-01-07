@@ -228,7 +228,7 @@ export const siteConfig = {
       },
       {
         title: "Software Development Team Lead",
-        company: "TGA",
+        company: "Türkiye Tourism Promotion and Development Agency",
         logoPath: "/images/experience/tga.png",
         isLogoRounded: true,
         timeRange: "July 2022 - December 2023",
@@ -251,7 +251,7 @@ export const siteConfig = {
       },
       {
         title: "Software Development Specialist",
-        company: "TGA",
+        company: "Türkiye Tourism Promotion and Development Agency",
         logoPath: "/images/experience/tga.png",
         isLogoRounded: true,
         timeRange: "December 2020 - July 2022",
