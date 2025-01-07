@@ -19,6 +19,7 @@ export interface SocialLinks {
   twitter?: string;
   linkedin?: string;
   instagram?: string;
+  website?: string;
 }
 
 export interface NavItem {
@@ -90,46 +91,278 @@ export interface PatternSelector {
   };
 }
 
+export interface Skill {
+  name: string;
+  category?:
+    | "frontend"
+    | "backend"
+    | "mobile"
+    | "database"
+    | "devops"
+    | "tools"
+    | "visualization";
+}
+
+export interface Language {
+  name: string;
+  level: string;
+}
+
 export const siteConfig = {
   // Main site info
   siteName: "Dogu Yilmaz",
   siteTitle: "Engineer, Developer, Tech Enthusiast & Mr. Know It All",
-  siteDescription: `Highly motivated software developer and dedicated team player. Enthusiastic about exploring new technologies and optimizing systems. Enjoys developing web and mobile applications. Passionate about JavaScript & TypeScript. Recently exploring Swift and Astro.`,
-  siteUrl: "https://doguyilmaz.com", // Add your domain
+  siteDescription:
+    "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem and a focus on building scalable solutions.",
+  siteUrl: "https://doguyilmaz.com",
   siteLanguage: "en",
   profileImage: "/images/profile.jpg",
 
+  // Contact Information
+  contact: {
+    email: "info@doguyilmaz.com",
+    phone: "", // redacted for privacy
+  },
+
+  // Skills categorized
+  skills: [
+    { name: "JavaScript", category: "frontend" },
+    { name: "TypeScript", category: "frontend" },
+    { name: "React", category: "frontend" },
+    { name: "Next.js", category: "frontend" },
+    { name: "React Native", category: "mobile" },
+    { name: "Redux", category: "frontend" },
+    { name: "Zustand", category: "frontend" },
+    { name: "Tailwind", category: "frontend" },
+    { name: "Astro", category: "frontend" },
+    { name: "Framer Motion", category: "frontend" },
+    { name: "Figma", category: "tools" },
+    { name: "Node.js", category: "backend" },
+    { name: "Express", category: "backend" },
+    { name: "Go", category: "backend" },
+    { name: "ElysiaJS", category: "backend" },
+    { name: "Bun", category: "tools" },
+    { name: "MongoDB", category: "database" },
+    { name: "PostgreSQL", category: "database" },
+    { name: "Prisma", category: "database" },
+    { name: "Supabase", category: "database" },
+    { name: "PocketBase", category: "database" },
+    { name: "Firebase", category: "database" },
+    { name: "Redis", category: "database" },
+    { name: "Docker", category: "devops" },
+    { name: "Highcharts", category: "visualization" },
+    { name: "Visx", category: "visualization" },
+    { name: "ApexCharts", category: "visualization" },
+    { name: "Kepler.gl", category: "visualization" },
+    { name: "Carto", category: "visualization" },
+    { name: "Deck.gl", category: "visualization" },
+    { name: "MapGL", category: "visualization" },
+    { name: "Mapbox", category: "visualization" },
+    { name: "Leaflet", category: "visualization" },
+    { name: "Jest", category: "tools" },
+    { name: "Vitest", category: "tools" },
+    { name: "Cypress", category: "tools" },
+    { name: "Playwright", category: "tools" },
+  ],
+
+  // Languages
+  languages: [
+    { name: "Turkish", level: "Native" },
+    { name: "English", level: "Professional Proficiency" },
+  ],
+
   // SEO and metadata
   seo: {
-    title: "Dogu Yilmaz - Software Engineer & Developer",
+    title: "Dogu Yilmaz - Software Developer & Computer Engineer",
     description:
-      "Highly motivated software developer and dedicated team player. Building elegant solutions to complex problems.",
+      "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem.",
     keywords: [
+      "software developer",
       "software engineer",
+      "engineer",
       "developer",
+      "tech enthusiast",
+      "computer engineer",
       "javascript",
       "typescript",
       "react",
-      "vue",
-      "swift",
+      "react native",
+      "node.js",
+      "go",
       "astro",
+      "vue",
+      "web development",
+      "mobile development",
     ],
     ogImage: "/images/og-image.jpg",
     twitterHandle: "@dogukyilmaz",
   },
 
+  // Experience section
+  experience: {
+    sectionTitle: "Experience",
+    jobs: [
+      {
+        title: "Software Developer",
+        company: "Togg",
+        logoPath: "/images/experience/togg.png",
+        isLogoRounded: true,
+        timeRange: "December 2023 - Present",
+        description:
+          "Creating digital tools for energy and EV management, making mobility smarter and more connected.",
+        projects: [
+          "Developing energy and EV-focused products, monitoring tools and CMS for mobility ecosystem",
+          "Building web and mobile applications for charging, EV, fleet and management operations",
+          "Contributing to scalable applications, enhancing user experience and workflows",
+        ],
+        technologies: [
+          "Vue.js",
+          "React Native",
+          "TypeScript",
+          "Expo",
+          "React",
+          "Primefaces",
+          "Tamagui",
+          "Bun",
+        ],
+      },
+      {
+        title: "Software Development Team Lead",
+        company: "TGA",
+        logoPath: "/images/experience/tga.png",
+        isLogoRounded: true,
+        timeRange: "July 2022 - December 2023",
+        description:
+          "Led a development team, driving web and mobile apps for project success and tourism growth.",
+        projects: [
+          "Managed a development team, overseeing project planning and delivery of multiple applications",
+          "Directed the creation of web and mobile apps, emphasizing data visualization and user experience",
+          "Supervised team growth and collaboration for efficient development",
+          "Delivered applications for the Ministry of Culture and Tourism, supporting national tourism goals",
+        ],
+        technologies: [
+          "Next.js",
+          "React Native",
+          "TypeScript",
+          "React",
+          "JavaScript",
+          "Team Leadership",
+        ],
+      },
+      {
+        title: "Software Development Specialist",
+        company: "TGA",
+        logoPath: "/images/experience/tga.png",
+        isLogoRounded: true,
+        timeRange: "December 2020 - July 2022",
+        description:
+          "Simplified complex data with interactive tools for better accessibility through modern apps.",
+        projects: [
+          "Built a multi-module analytics platform to manage and analyze large-scale tourism data and insights",
+          "Delivered a comprehensive Attaché management module, improving operational efficiency",
+          "Designed interactive data visualizations with React, Highcharts, and Deck.gl for better interpretation",
+          "Developed mobile apps with React Native and microservices using Node.js and Go",
+          "Enhanced decision-making with big data visualizations for tourism events",
+        ],
+        technologies: [
+          "React",
+          "Next.js",
+          "React Native",
+          "Node.js",
+          "Go",
+          "Highcharts",
+          "Deck.gl",
+        ],
+      },
+      {
+        title: "Full-stack Developer",
+        company: "Freelance",
+        logoPath: "/images/experience/archosch.png",
+        isLogoRounded: true,
+        timeRange: "February 2020 - November 2020",
+        description:
+          "Delivered personalized software solutions, solving real client challenges with technical expertise.",
+        projects: [
+          "Developed custom web, mobile, and desktop applications tailored to client needs",
+          "Designed and implemented REST APIs using Node.js and Spring Boot",
+        ],
+        technologies: [
+          "TypeScript",
+          "React Native",
+          "JavaScript",
+          "React",
+          "Vue.js",
+          "Spring Boot",
+          "PostgreSQL",
+          "MongoDB",
+          "Node.js",
+        ],
+      },
+      {
+        title: "Software Intern",
+        company: "Experto | AR-GE ve Tasarım Merkezi Danışmanlık",
+        logoPath: "/images/experience/experto.png",
+        isLogoRounded: true,
+        timeRange: "September 2019 - February 2020",
+        description:
+          "Contributed to data tools and R&D projects while focusing frontend and DevOps.",
+        projects: [
+          "Focused on Frontend and DevOps development",
+          "Built scripts for data parsing, improving data accuracy and CRM solutions",
+          "Gained hands-on experience in R&D processes, including project planning and execution",
+          "Developed a strong understanding of innovation-driven R&D methodologies",
+        ],
+        technologies: [
+          "JavaScript",
+          "React",
+          "Node.js",
+          "Material UI",
+          "PostgreSQL",
+          "Bootstrap",
+        ],
+      },
+      {
+        title: "Freelance Software Developer",
+        company: "Freelance",
+        logoPath: "/images/experience/myhosch.png",
+        isLogoRounded: true,
+        timeRange: "October 2018 - September 2019",
+        description:
+          "Helped clients bring ideas to life through web apps and API development tailored to their goals.",
+        projects: [
+          "Developed web applications and RESTful APIs for diverse client needs",
+        ],
+        technologies: [
+          "Node.js",
+          "Knex.js",
+          "React",
+          "HTML",
+          "JavaScript",
+          "CSS",
+          "Material UI",
+        ],
+      },
+    ],
+  },
+
+  // Education
+  education: {
+    degree: "Bachelor's Degree in Computer Engineering",
+    institution: "Istanbul University",
+  },
+
   // Page-specific metadata
   pages: {
     home: {
-      title: "Dogu Yilmaz - Software Engineer & Developer",
+      title: "Dogu Yilmaz - Software Developer & Computer Engineer",
       description:
-        "Highly motivated software developer and dedicated team player. Building elegant solutions to complex problems.",
+        "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem.",
       type: "website" as const,
     },
     about: {
       title: "About | Dogu Yilmaz",
       description:
-        "Learn more about Dogu Yilmaz, a software engineer passionate about building elegant solutions to complex problems.",
+        "Learn more about Dogu Yilmaz, a software developer passionate about building elegant solutions to complex problems.",
       type: "content" as const,
     },
     blog: {
@@ -172,149 +405,17 @@ export const siteConfig = {
   about: {
     title: "About Me",
     description:
-      "Highly motivated software developer and dedicated team player. Enthusiastic about exploring new technologies and optimizing systems. Enjoys developing web and mobile applications. Passionate about JavaScript & TypeScript. Recently exploring Swift and Astro.",
+      "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem and a focus on building scalable solutions.",
     pageTitle: "About | Dogu Yilmaz",
     pageDescription:
-      "Highly motivated software developer and dedicated team player. Enthusiastic about exploring new technologies and optimizing systems. Enjoys developing web and mobile applications. Passionate about JavaScript & TypeScript. Recently exploring Swift and Astro.",
+      "Learn more about Dogu Yilmaz, a software developer passionate about building elegant solutions to complex problems.",
     mainImage: "/images/personal/about.jpg",
     content: {
-      heading: "Hello this is Dogu Yilmaz, Engineer & Developer",
+      heading: "Hello, I'm Dogu Yilmaz",
       paragraphs: [
-        "I am a Software Developer at Togg | Trugo.",
-        "Building elegant solutions to complex problems...",
-        `Currently working with Vue, React and React Native. Describe myself as a highly motivated software developer and dedicated team player. Enthusiastic about exploring new technologies and optimizing systems. Enjoys developing web and mobile applications. Passionate about JavaScript & TypeScript.`,
-      ],
-    },
-    experience: {
-      sectionTitle: "Experience",
-      jobs: [
-        {
-          title: "Software Developer",
-          company: "Togg",
-          logoPath: "/images/experience/togg.png",
-          isLogoRounded: true,
-          timeRange: "Dec 2023 - Present",
-          description:
-            "Working as a Software Developer focusing on web and mobile application development.",
-          projects: [],
-          technologies: [
-            "Vue.js",
-            "React Native",
-            "TypeScript",
-            "Expo",
-            "React",
-            "Primefaces",
-            "Tamagui",
-            "Bun",
-          ],
-        },
-        {
-          title: "Software Development Team Lead",
-          company: "Türkiye Tourism Promotion and Development Agency",
-          logoPath: "/images/experience/tga.png",
-          isLogoRounded: true,
-          timeRange: "Jul 2022 - Dec 2022",
-          description:
-            "Led projects, created project plans and oversaw the team's progress while developing web and mobile applications.",
-          projects: [
-            "Led multiple development projects and managed team progress",
-            "Developed web and mobile applications",
-          ],
-          technologies: [
-            "Next.js",
-            "React Native",
-            "TypeScript",
-            "React",
-            "JavaScript",
-            "Teamwork",
-            "Team Leadership",
-          ],
-        },
-        {
-          title: "Software Development Specialist",
-          company: "Türkiye Tourism Promotion and Development Agency",
-          logoPath: "/images/experience/tga.png",
-          isLogoRounded: true,
-          timeRange: "Dec 2020 - Jul 2022",
-          description:
-            "Specialized in data visualization and mobile application development.",
-          projects: [
-            "Built data visualization apps using various charting libraries",
-            "Developed mobile applications using React Native",
-            "Created microservices using Node.js and Go",
-          ],
-          technologies: [
-            "React",
-            "Next.js",
-            "React Native",
-            "JavaScript",
-            "Go",
-            "Node.js",
-          ],
-        },
-        {
-          title: "Full-stack Developer",
-          company: "Freelance",
-          logoPath: "/images/experience/archosch.png",
-          isLogoRounded: true,
-          timeRange: "Feb 2020 - Nov 2020",
-          description:
-            "Worked as a freelance full-stack developer on various projects.",
-          projects: [
-            "Developed web, mobile and desktop applications",
-            "Built REST APIs & backend services using NodeJs and Spring Boot",
-          ],
-          technologies: [
-            "TypeScript",
-            "React Native",
-            "JavaScript",
-            "React",
-            "Vue.js",
-            "Spring Boot",
-            "PostgreSQL",
-            "MongoDB",
-            "Node.js",
-          ],
-        },
-        {
-          title: "Software Intern",
-          company: "Experto | AR-GE ve Tasarım Merkezi Danışmanlık",
-          logoPath: "/images/experience/experto.png",
-          isLogoRounded: true,
-          timeRange: "Sep 2019 - Feb 2020",
-          description: "Internship focused on Frontend and DevOps development.",
-          projects: [
-            "Developed scripts for data parsing",
-            "Participated in CRM application development",
-          ],
-          technologies: [
-            "JavaScript",
-            "React",
-            "Node.js",
-            "Material UI",
-            "PostgreSQL",
-            "Bootstrap",
-          ],
-        },
-        {
-          title: "Freelance Software Developer",
-          company: "Freelance",
-          logoPath: "/images/experience/myhosch.png",
-          isLogoRounded: true,
-          timeRange: "Oct 2018 - Sep 2019",
-          description:
-            "Worked on various freelance software development projects.",
-          projects: [],
-          technologies: [
-            "Node.js",
-            "Knex.js",
-            "React",
-            "HTML",
-            "JavaScript",
-            "CSS",
-            "Material UI",
-          ],
-        },
+        "Software Developer at Togg, focusing on energy and EV-focused products.",
+        "I specialize in building scalable web and mobile applications with modern technologies.",
+        "Currently working with Vue.js, React, and React Native. I'm passionate about creating elegant solutions to complex problems, with expertise in JavaScript/TypeScript ecosystem. Always enthusiastic about exploring new technologies and optimizing systems.",
       ],
     },
   },

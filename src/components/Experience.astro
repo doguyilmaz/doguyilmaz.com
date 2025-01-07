@@ -2,7 +2,7 @@
 import { siteConfig } from "@config/site";
 import { Image } from "astro:assets";
 
-const { experience } = siteConfig.about;
+const { experience } = siteConfig;
 ---
 
 <section class="mx-auto max-w-5xl pb-16">
@@ -65,11 +65,11 @@ const { experience } = siteConfig.about;
                     </p>
 
                     {job.projects.length > 0 && (
-                      <ul class="mt-4 grid grid-cols-1 gap-2">
+                      <ul class="mt-2 grid grid-cols-1 gap-1">
                         {job.projects.map((project) => (
                           <li class="text-xs sm:text-sm text-primary-500 flex items-start sm:items-center gap-2 sm:group-hover:text-primary-400 transition-colors">
                             <span class="h-1 w-1 rounded-full bg-accent-400 mt-1.5 sm:mt-0 flex-shrink-0" />
-                            <span class="leading-relaxed">{project}</span>
+                            <span class="leading-snug">{project}</span>
                           </li>
                         ))}
                       </ul>
