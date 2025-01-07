@@ -47,9 +47,22 @@ import { siteConfig } from "@config/site";
       <div class="flex gap-4 mt-4">
         <a
           href="/about"
-          class="px-6 py-3 text-sm font-medium transition-all rounded-lg sm:text-base bg-accent-400/90 hover:bg-accent-400 text-black"
+          class="px-4 py-3 text-sm font-medium transition-all rounded-lg sm:text-base bg-accent-500/30 hover:bg-accent-500/50 text-primary-300 dark:text-primary-300 flex items-center gap-2 group"
         >
           About Me
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
         </a>
         {
           siteConfig.homepage.showLatestPosts && (
