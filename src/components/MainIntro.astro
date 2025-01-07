@@ -14,7 +14,7 @@ import { siteConfig } from "@config/site";
     <div class="flex flex-col items-center gap-6">
       <div class="relative group">
         <div
-          class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-300 opacity-50 blur transition duration-1000 group-hover:opacity-75 group-hover:duration-200"
+          class="absolute -inset-0.5 rounded-full bg-gradient-to-r from-accent-400 to-accent-300 opacity-30 blur-sm transition duration-1000 group-hover:opacity-50 group-hover:duration-200"
         >
         </div>
         <img
@@ -22,13 +22,13 @@ import { siteConfig } from "@config/site";
           height={460}
           decoding="async"
           loading="lazy"
-          class="relative w-32 h-32 rounded-full shadow-lg sm:w-40 sm:h-40 aspect-[1/1] object-cover"
+          class="relative w-32 h-32 rounded-full shadow sm:w-40 sm:h-40 aspect-[1/1] object-cover"
           src="/images/personal/profile.jpeg"
           alt={`Profile photo of ${siteConfig.siteName}`}
         />
       </div>
       <SocialMediaIcons
-        class="w-6 h-6 stroke-1 hover:cursor-pointer stroke-primary-300 hover:stroke-accent-400 transition-colors duration-200"
+        class="w-8 h-8 stroke-1 hover:cursor-pointer stroke-primary-300 hover:stroke-accent-400 transition-colors duration-200"
       />
     </div>
 
