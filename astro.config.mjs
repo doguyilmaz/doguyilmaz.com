@@ -8,7 +8,9 @@ import vercel from "@astrojs/vercel";
 export default defineConfig({
   site: "https://doguyilmaz.com",
   output: "server",
-  adapter: vercel(),
+  adapter: vercel({
+    webAnalytics: true,
+  }),
   integrations: [
     tailwind(),
     mdx(),

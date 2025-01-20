@@ -1,4 +1,5 @@
 ---
+import Analytics from "@vercel/analytics/astro";
 import MainContainer from "@components/MainContainer.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.astro";
 import { ClientRouter, fade } from "astro:transitions";
@@ -78,6 +79,7 @@ const { pageTitle, description, type } = Astro.props;
     </style>
 
     <ClientRouter />
+    <Analytics />
   </head>
   <body
     class="h-full text-primary-100 selection:bg-accent-400 selection:text-black"
