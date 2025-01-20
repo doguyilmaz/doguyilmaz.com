@@ -26,6 +26,7 @@
     "@fontsource/jetbrains-mono": "^4.5.11",
     "@types/nodemailer": "^6.4.16",
     "@vercel/analytics": "^1.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "astro": "^5.1.1",
     "astro-seo": "^0.6.1",
     "nodemailer": "^6.9.15",

@@ -1,5 +1,6 @@
 ---
 import Analytics from "@vercel/analytics/astro";
+import SpeedInsights from "@vercel/speed-insights/astro";
 import MainContainer from "@components/MainContainer.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.astro";
 import { ClientRouter, fade } from "astro:transitions";
@@ -8,11 +9,12 @@ import "@fontsource/jetbrains-mono";
 import { SEO } from "astro-seo";
 import "@styles/global.css";
 
-const { pageTitle, description, type } = Astro.props;
+const { pageTitle, description, type, title } = Astro.props;
 ---
 
 <html lang="en" class="h-full antialiased">
   <head>
+    <SpeedInsights />
     <meta charset="utf-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
