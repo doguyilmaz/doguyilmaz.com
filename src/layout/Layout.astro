@@ -96,6 +96,18 @@ const { pageTitle, description, type, title } = Astro.props;
         y.parentNode.insertBefore(t, y);
       })(window, document, "clarity", "script", "r0se0rc0rd");
     </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9C63SEW2RQ"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-9C63SEW2RQ");
+    </script>
   </head>
   <body
     class="h-full text-primary-100 selection:bg-accent-400 selection:text-black"
