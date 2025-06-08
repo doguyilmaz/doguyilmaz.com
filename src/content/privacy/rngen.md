@@ -1,6 +1,6 @@
 ---
 title: "Rngen Privacy Policy"
-description: "Privacy policy for Rngen app provided by Dogu Yilmaz."
+description: "Mobile Application"
 appName: "Rngen"
 effectiveDate: 2024-05-14
 updatedDate: 2024-05-14

@@ -23,10 +23,13 @@ const type = "article";
     {
       privacyPolicies.map((policy) => (
         <li>
-          <a href={`/legal/privacy/${policy.data.appName.toLowerCase()}`}>
+          <a
+            href={`/legal/privacy/${policy.data.appName.toLowerCase()}`}
+            class="no-underline hover:underline"
+          >
             {policy.data.appName}
           </a>{" "}
-          -{policy.data.description}
+          - <span class="text-gray-400 text-sm">{policy.data.description}</span>
           <small class="text-gray-500 block">
             Last updated:{" "}
             {policy.data.updatedDate
