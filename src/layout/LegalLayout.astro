@@ -11,11 +11,13 @@ const { pageTitle, description, type } = Astro.props;
 ---
 
 <Layout {pageTitle} {description} {type}>
-  <main class="px-8 pt-16 mx-auto mb-4 max-w-6xl sm:pt-24 lg:px-16">
-    <article
-      class="mx-auto mt-8 prose text-primary-100 prose-headings:text-primary-100 prose-a:text-accent-300/80 prose-a:decoration-accent-400/80 hover:prose-a:decoration-accent-300 prose-strong:text-primary-100 prose-code:text-primary-100 prose-blockquote:text-primary-200 prose-img:rounded-2xl marker:prose-li:text-primary-100 prose-li:text-primary-100 prose-ul:text-primary-100 prose-ol:text-primary-100 prose-pre:rounded-2xl prose-pre:border-[1px] prose-pre:border-primary-700/40 prose-img:mx-auto prose-img:shadow-md prose-video:mx-auto prose-p:text-primary-300"
-    >
-      <slot />
-    </article>
-  </main>
+  <div class="flex flex-col flex-grow h-full min-h-[calc(100vh-120px)]">
+    <main class="px-8 pt-16 mx-auto w-full max-w-6xl sm:pt-24 lg:px-16 flex-grow">
+      <article
+        class="mx-auto mt-8 mb-16 prose text-primary-100 prose-headings:text-primary-100 prose-a:text-accent-300/80 prose-a:decoration-accent-400/80 hover:prose-a:decoration-accent-300 prose-strong:text-primary-100 prose-code:text-primary-100 prose-blockquote:text-primary-200 prose-img:rounded-2xl marker:prose-li:text-primary-100 prose-li:text-primary-100 prose-ul:text-primary-100 prose-ol:text-primary-100 prose-pre:rounded-2xl prose-pre:border-[1px] prose-pre:border-primary-700/40 prose-img:mx-auto prose-img:shadow-md prose-video:mx-auto prose-p:text-primary-300"
+      >
+        <slot />
+      </article>
+    </main>
+  </div>
 </Layout>

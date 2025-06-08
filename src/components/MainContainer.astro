@@ -3,17 +3,19 @@ import Footer from "./Footer.astro";
 import Navbar from "./Navbar.astro";
 ---
 
-<div class="relative min-h-full">
+<div class="relative flex flex-col min-h-screen h-full w-full">
   <div
     class="absolute inset-0 w-full h-full bg-gradient-to-br from-accent-400/20 via-primary-800/20 to-accent-300/20 animate-gradient-shift"
   >
   </div>
   <div
-    class="relative z-10 mx-auto max-w-6xl min-h-full backdrop-blur-sm bg-contentbackground/30 sm:px-8"
+    class="relative z-10 mx-auto max-w-6xl flex flex-col flex-grow w-full min-h-full backdrop-blur-sm bg-contentbackground/30 sm:px-8"
     id="main-container"
   >
     <Navbar />
-    <slot />
+    <div class="flex-grow flex flex-col justify-between">
+      <slot />
+    </div>
     <Footer />
   </div>
 </div>
