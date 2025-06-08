@@ -26,6 +26,7 @@ const blog = defineCollection({
   schema: blogSchema,
 });
 
+// Define with support for both .md and .mdx files
 const privacy = defineCollection({
   type: "content",
   schema: privacySchema,

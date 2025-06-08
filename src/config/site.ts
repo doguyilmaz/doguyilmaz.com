@@ -120,7 +120,7 @@ export const siteConfig = {
 
   // Contact Information
   contact: {
-    email: "info@doguyilmaz.com",
+    email: "hello@doguyilmaz.com",
     phone: "", // redacted for privacy
   },
 
@@ -423,7 +423,7 @@ export const siteConfig = {
   // Footer settings
   footer: {
     text: "Dogu Yilmaz",
-    email: "info@doguyilmaz.com",
+    email: "hello@doguyilmaz.com",
     copyright: "All rights reserved",
   },
 

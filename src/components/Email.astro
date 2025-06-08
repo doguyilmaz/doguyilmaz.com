@@ -1,0 +1,12 @@
+---
+import { siteConfig } from "../config/site";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+const { email } = siteConfig.contact;
+---
+
+<a href={`mailto:${email}`} class={className}>{email}</a>

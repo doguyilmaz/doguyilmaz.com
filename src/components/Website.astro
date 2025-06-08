@@ -1,0 +1,12 @@
+---
+import { siteConfig } from "../config/site";
+
+interface Props {
+  className?: string;
+}
+
+const { className = "" } = Astro.props;
+const { siteUrl } = siteConfig;
+---
+
+<a href={siteUrl} class={className} target="_blank" rel="noopener noreferrer">{siteUrl.replace(/^https?:\/\//, '')}</a>

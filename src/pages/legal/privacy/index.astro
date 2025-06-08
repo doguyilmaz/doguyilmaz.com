@@ -1,6 +1,8 @@
 ---
 import LegalLayout from "../../../layout/LegalLayout.astro";
 import { getCollection } from "astro:content";
+import { siteConfig } from "../../../config/site";
+import Email from "../../../components/Email.astro";
 
 const privacyPolicies = await getCollection("privacy");
 
@@ -8,6 +10,7 @@ const pageTitle = "Privacy Policies | Dogu Yilmaz";
 const description =
   "Privacy policies for apps and services provided by Dogu Yilmaz.";
 const type = "article";
+const contactEmail = siteConfig.contact.email;
 ---
 
 <LegalLayout {pageTitle} {description} {type}>
@@ -68,6 +71,6 @@ const type = "article";
   <p>
     If you have any questions regarding privacy while using any of the
     applications or services, or have questions about our practices, please
-    contact us via email at info@doguyilmaz.com.
+    contact us via email at <Email />.
   </p>
 </LegalLayout>
