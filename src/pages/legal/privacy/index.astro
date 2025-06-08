@@ -10,7 +10,6 @@ const pageTitle = "Privacy Policies | Dogu Yilmaz";
 const description =
   "Privacy policies for apps and services provided by Dogu Yilmaz.";
 const type = "article";
-const contactEmail = siteConfig.contact.email;
 ---
 
 <LegalLayout {pageTitle} {description} {type}>
@@ -27,12 +26,12 @@ const contactEmail = siteConfig.contact.email;
       privacyPolicies.map((policy) => (
         <li>
           <a
-            href={`/legal/privacy/${policy.data.appName.toLowerCase()}`}
+            href={`/legal/privacy/${policy.data.appName.toLowerCase().replace(/\s+/g, "-")}`}
             class="no-underline hover:underline"
           >
             {policy.data.appName}
           </a>{" "}
-          - <span class="text-gray-400 text-sm">{policy.data.description}</span>
+          - <span class="text-gray-400 text-sm">{policy.data.serviceType}</span>
           <small class="text-gray-500 block">
             Last updated:{" "}
             {policy.data.updatedDate

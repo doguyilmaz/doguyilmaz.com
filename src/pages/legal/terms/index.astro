@@ -1,0 +1,82 @@
+---
+import LegalLayout from "../../../layout/LegalLayout.astro";
+import { getCollection } from "astro:content";
+import Email from "../../../components/Email.astro";
+import Website from "../../../components/Website.astro";
+
+const termsCollection = await getCollection("terms");
+
+const pageTitle = "Terms & Conditions | Dogu Yilmaz";
+const description =
+  "Terms and conditions for services and applications provided by Dogu Yilmaz.";
+const type = "article";
+---
+
+<LegalLayout {pageTitle} {description} {type}>
+  <h1>Terms & Conditions</h1>
+
+  <p class="text-lg mb-8">
+    Below you'll find the terms and conditions for various services provided by
+    Dogu Yilmaz. Please select the relevant service to view its specific terms.
+  </p>
+
+  <ul class="space-y-4 mb-12">
+    {
+      termsCollection.map((terms) => (
+        <li>
+          <a
+            href={`/legal/terms/${terms.data.appName
+              .toLowerCase()
+              .replace(/\s+/g, "-")}`}
+            class="no-underline hover:underline"
+          >
+            {terms.data.appName}
+          </a>{" "}
+          - <span class="text-gray-400 text-sm">{terms.data.serviceType}</span>
+          <small class="block text-gray-500">
+            Last updated:{" "}
+            {terms.data.updatedDate
+              ? new Date(terms.data.updatedDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : new Date(terms.data.effectiveDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+          </small>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h2>General Information</h2>
+  <p>
+    All terms and conditions listed here outline the rules and guidelines when
+    using any of the applications or services provided by Dogu Yilmaz. For
+    specific details regarding a particular service or application, please refer
+    to its dedicated terms document.
+  </p>
+
+  <h2>Updates to Terms & Conditions</h2>
+  <p>
+    Terms and conditions may be updated from time to time for any reason. You
+    will be notified of any changes by the updating of the terms on the
+    respective page. You are advised to consult the relevant terms document
+    regularly for any changes, as continued use is deemed approval of all
+    changes.
+  </p>
+
+  <h2>Contact Us</h2>
+  <p>
+    If you have any questions regarding these terms for any of the applications
+    or services, or have questions about our practices, please contact us via
+    email at <Email />.
+  </p>
+
+  <p class="mt-4">
+    For more information, visit our website at <Website />.
+  </p>
+</LegalLayout>

@@ -1,0 +1,50 @@
+---
+import LegalLayout from "../../layout/LegalLayout.astro";
+import Email from "../../components/Email.astro";
+import Website from "../../components/Website.astro";
+
+const pageTitle = "Legal Information | Dogu Yilmaz";
+const description = "Privacy policies and terms & conditions for services and applications provided by Dogu Yilmaz.";
+const type = "article";
+---
+
+<LegalLayout {pageTitle} {description} {type}>
+  <h1>Legal Information</h1>
+
+  <p class="text-lg mb-8">
+    This section contains important legal documents related to services and applications provided by Dogu Yilmaz.
+  </p>
+
+  <h2>Available Documents</h2>
+  
+  <ul class="mb-8 space-y-4">
+    <li>
+      <a href="/legal/privacy/" class="no-underline hover:underline font-medium">Privacy Policies</a> - 
+      <span class="text-gray-600">How user data is collected and used across our applications and services</span>
+    </li>
+    <li>
+      <a href="/legal/terms/" class="no-underline hover:underline font-medium">Terms & Conditions</a> - 
+      <span class="text-gray-600">Rules and guidelines for using our applications and services</span>
+    </li>
+  </ul>
+
+  <h2>Data Protection Principles</h2>
+  <p class="mb-4">
+    Across all services, we follow these core principles:
+  </p>
+  <ul class="list-disc pl-6 mb-8 space-y-2">
+    <li><strong>Data Minimization:</strong> We only collect what's necessary for the functioning of our applications.</li>
+    <li><strong>Transparency:</strong> Our policies clearly explain what data we collect and how we use it.</li>
+    <li><strong>User Control:</strong> Where applicable, users have the ability to access, modify, or delete their data.</li>
+    <li><strong>Security:</strong> We implement appropriate measures to protect user information.</li>
+  </ul>
+
+  <h2>Contact Information</h2>
+  <p>
+    If you have any questions about our privacy policies or terms of service, please contact us:
+  </p>
+  <ul class="list-none pl-6 mb-8 space-y-2">
+    <li><strong>Email:</strong> <Email /></li>
+    <li><strong>Website:</strong> <Website /></li>
+  </ul>
+</LegalLayout>

@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import LegalLayout from "../../../layout/LegalLayout.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const termsCollection = await getCollection("terms");
+  return termsCollection.map((terms) => ({
+    params: { service: terms.data.appName.toLowerCase().replace(/\s+/g, "-") },
+    props: { terms },
+  }));
+}
+
+const { terms } = Astro.props;
+const { Content } = await terms.render();
+
+const pageTitle = `${terms.data.title} | Dogu Yilmaz`;
+const description = terms.data.description;
+const type = "article";
+---
+
+<LegalLayout {pageTitle} {description} {type}>
+  <Content />
+</LegalLayout>
