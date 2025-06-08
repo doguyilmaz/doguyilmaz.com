@@ -1,5 +1,8 @@
 ---
-import LegalLayout from "../../layout/LegalLayout.astro";
+import LegalLayout from "../../../layout/LegalLayout.astro";
+import { getCollection } from "astro:content";
+
+const privacyPolicies = await getCollection("privacy");
 
 const pageTitle = "Privacy Policies | Dogu Yilmaz";
 const description =
@@ -17,11 +20,29 @@ const type = "article";
   </p>
 
   <ul>
-    <li>
-      <a href="/legal/privacy/rngen">Rngen App</a> - Privacy policy for the
-      Rngen mobile application
-    </li>
-    <!-- Additional privacy policies can be added here as they become available -->
+    {
+      privacyPolicies.map((policy) => (
+        <li>
+          <a href={`/legal/privacy/${policy.data.appName.toLowerCase()}`}>
+            {policy.data.appName}
+          </a>{" "}
+          -{policy.data.description}
+          <small class="text-gray-500 block">
+            Last updated:{" "}
+            {policy.data.updatedDate
+              ? new Date(policy.data.updatedDate).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : new Date(policy.data.effectiveDate).toLocaleDateString(
+                  "en-US",
+                  { year: "numeric", month: "long", day: "numeric" }
+                )}
+          </small>
+        </li>
+      ))
+    }
   </ul>
 
   <h2>General Information</h2>

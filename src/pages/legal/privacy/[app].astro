@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import LegalLayout from "../../../layout/LegalLayout.astro";
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+  const privacyPolicies = await getCollection("privacy");
+  return privacyPolicies.map((policy) => ({
+    params: { app: policy.data.appName.toLowerCase() },
+    props: { policy: policy },
+  }));
+}
+
+const { policy } = Astro.props;
+const { Content } = await policy.render();
+
+const pageTitle = `${policy.data.title} | Dogu Yilmaz`;
+const description = policy.data.description;
+const type = "article";
+---
+
+<LegalLayout {pageTitle} {description} {type}>
+  <Content />
+</LegalLayout>
