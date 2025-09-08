@@ -111,7 +111,7 @@ export interface Language {
 export const siteConfig = {
   // Main site info
   siteName: "Dogu Yilmaz",
-  siteTitle: "Engineer, Developer, Tech Enthusiast & Mr. Know It All",
+  siteTitle: "Engineer, Developer, Tech Enthusiast & The Bugfinder",
   siteDescription:
     "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem and a focus on building scalable solutions.",
   siteUrl: "https://doguyilmaz.com",

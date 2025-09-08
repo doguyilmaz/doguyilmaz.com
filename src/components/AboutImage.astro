@@ -6,11 +6,11 @@ const { about } = siteConfig;
 const pattern = Astro.url.searchParams.get("pattern") || "dots";
 ---
 
-<div class="pt-16 sm:pb-12 md:pb-4 lg:pb-16 min-h-[80vh]">
-  <div class="mx-auto mt-8 max-w-7xl lg:px-8">
-    <div class="lg:grid lg:grid-cols-12">
+<div class="pt-16 sm:pb-12 md:pb-4 lg:pb-16 min-h-[80vh] flex items-center justify-center">
+  <div class="mx-auto mt-8 max-w-6xl lg:px-8">
+    <div class="lg:grid lg:grid-cols-12 lg:gap-8 lg:items-center">
       <div
-        class="z-10 lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:py-16 lg:bg-transparent"
+        class="z-10 lg:col-span-5 lg:py-16 lg:bg-transparent flex justify-center"
       >
         <div class="px-4 mx-auto max-w-xs sm:px-6 md:max-w-md lg:p-0">
           <img
@@ -26,20 +26,20 @@ const pattern = Astro.url.searchParams.get("pattern") || "dots";
       </div>
 
       <div
-        class="relative rounded-3xl lg:grid lg:grid-cols-10 lg:col-span-10 lg:col-start-3 lg:row-start-1 lg:items-center backdrop-blur-sm bg-contentbackground/30"
+        class="relative rounded-3xl lg:col-span-7 lg:items-center backdrop-blur-sm bg-contentbackground/30 p-8 lg:p-12"
       >
         <BackgroundPatterns selectedPattern={pattern} />
 
         <div
-          class="relative z-20 py-12 mx-auto space-y-6 sm:py-16 sm:max-w-3xl lg:col-span-7 lg:col-start-4 lg:max-w-none"
+          class="relative z-20 space-y-6"
         >
           <h2
-            class="text-4xl leading-[45px] font-bold tracking-tighter sm:text-5xl sm:leading-[60px]"
+            class="text-4xl leading-[45px] font-bold tracking-tighter sm:text-5xl sm:leading-[60px] text-center lg:text-left"
             id="about-heading"
           >
             {about.content.heading}
           </h2>
-          <div class="text-lg text-primary-300 md:text-primary-100">
+          <div class="text-lg text-primary-300 md:text-primary-100 text-center lg:text-left">
             {
               about.content.paragraphs.map((paragraph) => (
                 <p class="mb-4">{paragraph}</p>
