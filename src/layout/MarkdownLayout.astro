@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { data } = Astro.props;
-const { blogPost } = siteConfig.pages;
+const { blog } = siteConfig.pages;
 
 const formattedDate = new Date(data.pubDate).toLocaleDateString("en-us", {
   year: "numeric",
@@ -20,11 +20,7 @@ const formattedDate = new Date(data.pubDate).toLocaleDateString("en-us", {
 const pageTitle = `${data.title} | ${siteConfig.siteName}`;
 ---
 
-<Layout
-  pageTitle={pageTitle}
-  description={data.description}
-  type={blogPost.type}
->
+<Layout pageTitle={pageTitle} description={data.description} type={blog.type}>
   <main class="px-8 pt-16 mx-auto mb-4 max-w-6xl sm:pt-24 lg:px-16">
     <a
       href="/blog"

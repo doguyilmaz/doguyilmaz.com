@@ -1,0 +1,93 @@
+---
+import { siteConfig } from "@config/site";
+
+const { skills } = siteConfig;
+
+// Group skills by category for preview
+const skillsByCategory = skills.reduce((acc, skill) => {
+  const category = skill.category || 'tools';
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(skill.name);
+  return acc;
+}, {} as Record<string, string[]>);
+
+const categoryIcons = {
+  frontend: "⚛️",
+  backend: "🔧",
+  mobile: "📱",
+  database: "🗄️",
+  devops: "🚀",
+  tools: "🛠️",
+  visualization: "📊"
+};
+
+const categoryColors = {
+  frontend: "from-blue-500 to-cyan-500",
+  backend: "from-green-500 to-emerald-500",
+  mobile: "from-purple-500 to-pink-500",
+  database: "from-orange-500 to-red-500",
+  devops: "from-gray-500 to-slate-500",
+  tools: "from-yellow-500 to-amber-500",
+  visualization: "from-indigo-500 to-blue-500"
+};
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+    <div class="group relative bg-lightercontentbackground border border-primary-600 rounded-xl p-6 hover:border-primary-400 transition-all duration-300 hover:scale-105">
+      <!-- Category Header -->
+      <div class="flex items-center space-x-3 mb-4">
+        <div class={`w-12 h-12 rounded-lg bg-gradient-to-br ${categoryColors[category as keyof typeof categoryColors] || categoryColors.tools} flex items-center justify-center text-white text-xl`}>
+          {categoryIcons[category as keyof typeof categoryIcons] || "💻"}
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold capitalize">
+            {category === 'devops' ? 'DevOps' : category}
+          </h3>
+          <p class="text-sm text-primary-300">{categorySkills.length} technologies</p>
+        </div>
+      </div>
+
+      <!-- Skills List -->
+      <div class="space-y-2">
+        {categorySkills.slice(0, 5).map((skill) => (
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 bg-primary-400 rounded-full"></div>
+            <span class="text-sm text-primary-200">{skill}</span>
+          </div>
+        ))}
+        {categorySkills.length > 5 && (
+          <div class="flex items-center space-x-2">
+            <div class="w-2 h-2 bg-primary-500 rounded-full"></div>
+            <span class="text-sm text-primary-300 font-medium">
+              +{categorySkills.length - 5} more
+            </span>
+          </div>
+        )}
+      </div>
+
+      <!-- Hover Effect -->
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-500/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+  ))}
+</div>
+
+<!-- Skills Summary Stats -->
+<div class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+  <div class="text-center">
+    <div class="text-3xl font-bold text-primary-100 mb-2">{skills.filter(s => s.category === 'frontend').length}</div>
+    <div class="text-sm text-primary-300">Frontend</div>
+  </div>
+  <div class="text-center">
+    <div class="text-3xl font-bold text-primary-100 mb-2">{skills.filter(s => s.category === 'backend').length}</div>
+    <div class="text-sm text-primary-300">Backend</div>
+  </div>
+  <div class="text-center">
+    <div class="text-3xl font-bold text-primary-100 mb-2">{skills.filter(s => s.category === 'database').length}</div>
+    <div class="text-sm text-primary-300">Databases</div>
+  </div>
+  <div class="text-center">
+    <div class="text-3xl font-bold text-primary-100 mb-2">{skills.filter(s => s.category === 'visualization').length}</div>
+    <div class="text-sm text-primary-300">Data Viz</div>
+  </div>
+</div>

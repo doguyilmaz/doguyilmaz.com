@@ -1,0 +1,102 @@
+---
+// Testimonials and recommendations section
+interface Testimonial {
+  name: string;
+  role: string;
+  company: string;
+  content: string;
+  avatar: string;
+  rating: number;
+}
+
+const testimonials: Testimonial[] = [
+  {
+    name: "Sarah Johnson",
+    role: "Product Manager",
+    company: "TGA",
+    content: "Dogu's leadership in our development team was exceptional. He delivered complex data visualization projects on time and mentored junior developers effectively.",
+    avatar: "/images/testimonials/sarah.jpg",
+    rating: 5
+  },
+  {
+    name: "Michael Chen",
+    role: "Senior Developer",
+    company: "Togg",
+    content: "Working with Dogu on EV management systems has been great. His expertise in React Native and Vue.js helped us build scalable mobile solutions.",
+    avatar: "/images/testimonials/michael.jpg",
+    rating: 5
+  },
+  {
+    name: "Elena Rodriguez",
+    role: "Tech Lead",
+    company: "Freelance Client",
+    content: "Dogu delivered our web application ahead of schedule with excellent code quality. His full-stack expertise and communication skills are outstanding.",
+    avatar: "/images/testimonials/elena.jpg",
+    rating: 5
+  }
+];
+---
+
+<section class="space-y-8">
+  <div class="text-center">
+    <h2 class="text-3xl font-bold mb-4">What Colleagues Say</h2>
+    <p class="text-primary-300 max-w-2xl mx-auto">
+      Feedback from team members, clients, and collaborators I've worked with.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {testimonials.map((testimonial) => (
+      <div class="bg-lightercontentbackground border border-primary-600 rounded-xl p-6 hover:border-primary-400 transition-all duration-300 hover:scale-105">
+        <!-- Rating Stars -->
+        <div class="flex space-x-1 mb-4">
+          {Array.from({ length: testimonial.rating }, (_, i) => (
+            <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          ))}
+        </div>
+
+        <!-- Testimonial Content -->
+        <blockquote class="text-primary-200 mb-6 italic">
+          "{testimonial.content}"
+        </blockquote>
+
+        <!-- Author Info -->
+        <div class="flex items-center space-x-4">
+          <div class="w-12 h-12 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center text-white font-semibold">
+            {testimonial.name.split(' ').map(n => n[0]).join('')}
+          </div>
+          <div>
+            <div class="font-semibold text-primary-100">{testimonial.name}</div>
+            <div class="text-sm text-primary-300">{testimonial.role}</div>
+            <div class="text-sm text-primary-400">{testimonial.company}</div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Call to Action -->
+  <div class="text-center bg-lightercontentbackground border border-primary-600 rounded-xl p-8">
+    <h3 class="text-xl font-semibold mb-4">Want to Work Together?</h3>
+    <p class="text-primary-300 mb-6 max-w-2xl mx-auto">
+      I'm always open to discussing new opportunities, collaborations, and interesting projects. 
+      Let's create something amazing together!
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a 
+        href="/contact" 
+        class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+      >
+        💬 Get In Touch
+      </a>
+      <a 
+        href="/resume" 
+        class="inline-flex items-center gap-2 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-6 py-3 rounded-lg font-medium transition-colors"
+      >
+        📄 View Resume
+      </a>
+    </div>
+  </div>
+</section>

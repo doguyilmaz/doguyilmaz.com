@@ -1,0 +1,26 @@
+---
+interface Props {
+  title: string;
+  skills: Array<{
+    name: string;
+    category?: string;
+  }>;
+}
+
+const { title, skills } = Astro.props;
+---
+
+<div class="space-y-4">
+  <h3 class="text-2xl font-semibold">{title}</h3>
+  <div
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3"
+  >
+    {
+      skills.map((skill) => (
+        <div class="bg-lightercontentbackground border border-primary-600 rounded-lg p-3 text-center hover:border-primary-400 transition-colors">
+          <span class="text-sm font-medium">{skill.name}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>

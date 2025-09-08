@@ -1,0 +1,141 @@
+---
+import Layout from "@layout/Layout.astro";
+import SkillsGrid from "@components/SkillsGrid.astro";
+import SkillCategory from "@components/SkillCategory.astro";
+import { siteConfig } from "@config/site";
+
+const { skills: pageConfig } = siteConfig.pages;
+const { skills, languages } = siteConfig;
+
+// Group skills by category
+const skillsByCategory = skills.reduce((acc, skill) => {
+  const category = skill.category || "tools";
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(skill);
+  return acc;
+}, {} as Record<string, typeof skills>);
+
+const categoryLabels = {
+  frontend: "Frontend Development",
+  backend: "Backend Development",
+  mobile: "Mobile Development",
+  database: "Databases & Storage",
+  devops: "DevOps & Infrastructure",
+  tools: "Tools & Utilities",
+  visualization: "Data Visualization",
+};
+---
+
+<Layout
+  pageTitle={pageConfig.title}
+  description={pageConfig.description}
+  type={pageConfig.type}
+>
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
+    <div class="flex flex-col mt-4 space-y-12">
+      <!-- Header -->
+      <div class="flex flex-col space-y-4">
+        <h1
+          class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]"
+        >
+          Skills & Technologies
+        </h1>
+        <p class="text-primary-300 max-w-[65ch]">
+          A comprehensive overview of my technical expertise, programming
+          languages, frameworks, and tools I use to build modern applications.
+        </p>
+      </div>
+
+      <!-- Skills by Category -->
+      <section class="space-y-8">
+        {
+          Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+            <SkillCategory
+              title={
+                categoryLabels[category as keyof typeof categoryLabels] ||
+                category
+              }
+              skills={categorySkills}
+            />
+          ))
+        }
+      </section>
+
+      <!-- Languages -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-bold">Languages</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {
+            languages.map((language) => (
+              <div class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6">
+                <h3 class="text-xl font-semibold mb-2">{language.name}</h3>
+                <p class="text-primary-300">{language.level}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <!-- Skills Overview -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-bold">Technical Proficiency</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">Frontend</h3>
+            <p class="text-primary-300 mb-4">
+              Modern web interfaces with React, Vue, and TypeScript
+            </p>
+            <div class="text-2xl">⚛️</div>
+          </div>
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">Backend</h3>
+            <p class="text-primary-300 mb-4">
+              Scalable APIs with Node.js, Go, and microservices
+            </p>
+            <div class="text-2xl">🔧</div>
+          </div>
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">Mobile</h3>
+            <p class="text-primary-300 mb-4">
+              Cross-platform apps with React Native
+            </p>
+            <div class="text-2xl">📱</div>
+          </div>
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">Data Viz</h3>
+            <p class="text-primary-300 mb-4">
+              Interactive charts and maps with D3, Highcharts
+            </p>
+            <div class="text-2xl">📊</div>
+          </div>
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">DevOps</h3>
+            <p class="text-primary-300 mb-4">
+              Containerization and deployment automation
+            </p>
+            <div class="text-2xl">🚀</div>
+          </div>
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-xl font-semibold mb-2">Leadership</h3>
+            <p class="text-primary-300 mb-4">
+              Team management and project coordination
+            </p>
+            <div class="text-2xl">👥</div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>

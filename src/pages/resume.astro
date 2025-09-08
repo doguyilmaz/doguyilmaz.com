@@ -1,0 +1,134 @@
+---
+import Layout from "@layout/Layout.astro";
+import Experience from "@components/Experience.astro";
+import AchievementsSection from "@components/AchievementsSection.astro";
+import SkillsResume from "@components/SkillsResume.astro";
+import { siteConfig } from "@config/site";
+
+const { resume } = siteConfig.pages;
+const { education, achievements } = siteConfig;
+---
+
+<Layout
+  pageTitle={resume.title}
+  description={resume.description}
+  type={resume.type}
+>
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
+    <div class="flex flex-col mt-4 space-y-12">
+      <!-- Header with Download Button -->
+      <div
+        class="flex flex-col lg:flex-row lg:justify-between lg:items-start space-y-4 lg:space-y-0"
+      >
+        <div class="flex flex-col space-y-4">
+          <h1
+            class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]"
+          >
+            Resume
+          </h1>
+          <p class="text-primary-300 max-w-[65ch]">
+            Professional experience, education, and achievements in software
+            development and engineering.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href="/resume.pdf"
+            download
+            class="inline-flex items-center px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-lg font-medium transition-colors"
+          >
+            📄 Download PDF
+          </a>
+          <button
+            onclick="window.print()"
+            class="inline-flex items-center px-6 py-3 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white rounded-lg font-medium transition-colors"
+          >
+            🖨️ Print
+          </button>
+        </div>
+      </div>
+
+      <!-- Personal Info -->
+      <section
+        class="bg-lightercontentbackground border border-primary-600 rounded-lg p-8"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div>
+            <h2 class="text-2xl font-bold mb-4">Contact Information</h2>
+            <div class="space-y-2">
+              <p><strong>Email:</strong> {siteConfig.contact.email}</p>
+              <p><strong>Website:</strong> {siteConfig.siteUrl}</p>
+              <p><strong>Location:</strong> Istanbul, Turkey</p>
+            </div>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold mb-4">Education</h2>
+            <div class="space-y-2">
+              <p><strong>{education.degree}</strong></p>
+              <p class="text-primary-300">{education.institution}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Professional Summary -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-bold">Professional Summary</h2>
+        <div
+          class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+        >
+          <p class="text-lg leading-relaxed">
+            {siteConfig.siteDescription}
+          </p>
+        </div>
+      </section>
+
+      <!-- Experience -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-bold">Professional Experience</h2>
+        <Experience />
+      </section>
+
+      <!-- Achievements -->
+      <AchievementsSection achievements={achievements} />
+
+      <!-- Skills Summary -->
+      <SkillsResume />
+
+      <!-- Languages -->
+      <section class="space-y-6">
+        <h2 class="text-3xl font-bold">Languages</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {
+            siteConfig.languages.map((language) => (
+              <div class="bg-lightercontentbackground border border-primary-600 rounded-lg p-4">
+                <div class="flex justify-between items-center">
+                  <span class="font-medium">{language.name}</span>
+                  <span class="text-primary-300">{language.level}</span>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @media print {
+    .no-print {
+      display: none !important;
+    }
+
+    body {
+      background: white !important;
+      color: black !important;
+    }
+
+    .bg-lightercontentbackground {
+      background: white !important;
+      border: 1px solid #ccc !important;
+    }
+  }
+</style>

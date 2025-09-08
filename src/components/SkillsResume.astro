@@ -1,0 +1,44 @@
+---
+import { siteConfig } from "@config/site";
+
+const { skills } = siteConfig;
+
+// Group skills by category for resume display
+const skillsByCategory = skills.reduce((acc, skill) => {
+  const category = skill.category || "tools";
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(skill.name);
+  return acc;
+}, {} as Record<string, string[]>);
+
+const categoryLabels = {
+  frontend: "Frontend",
+  backend: "Backend",
+  mobile: "Mobile",
+  database: "Databases",
+  devops: "DevOps",
+  tools: "Tools",
+  visualization: "Data Visualization",
+};
+---
+
+<section class="space-y-6">
+  <h2 class="text-3xl font-bold">Technical Skills</h2>
+  <div
+    class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+  >
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        Object.entries(skillsByCategory).map(([category, categorySkills]) => (
+          <div>
+            <h3 class="text-lg font-semibold mb-3">
+              {categoryLabels[category as keyof typeof categoryLabels] ||
+                category}
+            </h3>
+            <p class="text-primary-300">{categorySkills.join(", ")}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

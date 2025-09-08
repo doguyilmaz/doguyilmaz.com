@@ -1,0 +1,185 @@
+---
+// Scroll progress indicator and smooth animations
+---
+
+<!-- Scroll Progress Bar -->
+<div
+  id="scroll-progress"
+  class="fixed top-0 left-0 w-full h-1 bg-primary-800/50 z-40"
+>
+  <div
+    id="scroll-progress-bar"
+    class="h-full bg-gradient-to-r from-primary-500 to-primary-400 transition-all duration-150 ease-out"
+    style="width: 0%"
+  >
+  </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button
+  id="scroll-to-top"
+  class="fixed bottom-8 right-8 w-12 h-12 bg-primary-500 hover:bg-primary-600 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 opacity-0 pointer-events-none z-40"
+  aria-label="Scroll to top"
+>
+  <svg
+    class="w-6 h-6 mx-auto"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<!-- Intersection Observer Animations -->
+<script>
+  // Scroll progress bar
+  function updateScrollProgress() {
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const scrollHeight =
+      document.documentElement.scrollHeight -
+      document.documentElement.clientHeight;
+    const scrollProgress = (scrollTop / scrollHeight) * 100;
+
+    const progressBar = document.getElementById("scroll-progress-bar");
+    if (progressBar) {
+      progressBar.style.width = scrollProgress + "%";
+    }
+  }
+
+  // Scroll to top button visibility
+  function updateScrollToTopButton() {
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+    if (scrollToTopButton) {
+      if (window.pageYOffset > 300) {
+        scrollToTopButton.style.opacity = "1";
+        scrollToTopButton.style.pointerEvents = "auto";
+        scrollToTopButton.style.transform = "scale(1)";
+      } else {
+        scrollToTopButton.style.opacity = "0";
+        scrollToTopButton.style.pointerEvents = "none";
+        scrollToTopButton.style.transform = "scale(0.8)";
+      }
+    }
+  }
+
+  // Smooth scroll to top
+  function scrollToTop() {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  // Intersection Observer for animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px",
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("animate-fade-in-up");
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  }, observerOptions);
+
+  // Event listeners
+  window.addEventListener("scroll", () => {
+    updateScrollProgress();
+    updateScrollToTopButton();
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Initialize scroll indicators
+    updateScrollProgress();
+    updateScrollToTopButton();
+
+    // Add scroll to top functionality
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+    if (scrollToTopButton) {
+      scrollToTopButton.addEventListener("click", scrollToTop);
+    }
+
+    // Observe elements for animations
+    const animatedElements = document.querySelectorAll(
+      "section, .gallery-item, .tech-node, .project-card"
+    );
+    animatedElements.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(20px)";
+      el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+      observer.observe(el);
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute("href"));
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      });
+    });
+  });
+
+  // Add parallax effect to hero section
+  window.addEventListener("scroll", () => {
+    const scrolled = window.pageYOffset;
+    const heroSection = document.querySelector(".hero-section");
+    if (heroSection) {
+      heroSection.style.transform = `translateY(${scrolled * 0.5}px)`;
+    }
+  });
+</script>
+
+<style>
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Smooth scrolling for the entire page */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-primary-800));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-primary-500));
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary-400));
+  }
+</style>

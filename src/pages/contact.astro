@@ -1,0 +1,166 @@
+---
+import Layout from "@layout/Layout.astro";
+import ContactForm from "@components/ContactForm.astro";
+import SocialMediaIcons from "@components/SocialMediaIcons.astro";
+import { siteConfig } from "@config/site";
+import { sendEmail } from "src/lib/nodemailer";
+
+export const prerender = false;
+
+let formSubmitted = false;
+let formError = false;
+
+if (Astro.request.method === "POST") {
+  try {
+    const data = await Astro.request.formData();
+    const name = data.get("username");
+    const email = data.get("email");
+    const message = data.get("message");
+
+    await sendEmail({
+      type: "contact",
+      data: {
+        name: name as string,
+        email: email as string,
+        message: message as string,
+      },
+    });
+
+    formSubmitted = true;
+  } catch (error) {
+    formError = true;
+  }
+}
+
+const { contact: pageConfig } = siteConfig.pages;
+---
+
+<Layout
+  pageTitle={pageConfig.title}
+  description={pageConfig.description}
+  type={pageConfig.type}
+>
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
+    <div class="flex flex-col mt-4 space-y-12">
+      <!-- Header -->
+      <div class="flex flex-col space-y-4">
+        <h1
+          class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]"
+        >
+          Let's Connect
+        </h1>
+        <p class="text-primary-300 max-w-[65ch]">
+          I'm always interested in new opportunities, collaborations, and
+          interesting projects. Feel free to reach out!
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="space-y-6">
+          <h2 class="text-2xl font-bold">Send a Message</h2>
+
+          {
+            formSubmitted && (
+              <div class="bg-green-500/10 border border-green-500 rounded-lg p-4">
+                <p class="text-green-400">
+                  ✅ Message sent successfully! I'll get back to you soon.
+                </p>
+              </div>
+            )
+          }
+
+          {
+            formError && (
+              <div class="bg-red-500/10 border border-red-500 rounded-lg p-4">
+                <p class="text-red-400">
+                  ❌ Something went wrong. Please try again or contact me
+                  directly.
+                </p>
+              </div>
+            )
+          }
+
+          <ContactForm />
+        </div>
+
+        <!-- Contact Information -->
+        <div class="space-y-8">
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold">Contact Information</h2>
+
+            <div class="space-y-4">
+              <div class="flex items-center space-x-4">
+                <div class="text-2xl">📧</div>
+                <div>
+                  <h3 class="font-semibold">Email</h3>
+                  <a
+                    href={`mailto:${siteConfig.contact.email}`}
+                    class="text-primary-300 hover:text-primary-100 transition-colors"
+                  >
+                    {siteConfig.contact.email}
+                  </a>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="text-2xl">🌍</div>
+                <div>
+                  <h3 class="font-semibold">Location</h3>
+                  <p class="text-primary-300">Istanbul, Turkey</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="text-2xl">⏰</div>
+                <div>
+                  <h3 class="font-semibold">Timezone</h3>
+                  <p class="text-primary-300">GMT+3 (Turkey Time)</p>
+                </div>
+              </div>
+
+              <div class="flex items-center space-x-4">
+                <div class="text-2xl">💼</div>
+                <div>
+                  <h3 class="font-semibold">Availability</h3>
+                  <p class="text-primary-300">
+                    Open to freelance projects and collaborations
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Social Links -->
+          <div class="space-y-6">
+            <h2 class="text-2xl font-bold">Connect on Social</h2>
+            <div class="flex space-x-4">
+              <SocialMediaIcons />
+            </div>
+            <p class="text-primary-300 text-sm">
+              Follow me for updates on my latest projects and tech insights.
+            </p>
+          </div>
+
+          <!-- Quick Response -->
+          <div
+            class="bg-lightercontentbackground border border-primary-600 rounded-lg p-6"
+          >
+            <h3 class="text-lg font-semibold mb-3">Quick Response Times</h3>
+            <div class="space-y-2 text-sm">
+              <p>
+                <span class="text-green-400">●</span> Email: Usually within 24 hours
+              </p>
+              <p>
+                <span class="text-yellow-400">●</span> LinkedIn: Within 2-3 days
+              </p>
+              <p>
+                <span class="text-blue-400">●</span> Twitter: For quick questions
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>

@@ -3,10 +3,14 @@ import Layout from "@layout/Layout.astro";
 import { siteConfig } from "@config/site";
 import type { CollectionEntry } from "astro:content";
 
-import MainIntro from "@components/MainIntro.astro";
+import HeroSection from "@components/HeroSection.astro";
+import ProjectsGrid from "@components/ProjectsGrid.astro";
+import SkillsPreview from "@components/SkillsPreview.astro";
 import ContactForm from "@components/ContactForm.astro";
 import FeaturedBlogsContainer from "@components/FeaturedBlogsContainer.astro";
 import FeaturedBlogPost from "@components/FeaturedBlogPost.astro";
+import AchievementsSection from "@components/AchievementsSection.astro";
+import TestimonialsSection from "@components/TestimonialsSection.astro";
 import readingTime from "reading-time";
 import { getCollection } from "astro:content";
 
@@ -20,6 +24,10 @@ const lastThreePosts = posts
     return 0;
   })
   .slice(0, 3);
+
+const featuredProjects = siteConfig.projects
+  .filter((project) => project.featured)
+  .slice(0, 3);
 ---
 
 <Layout
@@ -28,13 +36,103 @@ const lastThreePosts = posts
   type="website"
 >
   <main class="flex flex-col w-full">
-    <MainIntro />
+    <!-- Hero Section -->
+    <HeroSection />
 
     <div class="relative w-full overflow-hidden">
-      <div class="relative z-10 px-4 mx-auto max-w-6xl w-full">
+      <div class="relative z-10 px-4 mx-auto max-w-6xl w-full space-y-20">
+        <!-- Featured Projects Section -->
+        <section class="py-20">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Featured Projects</h2>
+            <p class="text-primary-300 max-w-2xl mx-auto">
+              Here are some of my most impactful projects that showcase my
+              expertise in full-stack development, data visualization, and
+              mobile applications.
+            </p>
+          </div>
+          <ProjectsGrid projects={featuredProjects} />
+          <div class="text-center mt-8">
+            <a
+              href="/projects"
+              class="inline-flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              View All Projects
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- Skills Preview Section -->
+        <section class="py-20">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Technical Expertise</h2>
+            <p class="text-primary-300 max-w-2xl mx-auto">
+              I work with modern technologies to build scalable, efficient, and
+              user-friendly applications.
+            </p>
+          </div>
+          <SkillsPreview />
+          <div class="text-center mt-8">
+            <a
+              href="/skills"
+              class="inline-flex items-center gap-2 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-6 py-3 rounded-lg font-medium transition-colors"
+            >
+              View All Skills
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"></path>
+              </svg>
+            </a>
+          </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section class="py-20">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl font-bold mb-4">Key Achievements</h2>
+            <p class="text-primary-300 max-w-2xl mx-auto">
+              Milestones and accomplishments that define my professional
+              journey.
+            </p>
+          </div>
+          <AchievementsSection achievements={siteConfig.achievements} />
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="py-20">
+          <TestimonialsSection />
+        </section>
+
         {
           siteConfig.homepage.showLatestPosts && (
             <section class="py-20">
+              <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Latest Blog Posts</h2>
+                <p class="text-primary-300 max-w-2xl mx-auto">
+                  Thoughts, insights, and tutorials about software development
+                  and technology.
+                </p>
+              </div>
               <FeaturedBlogsContainer>
                 {lastThreePosts.map((post: CollectionEntry<"blog">) => (
                   <FeaturedBlogPost
@@ -54,13 +152,41 @@ const lastThreePosts = posts
                   />
                 ))}
               </FeaturedBlogsContainer>
+              <div class="text-center mt-8">
+                <a
+                  href="/blog"
+                  class="inline-flex items-center gap-2 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-6 py-3 rounded-lg font-medium transition-colors"
+                >
+                  Read All Posts
+                  <svg
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
             </section>
           )
         }
 
         {
           siteConfig.homepage.showContactForm && (
-            <section class="py-20 ">
+            <section class="py-20">
+              <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold mb-4">Let's Work Together</h2>
+                <p class="text-primary-300 max-w-2xl mx-auto">
+                  Ready to bring your ideas to life? Let's discuss your next
+                  project.
+                </p>
+              </div>
               <ContactForm />
             </section>
           )

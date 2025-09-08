@@ -1,0 +1,80 @@
+---
+// Modern loading animation component
+---
+
+<div
+  id="loading-screen"
+  class="fixed inset-0 bg-background z-50 flex items-center justify-center"
+>
+  <div class="text-center space-y-8">
+    <!-- Animated Logo -->
+    <div class="relative">
+      <div
+        class="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white text-2xl font-bold animate-pulse"
+      >
+        DY
+      </div>
+      <div
+        class="absolute inset-0 w-20 h-20 mx-auto rounded-full border-4 border-primary-500/30 animate-spin border-t-primary-500"
+      >
+      </div>
+    </div>
+
+    <!-- Loading Text -->
+    <div class="space-y-2">
+      <h2 class="text-2xl font-bold text-primary-100">Loading Portfolio</h2>
+      <div class="flex justify-center space-x-1">
+        <div class="w-2 h-2 bg-primary-500 rounded-full animate-bounce"></div>
+        <div
+          class="w-2 h-2 bg-primary-500 rounded-full animate-bounce"
+          style="animation-delay: 0.1s;"
+        >
+        </div>
+        <div
+          class="w-2 h-2 bg-primary-500 rounded-full animate-bounce"
+          style="animation-delay: 0.2s;"
+        >
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="w-64 h-1 bg-primary-800 rounded-full overflow-hidden">
+      <div
+        class="h-full bg-gradient-to-r from-primary-500 to-primary-400 rounded-full animate-pulse"
+        id="progress-bar"
+      >
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Hide loading screen after page loads
+  window.addEventListener("load", () => {
+    const loadingScreen = document.getElementById("loading-screen");
+    if (loadingScreen) {
+      setTimeout(() => {
+        loadingScreen.style.opacity = "0";
+        loadingScreen.style.transition = "opacity 0.5s ease-out";
+        setTimeout(() => {
+          loadingScreen.style.display = "none";
+        }, 500);
+      }, 1000); // Show for at least 1 second
+    }
+  });
+
+  // Animate progress bar
+  const progressBar = document.getElementById("progress-bar");
+  if (progressBar) {
+    let width = 0;
+    const interval = setInterval(() => {
+      width += Math.random() * 15;
+      if (width >= 100) {
+        width = 100;
+        clearInterval(interval);
+      }
+      progressBar.style.width = width + "%";
+    }, 100);
+  }
+</script>

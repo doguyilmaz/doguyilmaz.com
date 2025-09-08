@@ -1,0 +1,255 @@
+---
+import Layout from "@layout/Layout.astro";
+import { siteConfig } from "@config/site";
+
+interface GalleryItem {
+  image: {
+    src: string;
+    alt: string;
+  };
+  caption: string;
+  category: string;
+  date: string;
+}
+
+const { gallery } = siteConfig.pages;
+const galleryItems: GalleryItem[] = [
+  {
+    image: {
+      src: "/images/gallery/workspace-1.jpg",
+      alt: "My development workspace",
+    },
+    caption:
+      "My daily development setup with multiple monitors and ergonomic accessories",
+    category: "workspace",
+    date: "2024-01",
+  },
+  {
+    image: {
+      src: "/images/gallery/project-demo-1.jpg",
+      alt: "Project demonstration",
+    },
+    caption: "Presenting the tourism analytics platform to stakeholders",
+    category: "projects",
+    date: "2023-12",
+  },
+  {
+    image: {
+      src: "/images/gallery/team-meeting.jpg",
+      alt: "Team collaboration",
+    },
+    caption: "Leading the development team at TGA during project planning",
+    category: "team",
+    date: "2023-08",
+  },
+  {
+    image: { src: "/images/gallery/conference-1.jpg", alt: "Tech conference" },
+    caption: "Attending a React Native conference in Istanbul",
+    category: "events",
+    date: "2023-06",
+  },
+  {
+    image: {
+      src: "/images/gallery/code-review.jpg",
+      alt: "Code review session",
+    },
+    caption: "Collaborative code review session with the team",
+    category: "development",
+    date: "2023-05",
+  },
+  {
+    image: {
+      src: "/images/gallery/mobile-app-demo.jpg",
+      alt: "Mobile app demonstration",
+    },
+    caption: "Demonstrating the React Native tourism app features",
+    category: "projects",
+    date: "2023-03",
+  },
+];
+
+const categories = [...new Set(galleryItems.map((item) => item.category))];
+---
+
+<Layout
+  pageTitle={gallery.title}
+  description={gallery.description}
+  type={gallery.type}
+>
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
+    <div class="flex flex-col mt-4 space-y-8">
+      <!-- Header -->
+      <div class="flex flex-col space-y-4">
+        <h1 class="text-4xl font-bold tracking-tighter sm:text-5xl max-w-[25ch]">
+          Visual Journey
+        </h1>
+        <p class="text-primary-300 max-w-[65ch]">
+          A collection of moments from my professional journey, workspace setups, project demonstrations, and tech events.
+        </p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap gap-3">
+        <button 
+          class="filter-btn active px-4 py-2 rounded-lg border border-primary-500 bg-primary-500 text-white font-medium transition-colors"
+          data-category="all"
+        >
+          All ({galleryItems.length})
+        </button>
+        {categories.map((category) => (
+          <button 
+            class="filter-btn px-4 py-2 rounded-lg border border-primary-600 text-primary-300 hover:border-primary-500 hover:text-primary-100 font-medium transition-colors capitalize"
+            data-category={category}
+          >
+            {category} ({galleryItems.filter(item => item.category === category).length})
+          </button>
+        ))}
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery-grid">
+        {galleryItems.map((item: GalleryItem) => (
+          <div
+            class="gallery-item group cursor-pointer"
+            data-image={item.image.src}
+            data-category={item.category}
+            data-caption={item.caption}
+            data-date={item.date}
+          >
+            <div class="relative overflow-hidden rounded-xl bg-lightercontentbackground border border-primary-600 hover:border-primary-400 transition-all duration-300 hover:scale-105">
+              <!-- Image -->
+              <div class="relative h-64 overflow-hidden">
+                <img
+                  src={item.image.src}
+                  alt={item.image.alt}
+                  class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                <!-- Category Badge -->
+                <div class="absolute top-3 left-3 px-2 py-1 bg-primary-500/80 backdrop-blur-sm text-white rounded-full text-xs font-medium capitalize">
+                  {item.category}
+                </div>
+                
+                <!-- Date Badge -->
+                <div class="absolute top-3 right-3 px-2 py-1 bg-black/50 backdrop-blur-sm text-white rounded-full text-xs">
+                  {item.date}
+                </div>
+
+                <!-- Zoom Icon -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div class="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Caption -->
+              <div class="p-4">
+                <p class="text-primary-200 text-sm leading-relaxed">{item.caption}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+      <div
+        id="imageModal"
+        class="modal fixed inset-0 z-[1000] bg-black bg-opacity-75 flex justify-center items-center"
+      >
+        <div class="relative">
+          <img
+            id="modalImage"
+            src=""
+            alt="Popup Image"
+            class="rounded-lg max-w-full max-h-screen"
+          />
+          <button
+            id="modalclose"
+            class="absolute top-2 border right-2 text-black text-4xl font-bold"
+            >&times;</button
+          >
+        </div>
+      </div>
+
+      <script>
+        // Gallery filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn') as NodeListOf<HTMLButtonElement>;
+        const galleryItems = document.querySelectorAll('.gallery-item') as NodeListOf<HTMLElement>;
+        const modal = document.getElementById("imageModal") as HTMLElement;
+        const modalImage = document.getElementById("modalImage") as HTMLImageElement;
+        const modalCloseButton = document.getElementById("modalclose") as HTMLElement;
+
+        // Filter functionality
+        filterButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const category = button.getAttribute('data-category');
+            
+            // Update active button
+            filterButtons.forEach(btn => {
+              btn.classList.remove('active', 'bg-primary-500', 'text-white');
+              btn.classList.add('border-primary-600', 'text-primary-300');
+            });
+            button.classList.add('active', 'bg-primary-500', 'text-white');
+            button.classList.remove('border-primary-600', 'text-primary-300');
+            
+            // Filter gallery items
+            galleryItems.forEach(item => {
+              const itemCategory = item.getAttribute('data-category');
+              if (category === 'all' || itemCategory === category) {
+                item.style.display = 'block';
+                item.style.animation = 'fadeIn 0.3s ease-in-out';
+              } else {
+                item.style.display = 'none';
+              }
+            });
+          });
+        });
+
+        // Modal functionality
+        galleryItems.forEach((item: HTMLElement) => {
+          item.addEventListener("click", () => {
+            const imageSrc = item.getAttribute("data-image");
+            const caption = item.getAttribute("data-caption");
+            const date = item.getAttribute("data-date");
+            const category = item.getAttribute("data-category");
+            
+            modalImage.src = imageSrc as string;
+            modalImage.alt = caption as string;
+            modal.classList.add("modal-active");
+          });
+        });
+
+        modalCloseButton.addEventListener("click", () => {
+          modal.classList.remove("modal-active");
+        });
+
+        // Close modal on background click
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            modal.classList.remove("modal-active");
+          }
+        });
+
+        // Close modal on escape key
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && modal.classList.contains("modal-active")) {
+            modal.classList.remove("modal-active");
+          }
+        });
+      </script>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .modal {
+    display: none;
+  }
+  .modal-active {
+    display: flex;
+  }
+</style>

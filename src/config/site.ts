@@ -108,6 +108,24 @@ export interface Language {
   level: string;
 }
 
+export interface Project {
+  name: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  category: "web" | "mobile" | "fullstack" | "data" | "tool";
+  featured: boolean;
+}
+
+export interface Achievement {
+  title: string;
+  description: string;
+  date: string;
+  icon?: string;
+}
+
 export const siteConfig = {
   // Main site info
   siteName: "Dogu Yilmaz",
@@ -170,6 +188,158 @@ export const siteConfig = {
     { name: "Turkish", level: "Native" },
     { name: "English", level: "Professional Proficiency" },
   ],
+
+  // Projects
+  projects: [
+    {
+      name: "Tourism Analytics Platform",
+      description:
+        "Multi-module analytics platform for managing and analyzing large-scale tourism data with interactive visualizations using React, Highcharts, and Deck.gl.",
+      image: "/images/projects/tourism-analytics.jpg",
+      technologies: [
+        "React",
+        "Next.js",
+        "TypeScript",
+        "Highcharts",
+        "Deck.gl",
+        "Node.js",
+        "PostgreSQL",
+      ],
+      category: "data",
+      featured: true,
+    },
+    {
+      name: "EV Management System",
+      description:
+        "Digital tools for energy and EV management, including charging station monitoring, fleet management, and mobile applications for the mobility ecosystem.",
+      image: "/images/projects/ev-management.jpg",
+      technologies: [
+        "Vue.js",
+        "React Native",
+        "TypeScript",
+        "Expo",
+        "Tamagui",
+        "Bun",
+      ],
+      category: "fullstack",
+      featured: true,
+    },
+    {
+      name: "Attaché Management Module",
+      description:
+        "Comprehensive management system for diplomatic attachés, improving operational efficiency with modern web technologies.",
+      image: "/images/projects/attache-management.jpg",
+      technologies: ["React", "TypeScript", "Node.js", "MongoDB"],
+      category: "web",
+      featured: true,
+    },
+    {
+      name: "Personal Portfolio Website",
+      description:
+        "Modern, responsive portfolio website built with Astro, featuring dynamic background patterns, blog functionality, and optimized performance.",
+      image: "/images/projects/portfolio.jpg",
+      technologies: ["Astro", "TypeScript", "Tailwind CSS", "MDX"],
+      githubUrl: "https://github.com/doguyilmaz/doguyilmaz.com",
+      liveUrl: "https://doguyilmaz.com",
+      category: "web",
+      featured: false,
+    },
+    {
+      name: "Mobile Tourism App",
+      description:
+        "Cross-platform mobile application for tourism data visualization and management, built with React Native.",
+      image: "/images/projects/mobile-tourism.jpg",
+      technologies: ["React Native", "TypeScript", "Redux", "Node.js"],
+      category: "mobile",
+      featured: false,
+    },
+    {
+      name: "Data Visualization Dashboard",
+      description:
+        "Interactive dashboard for big data visualizations supporting tourism events and decision-making processes.",
+      image: "/images/projects/data-dashboard.jpg",
+      technologies: ["React", "D3.js", "Highcharts", "TypeScript", "Go"],
+      category: "data",
+      featured: false,
+    },
+  ],
+
+  // Education
+  education: [
+    {
+      degree: "Bachelor of Science in Computer Engineering",
+      school: "Istanbul Technical University",
+      year: "2016-2020",
+      description: "Focused on software development, algorithms, and system design.",
+    },
+  ],
+
+  // Achievements
+  achievements: [
+    {
+      title: "Team Leadership Excellence",
+      description:
+        "Successfully led a development team at TGA, delivering multiple high-impact applications for the Ministry of Culture and Tourism.",
+      date: "2022-2023",
+      icon: "👥",
+    },
+    {
+      title: "Full-Stack Expertise",
+      description:
+        "Mastered end-to-end development from frontend React applications to backend microservices in Node.js and Go.",
+      date: "2020-Present",
+      icon: "🚀",
+    },
+    {
+      title: "Data Visualization Specialist",
+      description:
+        "Created complex interactive visualizations using Highcharts, Deck.gl, and custom mapping solutions for large-scale data analysis.",
+      date: "2021-Present",
+      icon: "📊",
+    },
+    {
+      title: "Mobile Development Proficiency",
+      description:
+        "Built cross-platform mobile applications with React Native, serving thousands of users in tourism and mobility sectors.",
+      date: "2020-Present",
+      icon: "📱",
+    },
+  ],
+
+  // Page configurations
+  pages: {
+    skills: {
+      title: "Skills & Technologies | Dogu Yilmaz",
+      description: "Technical skills, programming languages, frameworks, and tools used by Dogu Yilmaz in software development.",
+      type: "content" as const,
+    },
+    resume: {
+      title: "Resume | Dogu Yilmaz",
+      description: "Professional resume and CV of Dogu Yilmaz, software developer and computer engineer.",
+      type: "content" as const,
+    },
+    projects: {
+      title: "Projects | Dogu Yilmaz",
+      description: "Portfolio of web, mobile, and data visualization projects built by Dogu Yilmaz.",
+      type: "content" as const,
+    },
+    contact: {
+      title: "Contact | Dogu Yilmaz",
+      description: "Get in touch with Dogu Yilmaz for collaboration, projects, or opportunities.",
+      type: "content" as const,
+    },
+    blog: {
+      title: "Blog | Dogu Yilmaz",
+      description: "Technical articles, tutorials, and insights about software development.",
+      type: "content" as const,
+    },
+  },
+
+  // Homepage configuration
+  homepage: {
+    showLatestPosts: true,
+    showContactForm: true,
+  },
 
   // SEO and metadata
   seo: {
@@ -345,61 +515,6 @@ export const siteConfig = {
     ],
   },
 
-  // Education
-  education: {
-    degree: "Bachelor's Degree in Computer Engineering",
-    institution: "Istanbul University",
-  },
-
-  // Page-specific metadata
-  pages: {
-    home: {
-      title: "Dogu Yilmaz - Software Developer & Computer Engineer",
-      description:
-        "Experienced software developer specializing in web and mobile application development, with expertise in JavaScript/TypeScript ecosystem.",
-      type: "website" as const,
-    },
-    about: {
-      title: "About | Dogu Yilmaz",
-      description:
-        "Learn more about Dogu Yilmaz, a software developer passionate about building elegant solutions to complex problems.",
-      type: "content" as const,
-    },
-    blog: {
-      title: "Blog | Dogu Yilmaz",
-      description:
-        "Thoughts, experiences, and insights about software development, engineering, and technology.",
-      type: "content" as const,
-    },
-    blogPost: {
-      type: "article" as const,
-    },
-    projects: {
-      title: "Projects | Dogu Yilmaz",
-      description:
-        "Explore the projects and applications built by Dogu Yilmaz, showcasing expertise in web and mobile development.",
-      type: "content" as const,
-    },
-    gallery: {
-      title: "Gallery | Dogu Yilmaz",
-      description:
-        "Visual journey through the work and experiences of Dogu Yilmaz.",
-      type: "content" as const,
-    },
-    notFound: {
-      title: "404 | Page Not Found",
-      description:
-        "The page you're looking for doesn't exist or has been moved.",
-      type: "notfound" as const,
-    },
-  },
-
-  // Homepage settings
-  homepage: {
-    showLatestPosts: false,
-    showContactForm: true,
-    contactButtonText: "Want to reach out?",
-  },
 
   // About page settings
   about: {
@@ -431,9 +546,11 @@ export const siteConfig = {
   navigation: [
     { label: "Home", path: "/" },
     { label: "About", path: "/about" },
-    // { label: "Projects", path: "/projects" },
-    // { label: "Blog", path: "/blog" },
-    // { label: "Gallery", path: "/gallery" },
+    { label: "Projects", path: "/projects" },
+    { label: "Skills", path: "/skills" },
+    { label: "Blog", path: "/blog" },
+    { label: "Resume", path: "/resume" },
+    { label: "Contact", path: "/contact" },
   ],
 
   // Social links (used in header and footer)

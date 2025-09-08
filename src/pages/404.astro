@@ -2,70 +2,148 @@
 import Layout from "@layout/Layout.astro";
 import { siteConfig } from "@config/site";
 
-const { notFound } = siteConfig.pages;
+const {} = siteConfig.pages;
 ---
 
 <Layout
-  pageTitle={notFound.title}
-  description={notFound.description}
-  type={notFound.type}
+  pageTitle={"notFound.title"}
+  description={"notFound.description"}
+  type={"notFound.type"}
 >
-  <main class="min-h-screen flex flex-col">
+  <main class="px-8 pt-16 mx-auto max-w-6xl sm:pt-24 lg:px-16">
     <div
-      class="grow flex flex-col justify-center items-center px-6 mx-auto max-w-6xl text-center sm:px-16 py-20"
+      class="flex flex-col items-center justify-center min-h-[70vh] text-center space-y-12"
     >
-      <div class="space-y-8">
-        <div class="space-y-4">
-          <h1 class="text-8xl font-extrabold">
-            <span
-              class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500"
-            >
-              404
-            </span>
-          </h1>
-          <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-200">
-            Page Not Found
-          </h2>
+      <!-- Animated 404 -->
+      <div class="relative">
+        <div
+          class="text-9xl font-bold bg-gradient-to-r from-primary-500 via-primary-400 to-primary-600 bg-clip-text text-transparent animate-pulse"
+        >
+          404
         </div>
-
-        <div class="max-w-md mx-auto">
-          <p class="text-lg text-gray-600 dark:text-gray-400">
-            Oops! The page you're looking for seems to have wandered off into
-            the digital void.
-          </p>
-        </div>
-
-        <div class="pt-8">
-          <a
-            href="/"
-            class="inline-flex items-center px-6 py-3 text-base font-medium text-white transition-colors duration-200 rounded-lg bg-gradient-to-r from-pink-500 to-violet-500 hover:from-pink-600 hover:to-violet-600"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="w-5 h-5 mr-2"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
-                clip-rule="evenodd"></path>
-            </svg>
-            Back to Home
-          </a>
-        </div>
-
-        <div class="mt-12 text-sm text-gray-500 dark:text-gray-400">
-          Lost? Check out our <a
-            href="/sitemap"
-            class="text-violet-500 hover:text-violet-600 underline">sitemap</a
-          > or <a
-            href="/?contact=true#contact-form"
-            class="text-violet-500 hover:text-violet-600 underline"
-            >contact us</a
-          >.
+        <div
+          class="absolute inset-0 text-9xl font-bold text-primary-500/10 animate-ping"
+        >
+          404
         </div>
       </div>
+
+      <!-- Error Message -->
+      <div class="space-y-6 max-w-2xl">
+        <h2 class="text-4xl font-bold">Oops! Page Not Found</h2>
+        <p class="text-xl text-primary-300 leading-relaxed">
+          Looks like you've ventured into uncharted territory. The page you're
+          looking for might have been moved, deleted, or never existed in the
+          first place.
+        </p>
+      </div>
+
+      <!-- Fun Error Messages -->
+      <div
+        class="bg-lightercontentbackground border border-primary-600 rounded-xl p-6 max-w-md"
+      >
+        <div class="text-6xl mb-4">🤖</div>
+        <p class="text-primary-300 text-sm">
+          <strong>Developer's Note:</strong> Even the best code has bugs sometimes.
+          This isn't one of them though - you just found a page that doesn't exist!
+        </p>
+      </div>
+
+      <!-- Navigation Options -->
+      <div class="space-y-6">
+        <h3 class="text-xl font-semibold">Where would you like to go?</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <a
+            href="/"
+            class="group bg-primary-500 hover:bg-primary-600 text-white p-4 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+          >
+            <div class="text-2xl mb-2">🏠</div>
+            <div>Home</div>
+            <div class="text-sm opacity-80">Start fresh</div>
+          </a>
+          <a
+            href="/projects"
+            class="group border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white p-4 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+          >
+            <div class="text-2xl mb-2">💼</div>
+            <div>Projects</div>
+            <div class="text-sm opacity-80">See my work</div>
+          </a>
+          <a
+            href="/about"
+            class="group border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white p-4 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+          >
+            <div class="text-2xl mb-2">👨‍💻</div>
+            <div>About</div>
+            <div class="text-sm opacity-80">Learn more</div>
+          </a>
+          <a
+            href="/contact"
+            class="group border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white p-4 rounded-xl font-medium transition-all duration-300 hover:scale-105"
+          >
+            <div class="text-2xl mb-2">📧</div>
+            <div>Contact</div>
+            <div class="text-sm opacity-80">Get in touch</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Search Suggestion -->
+      <div
+        class="bg-lightercontentbackground border border-primary-600 rounded-xl p-6 max-w-lg"
+      >
+        <h4 class="font-semibold mb-3">Looking for something specific?</h4>
+        <div class="space-y-2 text-sm text-primary-300">
+          <p>
+            • Check out my <a
+              href="/projects"
+              class="text-primary-400 hover:text-primary-300 underline"
+              >latest projects</a
+            >
+          </p>
+          <p>
+            • Read my <a
+              href="/blog"
+              class="text-primary-400 hover:text-primary-300 underline"
+              >blog posts</a
+            >
+          </p>
+          <p>
+            • View my <a
+              href="/skills"
+              class="text-primary-400 hover:text-primary-300 underline"
+              >technical skills</a
+            >
+          </p>
+          <p>
+            • Download my <a
+              href="/resume"
+              class="text-primary-400 hover:text-primary-300 underline"
+              >resume</a
+            >
+          </p>
+        </div>
+      </div>
+
+      <!-- Back Button -->
+      <button
+        onclick="history.back()"
+        class="flex items-center gap-2 text-primary-400 hover:text-primary-300 transition-colors"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Go back to previous page
+      </button>
     </div>
   </main>
 </Layout>

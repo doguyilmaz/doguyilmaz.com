@@ -1,0 +1,180 @@
+---
+import { siteConfig } from "@config/site";
+import SocialMediaIcons from "@components/SocialMediaIcons.astro";
+import TypewriterEffect from "@components/TypewriterEffect.astro";
+
+const { siteName, siteTitle, siteDescription } = siteConfig;
+
+const roles = [
+  "Full-Stack Developer",
+  "React Native Expert",
+  "Data Visualization Specialist",
+  "Team Leader",
+  "Problem Solver",
+];
+---
+
+<section
+  class="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      class="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl animate-pulse"
+    >
+    </div>
+    <div
+      class="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"
+    >
+    </div>
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse delay-500"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-8 text-center">
+    <!-- Profile Image -->
+    <div class="mb-8 relative">
+      <div
+        class="w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-primary-500/20 shadow-2xl"
+      >
+        <img
+          src={siteConfig.profileImage}
+          alt={siteName}
+          class="w-full h-full object-cover"
+        />
+      </div>
+      <!-- Status Indicator -->
+      <div
+        class="absolute -bottom-2 -right-2 w-8 h-8 bg-green-500 rounded-full border-4 border-background flex items-center justify-center"
+      >
+        <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="space-y-6">
+      <!-- Greeting -->
+      <div class="space-y-2">
+        <p class="text-primary-300 text-lg font-medium">👋 Hello, I'm</p>
+        <h1
+          class="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-primary-100 to-primary-300 bg-clip-text text-transparent"
+        >
+          {siteName}
+        </h1>
+      </div>
+
+      <!-- Title with Typing Effect -->
+      <div class="space-y-4">
+        <h2 class="text-2xl md:text-3xl font-semibold text-primary-200">
+          <TypewriterEffect 
+            texts={roles}
+            baseText="I'm a"
+            speed={80}
+            deleteSpeed={40}
+            pauseDuration={2000}
+          />
+        </h2>
+        <p
+          class="text-lg md:text-xl text-primary-300 max-w-3xl mx-auto leading-relaxed"
+        >
+          {siteDescription}
+        </p>
+      </div>
+
+      <!-- Quick Stats -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto mt-12"
+      >
+        <div
+          class="bg-lightercontentbackground/50 backdrop-blur-sm border border-primary-600/50 rounded-lg p-4"
+        >
+          <div class="text-2xl font-bold text-primary-100">5+</div>
+          <div class="text-sm text-primary-300">Years Experience</div>
+        </div>
+        <div
+          class="bg-lightercontentbackground/50 backdrop-blur-sm border border-primary-600/50 rounded-lg p-4"
+        >
+          <div class="text-2xl font-bold text-primary-100">
+            {siteConfig.projects.length}+
+          </div>
+          <div class="text-sm text-primary-300">Projects Completed</div>
+        </div>
+        <div
+          class="bg-lightercontentbackground/50 backdrop-blur-sm border border-primary-600/50 rounded-lg p-4"
+        >
+          <div class="text-2xl font-bold text-primary-100">
+            {siteConfig.skills.length}+
+          </div>
+          <div class="text-sm text-primary-300">Technologies</div>
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
+      >
+        <a
+          href="/projects"
+          class="group bg-primary-500 hover:bg-primary-600 text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-500/25"
+        >
+          <span class="flex items-center gap-2">
+            🚀 View My Work
+            <svg
+              class="w-4 h-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path>
+            </svg>
+          </span>
+        </a>
+        <a
+          href="/contact"
+          class="group border-2 border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-8 py-4 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+        >
+          <span class="flex items-center gap-2"> 💬 Let's Connect</span>
+        </a>
+      </div>
+
+      <!-- Social Links -->
+      <div class="flex justify-center items-center gap-6 mt-8">
+        <SocialMediaIcons />
+      </div>
+
+      <!-- Scroll Indicator -->
+      <div
+        class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce"
+      >
+        <div
+          class="w-6 h-10 border-2 border-primary-400 rounded-full flex justify-center"
+        >
+          <div class="w-1 h-3 bg-primary-400 rounded-full mt-2 animate-pulse">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+</style>

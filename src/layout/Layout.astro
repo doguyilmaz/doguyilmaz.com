@@ -3,7 +3,8 @@ import Analytics from "@vercel/analytics/astro";
 import SpeedInsights from "@vercel/speed-insights/astro";
 import MainContainer from "@components/MainContainer.astro";
 import ThemeSwitcher from "@components/ThemeSwitcher.astro";
-import { ClientRouter, fade } from "astro:transitions";
+import ScrollProgress from "@components/ScrollProgress.astro";
+import { ClientRouter } from "astro:transitions";
 import "@fontsource-variable/onest";
 import "@fontsource/jetbrains-mono";
 import { SEO } from "astro-seo";
@@ -112,11 +113,10 @@ const { pageTitle, description, type, title } = Astro.props;
   <body
     class="h-full text-primary-100 selection:bg-accent-400 selection:text-black"
   >
-    <div transition:animate={fade({ duration: "0.5s" })}>
-      <MainContainer>
-        <slot />
-      </MainContainer>
-      <ThemeSwitcher />
-    </div>
+    <ScrollProgress />
+    <MainContainer>
+      <slot />
+    </MainContainer>
+    <ThemeSwitcher />
   </body>
 </html>

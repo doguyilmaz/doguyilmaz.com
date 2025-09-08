@@ -1,70 +1,145 @@
 ---
-import { ImageMetadata } from "astro";
-
 interface Project {
   name: string;
-  image: ImageMetadata;
   description: string;
-  link: string;
+  image: string;
+  technologies: string[];
+  liveUrl?: string;
+  githubUrl?: string;
+  category: "web" | "mobile" | "fullstack" | "data" | "tool";
+  featured: boolean;
 }
+
 interface Props {
-  projects: Project[];
+  projects: readonly Project[];
 }
 
 const { projects } = Astro.props;
+
+const getCategoryIcon = (category: string) => {
+  switch (category) {
+    case "web":
+      return "🌐";
+    case "mobile":
+      return "📱";
+    case "fullstack":
+      return "⚡";
+    case "data":
+      return "📊";
+    case "tool":
+      return "🔧";
+    default:
+      return "💻";
+  }
+};
+
+const getCategoryColor = (category: string) => {
+  switch (category) {
+    case "web":
+      return "bg-blue-500/20 text-blue-400";
+    case "mobile":
+      return "bg-green-500/20 text-green-400";
+    case "fullstack":
+      return "bg-purple-500/20 text-purple-400";
+    case "data":
+      return "bg-orange-500/20 text-orange-400";
+    case "tool":
+      return "bg-gray-500/20 text-gray-400";
+    default:
+      return "bg-primary-500/20 text-primary-400";
+  }
+};
 ---
 
-<ul role="list" class="grid gap-x-4 gap-y-8 grid-cols-fill-16">
+<div class="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
   {
     projects.map((project: Project) => (
-      <a class="transition-all group" href={project.link} target="_blank">
-        <li class="relative w-full rounded-2xl shadow-md transition-all duration-200 ease-in-out hover:scale-105 h-[300px] shadow-black">
+      <div class="group relative bg-lightercontentbackground border border-primary-600 rounded-xl overflow-hidden hover:border-primary-400 transition-all duration-300 hover:scale-105">
+        {/* Project Image */}
+        <div class="relative h-48 overflow-hidden">
           <img
-            decoding="async"
-            loading="lazy"
-            class="object-cover absolute brightness-50 inset-0 z-10 w-full max-w-full h-full max-h-full rounded-2xl aspect-[1/1]"
-            src={project.image.src}
-            alt={`Picture of ${project.name.replace(/ /g, "").toLowerCase()}`}
+            src={project.image}
+            alt={project.name}
+            class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
           />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-          <div class="flex relative z-20 flex-col gap-2 justify-end p-4 w-full h-full">
-            <div class="inset-0 w-full h-full rounded-2xl progressive-blur" />
-            <h2 class="text-2xl font-bold tracking-tight text-white text-shadow-name">
+          {/* Category Badge */}
+          <div
+            class={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(
+              project.category
+            )}`}
+          >
+            <span class="mr-1">{getCategoryIcon(project.category)}</span>
+            {project.category}
+          </div>
+
+          {/* Featured Badge */}
+          {project.featured && (
+            <div class="absolute top-3 right-3 bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full text-xs font-medium">
+              ⭐ Featured
+            </div>
+          )}
+        </div>
+
+        {/* Project Content */}
+        <div class="p-6 space-y-4">
+          <div>
+            <h3 class="text-xl font-bold mb-2 group-hover:text-primary-300 transition-colors">
               {project.name}
-            </h2>
-            <p class="text-ellipsis line-clamp-3 text-[#e4e4e7ff] text-shadow-desc">
+            </h3>
+            <p class="text-primary-300 text-sm line-clamp-3">
               {project.description}
             </p>
-            <div class="flex flex-row gap-1 items-center">
-              <svg
-                class="w-6 h-6 hover:cursor-pointer stroke-[0.5] stroke-[#fafafaff] hover:stroke-accent-400"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <>
-                  <path
-                    d="M14 11.998C14 9.506 11.683 7 8.857 7H7.143C4.303 7 2 9.238 2 11.998c0 2.378 1.71 4.368 4 4.873a5.3 5.3 0 001.143.124"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M10 11.998c0 2.491 2.317 4.997 5.143 4.997h1.714c2.84 0 5.143-2.237 5.143-4.997 0-2.379-1.71-4.37-4-4.874A5.304 5.304 0 0016.857 7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </>
-              </svg>
-              <p class="text-[#e4e4e7ff]">
-                {project.link.replace(/(http(s?)):\/\//i, "").split("/")[0]}
-              </p>
-            </div>
           </div>
-        </li>
-      </a>
+
+          {/* Technologies */}
+          <div class="flex flex-wrap gap-1">
+            {project.technologies.slice(0, 4).map((tech) => (
+              <span class="px-2 py-1 bg-primary-500/10 text-primary-400 rounded text-xs">
+                {tech}
+              </span>
+            ))}
+            {project.technologies.length > 4 && (
+              <span class="px-2 py-1 bg-primary-500/10 text-primary-400 rounded text-xs">
+                +{project.technologies.length - 4}
+              </span>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          <div class="flex gap-3 pt-2">
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center"
+              >
+                🔗 Live Demo
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex-1 border border-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors text-center"
+              >
+                📂 Code
+              </a>
+            )}
+            {!project.liveUrl && !project.githubUrl && (
+              <div class="flex-1 bg-gray-500/20 text-gray-400 px-4 py-2 rounded-lg text-sm font-medium text-center">
+                🔒 Private Project
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
     ))
   }
-</ul>
+</div>
 <style>
   .progressive-blur {
     position: absolute;

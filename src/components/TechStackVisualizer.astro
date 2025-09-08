@@ -1,0 +1,312 @@
+---
+import { siteConfig } from "@config/site";
+
+const { skills } = siteConfig;
+
+// Group skills by category for visualization
+const skillsByCategory = skills.reduce((acc, skill) => {
+  const category = skill.category || "tools";
+  if (!acc[category]) acc[category] = [];
+  acc[category].push(skill.name);
+  return acc;
+}, {} as Record<string, string[]>);
+
+const categoryInfo = {
+  frontend: {
+    color: "from-blue-500 to-cyan-500",
+    icon: "⚛️",
+    position: "top-left",
+  },
+  backend: {
+    color: "from-green-500 to-emerald-500",
+    icon: "🔧",
+    position: "top-right",
+  },
+  mobile: {
+    color: "from-purple-500 to-pink-500",
+    icon: "📱",
+    position: "bottom-left",
+  },
+  database: {
+    color: "from-orange-500 to-red-500",
+    icon: "🗄️",
+    position: "bottom-right",
+  },
+  devops: {
+    color: "from-gray-500 to-slate-500",
+    icon: "🚀",
+    position: "center-top",
+  },
+  tools: {
+    color: "from-yellow-500 to-amber-500",
+    icon: "🛠️",
+    position: "center-bottom",
+  },
+  visualization: {
+    color: "from-indigo-500 to-blue-500",
+    icon: "📊",
+    position: "center",
+  },
+};
+
+// Create nodes array for easier rendering
+const nodes = Object.entries(skillsByCategory)
+  .map(([category, categorySkills]) => {
+    const info = categoryInfo[category as keyof typeof categoryInfo];
+    if (!info) return null;
+
+    let positionStyle = "";
+    switch (info.position) {
+      case "top-left":
+        positionStyle = "top: 10%; left: 15%;";
+        break;
+      case "top-right":
+        positionStyle = "top: 10%; right: 15%;";
+        break;
+      case "bottom-left":
+        positionStyle = "bottom: 10%; left: 15%;";
+        break;
+      case "bottom-right":
+        positionStyle = "bottom: 10%; right: 15%;";
+        break;
+      case "center-top":
+        positionStyle = "top: 5%; left: 50%; transform: translateX(-50%);";
+        break;
+      case "center-bottom":
+        positionStyle = "bottom: 5%; left: 50%; transform: translateX(-50%);";
+        break;
+      case "center":
+        positionStyle = "top: 20%; right: 10%;";
+        break;
+    }
+
+    return {
+      category,
+      skills: categorySkills,
+      info,
+      positionStyle,
+    };
+  })
+  .filter(Boolean);
+---
+
+<div
+  class="bg-lightercontentbackground border border-primary-600 rounded-xl p-8"
+>
+  <div class="text-center mb-8">
+    <h3 class="text-2xl font-bold mb-2">Tech Stack Architecture</h3>
+    <p class="text-primary-300">
+      Interactive visualization of my technology ecosystem
+    </p>
+  </div>
+
+  <!-- Main Visualization -->
+  <div class="relative w-full h-96 mb-8">
+    <!-- Central Hub -->
+    <div
+      class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center text-white text-2xl font-bold shadow-lg z-10"
+    >
+      DY
+    </div>
+
+    <!-- Category Nodes -->
+    {
+      nodes.map((node) => (
+        <div
+          class={`tech-node absolute w-16 h-16 bg-gradient-to-br ${node.info.color} rounded-full flex items-center justify-center text-white text-xl cursor-pointer hover:scale-110 transition-transform duration-300 shadow-lg`}
+          data-category={node.category}
+          data-skills={node.skills.join(", ")}
+          style={node.positionStyle}
+        >
+          {node.info.icon}
+        </div>
+      ))
+    }
+
+    <!-- Connection Lines -->
+    <svg
+      class="absolute inset-0 w-full h-full pointer-events-none"
+      style="z-index: 1;"
+    >
+      <!-- Lines connecting center to each category -->
+      <line
+        x1="50%"
+        y1="50%"
+        x2="15%"
+        y2="10%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="85%"
+        y2="10%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="15%"
+        y2="90%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="85%"
+        y2="90%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="50%"
+        y2="5%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="50%"
+        y2="95%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+      <line
+        x1="50%"
+        y1="50%"
+        x2="90%"
+        y2="20%"
+        stroke="rgb(var(--color-primary-500))"
+        stroke-width="2"
+        opacity="0.3"
+        class="connection-line"></line>
+    </svg>
+
+    <!-- Floating Particles -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      {
+        Array.from({ length: 20 }, (_, i) => (
+          <div
+            class="absolute w-1 h-1 bg-primary-400 rounded-full animate-pulse"
+            style={`left: ${Math.random() * 100}%; top: ${
+              Math.random() * 100
+            }%; animation-delay: ${Math.random() * 2}s;`}
+          />
+        ))
+      }
+    </div>
+  </div>
+
+  <!-- Skills Tooltip -->
+  <div
+    id="skillsTooltip"
+    class="hidden absolute bg-primary-800 border border-primary-600 rounded-lg p-4 max-w-xs z-20 shadow-xl"
+  >
+    <h4 id="tooltipTitle" class="font-semibold mb-2 capitalize"></h4>
+    <p id="tooltipSkills" class="text-sm text-primary-300"></p>
+  </div>
+
+  <!-- Legend -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    {
+      Object.entries(skillsByCategory).map(([category, categorySkills]) => {
+        const info = categoryInfo[category as keyof typeof categoryInfo];
+        if (!info) return null;
+
+        return (
+          <div class="flex items-center space-x-3 p-3 bg-primary-800/30 rounded-lg">
+            <div
+              class={`w-8 h-8 bg-gradient-to-br ${info.color} rounded-full flex items-center justify-center text-white text-sm`}
+            >
+              {info.icon}
+            </div>
+            <div>
+              <div class="font-medium capitalize text-sm">{category}</div>
+              <div class="text-xs text-primary-400">
+                {categorySkills.length} skills
+              </div>
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>
+
+<script>
+  const techNodes = document.querySelectorAll(
+    ".tech-node"
+  ) as NodeListOf<HTMLElement>;
+  const tooltip = document.getElementById("skillsTooltip") as HTMLElement;
+  const tooltipTitle = document.getElementById("tooltipTitle") as HTMLElement;
+  const tooltipSkills = document.getElementById("tooltipSkills") as HTMLElement;
+
+  techNodes.forEach((node) => {
+    node.addEventListener("mouseenter", (e) => {
+      const category = node.getAttribute("data-category");
+      const skills = node.getAttribute("data-skills");
+
+      tooltipTitle.textContent = category || "";
+      tooltipSkills.textContent = skills || "";
+
+      tooltip.classList.remove("hidden");
+
+      // Position tooltip
+      const rect = node.getBoundingClientRect();
+      const tooltipRect = tooltip.getBoundingClientRect();
+
+      tooltip.style.left = `${
+        rect.left + rect.width / 2 - tooltipRect.width / 2
+      }px`;
+      tooltip.style.top = `${rect.top - tooltipRect.height - 10}px`;
+    });
+
+    node.addEventListener("mouseleave", () => {
+      tooltip.classList.add("hidden");
+    });
+
+    // Add click animation
+    node.addEventListener("click", () => {
+      node.style.transform = "scale(1.2)";
+      setTimeout(() => {
+        node.style.transform = "scale(1)";
+      }, 200);
+    });
+  });
+
+  // Animate connection lines on load
+  const connectionLines = document.querySelectorAll(
+    ".connection-line"
+  ) as NodeListOf<SVGLineElement>;
+  connectionLines.forEach((line, index) => {
+    line.style.strokeDasharray = "5,5";
+    line.style.strokeDashoffset = "10";
+    line.style.animation = `dash 2s linear infinite`;
+    line.style.animationDelay = `${index * 0.2}s`;
+  });
+</script>
+
+<style>
+  @keyframes dash {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  .tech-node:hover + svg .connection-line {
+    opacity: 0.8 !important;
+    stroke-width: 3;
+  }
+</style>

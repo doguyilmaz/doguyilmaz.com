@@ -1,0 +1,108 @@
+---
+interface Props {
+  texts: string[];
+  baseText?: string;
+  speed?: number;
+  deleteSpeed?: number;
+  pauseDuration?: number;
+}
+
+const { 
+  texts, 
+  baseText = "",
+  speed = 100,
+  deleteSpeed = 50,
+  pauseDuration = 2000 
+} = Astro.props;
+
+const uniqueId = `typewriter-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<span class="typewriter-container">
+  {baseText && <span>{baseText} </span>}
+  <span id={uniqueId} class="typewriter-text"></span>
+  <span class="typewriter-cursor">|</span>
+</span>
+
+<style>
+  .typewriter-container {
+    display: inline-flex;
+    align-items: baseline;
+  }
+
+  .typewriter-cursor {
+    animation: blink 1s infinite;
+    font-weight: 300;
+    color: rgb(var(--color-primary-500));
+  }
+
+  @keyframes blink {
+    0%, 50% {
+      opacity: 1;
+    }
+    51%, 100% {
+      opacity: 0;
+    }
+  }
+
+  .typewriter-text {
+    background: linear-gradient(to right, 
+      rgb(var(--color-primary-400)), 
+      rgb(var(--color-primary-600))
+    );
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+  }
+</style>
+
+<script define:vars={{ texts, uniqueId, speed, deleteSpeed, pauseDuration }}>
+  // Wait for DOM to be ready
+  function initTypewriter() {
+    const element = document.getElementById(uniqueId);
+    if (!element) return;
+
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isTyping = false;
+
+    function type() {
+      if (!texts || texts.length === 0) return;
+      
+      const currentText = texts[textIndex];
+      
+      if (isDeleting) {
+        element.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        element.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let typeSpeed = isDeleting ? deleteSpeed : speed;
+
+      if (!isDeleting && charIndex === currentText.length) {
+        typeSpeed = pauseDuration;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typeSpeed = 500;
+      }
+
+      setTimeout(type, typeSpeed);
+    }
+
+    // Start typing after a short delay
+    setTimeout(type, 1000);
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTypewriter);
+  } else {
+    initTypewriter();
+  }
+</script>
